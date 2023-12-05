@@ -20,7 +20,10 @@ func _process(_delta: float) -> void:
 	move_and_slide()
 	
 	if direction != Vector2.ZERO:
-		animation_player.play("walk")
+		if speed > 100:
+			animation_player.play("run")
+		else:
+			animation_player.play("walk")
 	else:
 		animation_player.play("idle")
 	

@@ -1,8 +1,11 @@
-Sprite2D
+Timer
+Control
+TextureProgressBar
+AnimationPlayer
 CollisionShape2D
 Area2D
-Trail2D
 Node2D
-AnimationPlayer
+Sprite2D
 CharacterBody2D
+Trail2D
 TileMap

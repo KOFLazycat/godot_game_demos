@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://b11swgmrc85j1"]
+
+[ext_resource type="Script" path="res://src/main/scene/component/health_component.gd" id="1_5yu77"]
+[ext_resource type="Texture2D" uid="uid://bwv71diva2538" path="res://src/main/assets/textures/blood/blood_over.png" id="1_v03kj"]
+[ext_resource type="Texture2D" uid="uid://ctfc6xgirrvl7" path="res://src/main/assets/textures/blood/blood_darkred.png" id="1_wrvto"]
+[ext_resource type="Texture2D" uid="uid://iyk08nr5jtoa" path="res://src/main/assets/textures/blood/blood_red.png" id="2_ytces"]
+
+[node name="HealthComponent" type="Node2D"]
+scale = Vector2(0.05, 0.1)
+script = ExtResource("1_5yu77")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -226.5
+offset_top = -41.5
+offset_right = 226.5
+offset_bottom = 41.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthBarBottom" type="TextureProgressBar" parent="Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -18.5
+offset_right = 446.0
+offset_bottom = 18.5
+grow_vertical = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource("1_wrvto")
+
+[node name="HealthBarTop" type="TextureProgressBar" parent="Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -18.5
+offset_right = 446.0
+offset_bottom = 18.5
+grow_vertical = 2
+max_value = 1.0
+step = 0.01
+value = 0.5
+texture_under = ExtResource("1_v03kj")
+texture_progress = ExtResource("2_ytces")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

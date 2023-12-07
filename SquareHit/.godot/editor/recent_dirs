@@ -1,3 +1,4 @@
 res://src/main/scene/component
+res://src/main/scene/role/enemy
 res://src/main/scene/role/player
 res://src/main/scene/level/room

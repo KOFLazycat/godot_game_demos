@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1701877854
+::res://::1701906504
 icon.svg::CompressedTexture2D::148644701712527421::1701788334::1701788570::1::::<><>::
 ::res://addons/::1701788334
 ::res://addons/awesome_splash/::1701788334
@@ -453,8 +453,9 @@ blood_yellow.png::CompressedTexture2D::3377389213505029498::1701788334::17017883
 ::res://src/main/assets/textures/dinosaur/misc/::1701789565
 bg.png::CompressedTexture2D::1451547962653271448::1506797826::1701789565::1::::<><>::
 shadow_2.png::CompressedTexture2D::8300934004358952201::1444645508::1701789565::1::::<><>::
-::res://src/main/assets/textures/dinosaur/sheets/::1701789565
+::res://src/main/assets/textures/dinosaur/sheets/::1701906752
 DinoSprites - doux.png::CompressedTexture2D::5913778597396323781::1507392544::1701789565::1::::<><>::
+DinoSprites - mort - run.png::CompressedTexture2D::2513158224063810423::1701906752::1701906755::1::::<><>::
 DinoSprites - mort.png::CompressedTexture2D::2069100000109442885::1507392570::1701789565::1::::<><>::
 DinoSprites - tard.png::CompressedTexture2D::7641108064436426382::1507392556::1701789565::1::::<><>::
 DinoSprites - vita.png::CompressedTexture2D::6367153394832526972::1507392586::1701789565::1::::<><>::
@@ -470,13 +471,14 @@ Objects.png::CompressedTexture2D::2157353628712079566::1616336774::1701789565::1
 Tilemap_Compressed.png::CompressedTexture2D::3583614259628861033::1616262416::1701789565::1::::<><>::
 Tilemap_Detailed.png::CompressedTexture2D::8420139288582503379::1616262490::1701789565::1::::<><>::
 ::res://src/main/scene/::1701877854
-::res://src/main/scene/buff/::1701877986
-speed_up.tscn::PackedScene::1286342644236257855::1701878185::0::1::::<><>::uid://dhgg4q6p2fseu::::res://src/main/assets/textures/dungeon_tiles/Tiles-Items-pack.png
+::res://src/main/scene/buff/::1701906517
+speed_up_buff.gd::GDScript::-1::1701878856::0::1::::<>Area2D<>::
+speed_up_buff.tscn::PackedScene::1286342644236257855::1701906517::0::1::::<><>::uid://dhgg4q6p2fseu::::res://src/main/assets/textures/dungeon_tiles/Tiles-Items-pack.png<>res://src/main/scene/buff/speed_up_buff.gd
 ::res://src/main/scene/level/::1701789897
-::res://src/main/scene/level/room/::1701877986
+::res://src/main/scene/level/room/::1701906516
 room.gd::GDScript::-1::1701789945::0::1::::<>Node2D<>::
-room.tscn::PackedScene::2619383385650694939::1701877986::0::1::::<><>::res://src/main/scene/level/room/room.gd<>uid://dr210681ck1lt::::res://src/main/assets/textures/dungeon_tiles/Tiles-SandstoneDungeons.png<>uid://b4pud502ri6ul::::res://src/main/scene/role/player/player.tscn
+room.tscn::PackedScene::2619383385650694939::1701906516::0::1::::<><>::res://src/main/scene/level/room/room.gd<>uid://dr210681ck1lt::::res://src/main/assets/textures/dungeon_tiles/Tiles-SandstoneDungeons.png<>uid://b4pud502ri6ul::::res://src/main/scene/role/player/player.tscn<>uid://sld408iwhqix::::res://src/main/scene/buff/speed_up_buff.tscn
 ::res://src/main/scene/role/::1701791925
-::res://src/main/scene/role/player/::1701877986
-player.gd::GDScript::-1::1701877616::0::1::::<>CharacterBody2D<>::
-player.tscn::PackedScene::4454084128314420639::1701877986::0::1::::<><>::res://src/main/scene/role/player/player.gd<>uid://4qj1ls538l14::::res://src/main/assets/textures/dinosaur/sheets/DinoSprites - mort.png<>res://addons/trail_2d/trail_2d.gd<>uid://dqjbf13key2ob::::res://src/main/assets/textures/dinosaur/misc/shadow_2.png
+::res://src/main/scene/role/player/::1701906517
+player.gd::GDScript::-1::1701878965::0::1::::<>CharacterBody2D<>::
+player.tscn::PackedScene::4454084128314420639::1701906517::0::1::::<><>::res://src/main/scene/role/player/player.gd<>uid://4qj1ls538l14::::res://src/main/assets/textures/dinosaur/sheets/DinoSprites - mort.png<>res://addons/trail_2d/trail_2d.gd<>uid://dqjbf13key2ob::::res://src/main/assets/textures/dinosaur/misc/shadow_2.png

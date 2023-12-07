@@ -1,6 +1,3 @@
 res://src/main/scene/level/room/room.tscn
 res://src/main/scene/role/player/player.tscn
-res://src/main/scene/role/player/player.gd
-res://src/main/scene/buff/speed_up.tscn
 res://src/main/scene/buff/speed_up_buff.tscn
-res://src/main/scene/buff/speed_up_buff.gd

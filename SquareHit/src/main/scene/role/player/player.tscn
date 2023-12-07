@@ -225,8 +225,8 @@ _data = {
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Gradient" id="Gradient_y2kl7"]
-colors = PackedColorArray(0.630625, 0.2438, 0.251911, 0.827451, 0.737255, 0.301961, 0.309804, 0)
+[sub_resource type="Gradient" id="Gradient_xqnnp"]
+colors = PackedColorArray(0.737255, 0.301961, 0.309804, 0.65098, 0.737255, 0.301961, 0.309804, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r8c82"]
 radius = 3.5
@@ -247,7 +247,7 @@ libraries = {
 position = Vector2(0, 10)
 width = 25.0
 width_curve = SubResource("Curve_e73jt")
-gradient = SubResource("Gradient_y2kl7")
+gradient = SubResource("Gradient_xqnnp")
 script = ExtResource("3_bcpi1")
 length = 25
 

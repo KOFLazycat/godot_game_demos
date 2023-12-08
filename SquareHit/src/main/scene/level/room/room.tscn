@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdk34kc46a2xr"]
+[gd_scene load_steps=9 format=3 uid="uid://bdk34kc46a2xr"]
 
 [ext_resource type="Script" path="res://src/main/scene/level/room/room.gd" id="1_xmj3i"]
 [ext_resource type="Texture2D" uid="uid://dr210681ck1lt" path="res://src/main/assets/textures/dungeon_tiles/Tiles-SandstoneDungeons.png" id="2_4tkd2"]
 [ext_resource type="PackedScene" uid="uid://b4pud502ri6ul" path="res://src/main/scene/role/player/player.tscn" id="3_euhir"]
 [ext_resource type="PackedScene" uid="uid://sld408iwhqix" path="res://src/main/scene/buff/speed_up_buff.tscn" id="4_333ga"]
 [ext_resource type="PackedScene" uid="uid://spi44mmvknls" path="res://src/main/scene/role/enemy/enemy.tscn" id="5_42afq"]
+[ext_resource type="PackedScene" uid="uid://cifpyf3khl80t" path="res://src/main/scene/buff/attack_buff.tscn" id="6_ofbx8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1sre2"]
 texture = ExtResource("2_4tkd2")
@@ -616,27 +617,33 @@ layer_1/tile_data = PackedInt32Array(327655, 131072, 4, 393191, 131072, 5, 32765
 layer_2/name = "items"
 layer_2/tile_data = PackedInt32Array()
 
-[node name="Player" parent="." instance=ExtResource("3_euhir")]
+[node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
+
+[node name="Player" parent="Entities" instance=ExtResource("3_euhir")]
 position = Vector2(625, 597)
 scale = Vector2(3, 3)
 speed_up = 100
 
-[node name="SpeedUpBuff" parent="." instance=ExtResource("4_333ga")]
-position = Vector2(1045, 376)
-scale = Vector2(2, 2)
-
-[node name="SpeedUpBuff2" parent="." instance=ExtResource("4_333ga")]
-position = Vector2(553, 598)
-scale = Vector2(2, 2)
-
-[node name="SpeedUpBuff3" parent="." instance=ExtResource("4_333ga")]
-position = Vector2(232, 313)
-scale = Vector2(2, 2)
-
-[node name="SpeedUpBuff4" parent="." instance=ExtResource("4_333ga")]
-position = Vector2(614, 114)
-scale = Vector2(2, 2)
-
-[node name="Enemy" parent="." instance=ExtResource("5_42afq")]
+[node name="Enemy" parent="Entities" groups=["enemy"] instance=ExtResource("5_42afq")]
 position = Vector2(640, 360)
 scale = Vector2(4, 4)
+
+[node name="Buffs" type="Node2D" parent="." groups=["buffs_layer"]]
+
+[node name="SpeedUpBuff" parent="Buffs" instance=ExtResource("4_333ga")]
+position = Vector2(1056, 376)
+scale = Vector2(1.5, 1.5)
+
+[node name="SpeedUpBuff2" parent="Buffs" instance=ExtResource("4_333ga")]
+position = Vector2(553, 605)
+scale = Vector2(1.5, 1.5)
+
+[node name="AttackBuff" parent="Buffs" instance=ExtResource("6_ofbx8")]
+position = Vector2(640, 111)
+scale = Vector2(1.5, 1.5)
+
+[node name="AttackBuff2" parent="Buffs" instance=ExtResource("6_ofbx8")]
+position = Vector2(230, 360)
+scale = Vector2(1.5, 1.5)
+
+[node name="Foreground" type="Node2D" parent="." groups=["foreground_layer"]]

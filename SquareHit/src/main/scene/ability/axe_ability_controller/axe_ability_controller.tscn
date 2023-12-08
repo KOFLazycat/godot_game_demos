@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmpaknj0ip12e"]
+
+[ext_resource type="Script" path="res://src/main/scene/ability/axe_ability_controller/axe_ability_controller.gd" id="1_k5fdf"]
+
+[node name="AxeAbilityController" type="Node"]
+script = ExtResource("1_k5fdf")

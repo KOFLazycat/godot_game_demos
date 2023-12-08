@@ -72,8 +72,4 @@ func get_health_percent() -> float:
 func check_death():
 	if current_health == 0:
 		died.emit()
-		owner.queue_free()
-
-
-func _on_timer_timeout() -> void:
-	damage(10)
+		#owner.queue_free()

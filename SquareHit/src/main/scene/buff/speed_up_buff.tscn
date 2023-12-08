@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://src/main/scene/buff/speed_up_buff.gd" id="1_uaesh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t2drf"]
+radius = 8.0
 
 [node name="SpeedUpBuff" type="Area2D"]
 collision_layer = 8
@@ -14,6 +15,7 @@ script = ExtResource("1_uaesh")
 shape = SubResource("CircleShape2D_t2drf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_pfvor")
 region_enabled = true
 region_rect = Rect2(129, 99, 30, 23)

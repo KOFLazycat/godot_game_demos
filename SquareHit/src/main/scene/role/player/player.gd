@@ -12,6 +12,8 @@ extends CharacterBody2D
 @export var max_speed: int = 1000
 ## 每次加速BUF可提供的加速度
 @export var speed_up: int = 5
+## 攻击武器
+@export var axe_ability_scene: PackedScene
 ## 移动速度
 var speed: int:
 	get:
@@ -78,13 +80,6 @@ func _input(event: InputEvent) -> void:
 		elif event.is_action_pressed("move_up"):
 			if current_normal != Vector2.UP:
 				direction = Vector2.UP
-	
-
-
-#func get_movement_vector() -> Vector2:
-	#var x_movement: float = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	#var y_movement: float = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-	#return Vector2(x_movement, y_movement).normalized()
 
 
 func accelerate_in_direction() -> void:
@@ -94,5 +89,18 @@ func accelerate_in_direction() -> void:
 
 func speed_up_once() -> void:
 	speed = clamp(speed + speed_up, min_speed, max_speed)
-	print(speed)
-	
+
+
+func attack() -> void:
+	var enemy:CharacterBody2D = get_tree().get_first_node_in_group("enemy") as CharacterBody2D
+	var axe_instance: Node2D = axe_ability_scene.instantiate() as Node2D
+	if !is_instance_valid(enemy) or !is_instance_valid(axe_instance):
+		return
+	var foreground_layer = get_tree().get_first_node_in_group("foreground_layer") as Node2D
+	if !is_instance_valid(foreground_layer):
+		return
+	foreground_layer.add_child(axe_instance)
+	axe_instance.global_position = global_position
+	#TODO 伤害待优化
+	axe_instance.hitbox_component.damage = 40
+	axe_instance.enemy_pos = enemy.global_position

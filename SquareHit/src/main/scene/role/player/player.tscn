@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://b4pud502ri6ul"]
+[gd_scene load_steps=14 format=3 uid="uid://b4pud502ri6ul"]
 
 [ext_resource type="Script" path="res://src/main/scene/role/player/player.gd" id="1_dw20l"]
 [ext_resource type="Texture2D" uid="uid://4qj1ls538l14" path="res://src/main/assets/textures/dinosaur/sheets/DinoSprites - mort.png" id="1_qu54u"]
 [ext_resource type="Script" path="res://addons/trail_2d/trail_2d.gd" id="3_bcpi1"]
 [ext_resource type="Texture2D" uid="uid://dqjbf13key2ob" path="res://src/main/assets/textures/dinosaur/misc/shadow_2.png" id="4_dea7w"]
+[ext_resource type="PackedScene" uid="uid://bx8h5ki1r33xr" path="res://src/main/scene/ability/axe_ability/axe_ability.tscn" id="4_dwqdi"]
 
 [sub_resource type="Animation" id="Animation_0p7gh"]
 length = 0.001
@@ -231,10 +232,11 @@ colors = PackedColorArray(0.737255, 0.301961, 0.309804, 0.65098, 0.737255, 0.301
 [sub_resource type="CircleShape2D" id="CircleShape2D_r8c82"]
 radius = 3.5
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_dw20l")
+axe_ability_scene = ExtResource("4_dwqdi")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

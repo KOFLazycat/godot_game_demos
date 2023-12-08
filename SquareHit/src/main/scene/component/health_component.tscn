@@ -51,8 +51,3 @@ step = 0.01
 value = 0.5
 texture_under = ExtResource("1_v03kj")
 texture_progress = ExtResource("2_ytces")
-
-[node name="Timer" type="Timer" parent="."]
-autostart = true
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

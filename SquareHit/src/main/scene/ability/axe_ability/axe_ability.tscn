@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://bx8h5ki1r33xr"]
+
+[ext_resource type="Texture2D" uid="uid://dhgg4q6p2fseu" path="res://src/main/assets/textures/dungeon_tiles/Tiles-Items-pack.png" id="1_8hp1l"]
+[ext_resource type="PackedScene" uid="uid://qc2hqc63jtjv" path="res://src/main/scene/component/hitbox_component.tscn" id="1_17j8i"]
+[ext_resource type="Script" path="res://src/main/scene/ability/axe_ability/axe_ability.gd" id="1_rh3yc"]
+
+[sub_resource type="Animation" id="Animation_q0dot"]
+resource_name = "rotate"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 2.8),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_rned3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s1jiq"]
+_data = {
+"RESET": SubResource("Animation_rned3"),
+"rotate": SubResource("Animation_q0dot")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p2j84"]
+radius = 8.0
+
+[node name="AxeAbility" type="Node2D"]
+script = ExtResource("1_rh3yc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_s1jiq")
+}
+autoplay = "rotate"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_8hp1l")
+region_enabled = true
+region_rect = Rect2(136, 141, 17, 8)
+region_filter_clip_enabled = true
+
+[node name="HitboxComponent" parent="." instance=ExtResource("1_17j8i")]
+collision_layer = 16
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_p2j84")

@@ -102,5 +102,5 @@ func attack() -> void:
 	foreground_layer.add_child(axe_instance)
 	axe_instance.global_position = global_position
 	#TODO 伤害待优化
-	axe_instance.hitbox_component.damage = 40
-	axe_instance.enemy_pos = enemy.global_position
+	axe_instance.hitbox_component.damage = 10
+	axe_instance.target_pos = enemy.global_position

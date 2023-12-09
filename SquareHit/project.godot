@@ -25,7 +25,7 @@ window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/trail_2d/plugin.cfg")
+enabled=PackedStringArray("res://addons/com.timothyqiu.animation-resetter/plugin.cfg", "res://addons/trail_2d/plugin.cfg")
 
 [input]
 
@@ -61,6 +61,7 @@ move_right={
 2d_physics/layer_3="Enemy"
 2d_physics/layer_4="Buff"
 2d_physics/layer_5="Ability"
+2d_physics/layer_6="EnemyAbility"
 
 [rendering]
 

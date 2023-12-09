@@ -1,10 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://b4pud502ri6ul"]
+[gd_scene load_steps=17 format=3 uid="uid://b4pud502ri6ul"]
 
 [ext_resource type="Script" path="res://src/main/scene/role/player/player.gd" id="1_dw20l"]
 [ext_resource type="Texture2D" uid="uid://4qj1ls538l14" path="res://src/main/assets/textures/dinosaur/sheets/DinoSprites - mort.png" id="1_qu54u"]
 [ext_resource type="Script" path="res://addons/trail_2d/trail_2d.gd" id="3_bcpi1"]
 [ext_resource type="Texture2D" uid="uid://dqjbf13key2ob" path="res://src/main/assets/textures/dinosaur/misc/shadow_2.png" id="4_dea7w"]
 [ext_resource type="PackedScene" uid="uid://bx8h5ki1r33xr" path="res://src/main/scene/ability/axe_ability/axe_ability.tscn" id="4_dwqdi"]
+[ext_resource type="PackedScene" uid="uid://b11swgmrc85j1" path="res://src/main/scene/component/health_component.tscn" id="6_5k2ir"]
+[ext_resource type="PackedScene" uid="uid://br8kddnw428pw" path="res://src/main/scene/component/hurtbox_component.tscn" id="7_6vfwy"]
 
 [sub_resource type="Animation" id="Animation_0p7gh"]
 length = 0.001
@@ -222,6 +224,9 @@ _data = {
 "walk": SubResource("Animation_6k6j2")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_yhxnw"]
+radius = 6.0
+
 [sub_resource type="Curve" id="Curve_e73jt"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -243,6 +248,14 @@ libraries = {
 "": SubResource("AnimationLibrary_hxwcb")
 }
 
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("7_6vfwy")]
+collision_layer = 4
+collision_mask = 36
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_yhxnw")
+
 [node name="Visuals" type="Node2D" parent="."]
 
 [node name="Trail2D" type="Line2D" parent="Visuals"]
@@ -260,6 +273,10 @@ texture = ExtResource("4_dea7w")
 z_index = 10
 texture = ExtResource("1_qu54u")
 hframes = 24
+
+[node name="HealthComponent" parent="." instance=ExtResource("6_5k2ir")]
+position = Vector2(0, -12)
+scale = Vector2(0.04, 0.1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)

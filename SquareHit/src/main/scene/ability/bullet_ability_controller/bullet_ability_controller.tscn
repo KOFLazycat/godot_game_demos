@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpsyovkn6od5w"]
+
+[ext_resource type="Script" path="res://src/main/scene/ability/bullet_ability_controller/bullet_ability_controller.gd" id="1_31xno"]
+[ext_resource type="PackedScene" uid="uid://cebrgdxf0yg17" path="res://src/main/scene/ability/bullet_ability/bullet_ability.tscn" id="2_h52o6"]
+
+[node name="BulletAbilityController" type="Node"]
+script = ExtResource("1_31xno")
+bullet_ability_scene = ExtResource("2_h52o6")
+
+[node name="Timer" type="Timer" parent="."]

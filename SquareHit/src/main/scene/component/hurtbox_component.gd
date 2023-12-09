@@ -19,7 +19,8 @@ func on_area_entered(area: Area2D) -> void:
 	var hitbox_component = area as HitboxComponent
 	var damage = round(hitbox_component.damage)
 	#TODO 释放攻击武器，待优化
-	hitbox_component.owner.queue_free()
+	if hitbox_component.owner.has_method("die"):
+		hitbox_component.owner.die()
 	# 造成伤害
 	health_component.damage(damage)
 	

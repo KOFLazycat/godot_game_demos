@@ -1,12 +1,12 @@
 extends Node2D
 
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
+@onready var velocity_component: Node = $VelocityComponent
 @onready var timer: Timer = $Timer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-
-var target_pos: Vector2 = Vector2.ZERO
-var speed: float = 300.0
+var is_stop_move: bool = false
+var velocity: Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
@@ -14,12 +14,17 @@ func _ready() -> void:
 	animation_player.animation_finished.connect(on_animation_player_animation_finished)
 
 
-func _physics_process(delta: float) -> void:
-	if target_pos != Vector2.ZERO:
-		global_position = global_position.move_toward(target_pos, delta * speed)
+func _process(delta: float) -> void:
+	if !is_stop_move:
+		velocity_component.accelerate_to_player()
+		velocity = velocity_component.velocity
+	
+	global_position = global_position + velocity * delta
 
 
 func die() -> void:
+	is_stop_move = true
+	velocity = Vector2.ZERO
 	animation_player.play("die")
 
 

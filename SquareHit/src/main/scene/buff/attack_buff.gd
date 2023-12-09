@@ -8,4 +8,4 @@ func _ready() -> void:
 
 func on_body_entered(boddy: Node2D) -> void:
 	if boddy.is_in_group("player") and boddy.has_method("attack"):
-		boddy.attack()
+		boddy.call_deferred("attack")

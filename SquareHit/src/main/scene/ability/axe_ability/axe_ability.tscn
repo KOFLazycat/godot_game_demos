@@ -67,10 +67,9 @@ tracks/4/keys = {
 "values": [0.0]
 }
 
-[sub_resource type="Animation" id="Animation_q0dot"]
-resource_name = "rotate"
+[sub_resource type="Animation" id="Animation_yy54b"]
+resource_name = "die"
 length = 0.5
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -132,8 +131,8 @@ tracks/4/keys = {
 "values": [0.0, 6.28319]
 }
 
-[sub_resource type="Animation" id="Animation_yy54b"]
-resource_name = "die"
+[sub_resource type="Animation" id="Animation_q0dot"]
+resource_name = "rotate"
 length = 0.5
 loop_mode = 1
 tracks/0/type = "value"

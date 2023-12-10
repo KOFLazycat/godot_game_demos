@@ -628,6 +628,9 @@ speed_up = 100
 position = Vector2(640, 360)
 scale = Vector2(4, 4)
 
+[node name="Foreground" type="Node2D" parent="." groups=["foreground_layer"]]
+z_index = 10
+
 [node name="Buffs" type="Node2D" parent="." groups=["buffs_layer"]]
 
 [node name="SpeedUpBuff" parent="Buffs" instance=ExtResource("4_333ga")]
@@ -645,5 +648,3 @@ scale = Vector2(1.5, 1.5)
 [node name="AttackBuff2" parent="Buffs" instance=ExtResource("6_ofbx8")]
 position = Vector2(230, 360)
 scale = Vector2(1.5, 1.5)
-
-[node name="Foreground" type="Node2D" parent="." groups=["foreground_layer"]]

@@ -20,6 +20,7 @@ func _physics_process(delta: float) -> void:
 
 
 func die() -> void:
+	visible = false
 	animation_player.play("die")
 
 

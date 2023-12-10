@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdk34kc46a2xr"]
+[gd_scene load_steps=10 format=3 uid="uid://bdk34kc46a2xr"]
 
 [ext_resource type="Script" path="res://src/main/scene/level/room/room.gd" id="1_xmj3i"]
 [ext_resource type="Texture2D" uid="uid://dr210681ck1lt" path="res://src/main/assets/textures/dungeon_tiles/Tiles-SandstoneDungeons.png" id="2_4tkd2"]
 [ext_resource type="PackedScene" uid="uid://b4pud502ri6ul" path="res://src/main/scene/role/player/player.tscn" id="3_euhir"]
 [ext_resource type="PackedScene" uid="uid://sld408iwhqix" path="res://src/main/scene/buff/speed_up_buff.tscn" id="4_333ga"]
 [ext_resource type="PackedScene" uid="uid://spi44mmvknls" path="res://src/main/scene/role/enemy/enemy.tscn" id="5_42afq"]
+[ext_resource type="PackedScene" uid="uid://cmpptk6ucqijf" path="res://src/main/scene/ability/restricted_zone_ability/restricted_zone_ability.tscn" id="5_bmg21"]
 [ext_resource type="PackedScene" uid="uid://cifpyf3khl80t" path="res://src/main/scene/buff/attack_buff.tscn" id="6_ofbx8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1sre2"]
@@ -630,6 +631,13 @@ scale = Vector2(4, 4)
 
 [node name="Foreground" type="Node2D" parent="." groups=["foreground_layer"]]
 z_index = 10
+
+[node name="RestrictedZoneAbility" parent="Foreground" instance=ExtResource("5_bmg21")]
+position = Vector2(640, 360)
+rotation = 4.71239
+
+[node name="RestrictedZoneAbility2" parent="Foreground" instance=ExtResource("5_bmg21")]
+position = Vector2(640, 360)
 
 [node name="Buffs" type="Node2D" parent="." groups=["buffs_layer"]]
 

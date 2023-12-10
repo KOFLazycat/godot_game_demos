@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b4pud502ri6ul"]
+[gd_scene load_steps=18 format=3 uid="uid://b4pud502ri6ul"]
 
 [ext_resource type="Script" path="res://src/main/scene/role/player/player.gd" id="1_dw20l"]
 [ext_resource type="Texture2D" uid="uid://4qj1ls538l14" path="res://src/main/assets/textures/dinosaur/sheets/DinoSprites - mort.png" id="1_qu54u"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dqjbf13key2ob" path="res://src/main/assets/textures/dinosaur/misc/shadow_2.png" id="4_dea7w"]
 [ext_resource type="PackedScene" uid="uid://bx8h5ki1r33xr" path="res://src/main/scene/ability/axe_ability/axe_ability.tscn" id="4_dwqdi"]
 [ext_resource type="PackedScene" uid="uid://b11swgmrc85j1" path="res://src/main/scene/component/health_component.tscn" id="6_5k2ir"]
+[ext_resource type="PackedScene" uid="uid://bmpaknj0ip12e" path="res://src/main/scene/ability/axe_ability_controller/axe_ability_controller.tscn" id="6_f68ql"]
 [ext_resource type="PackedScene" uid="uid://br8kddnw428pw" path="res://src/main/scene/component/hurtbox_component.tscn" id="7_6vfwy"]
 
 [sub_resource type="Animation" id="Animation_0p7gh"]
@@ -259,6 +260,10 @@ shape = SubResource("CircleShape2D_yhxnw")
 [node name="HealthComponent" parent="." instance=ExtResource("6_5k2ir")]
 position = Vector2(0, -12)
 scale = Vector2(0.04, 0.1)
+
+[node name="Abilities" type="Node" parent="."]
+
+[node name="AxeAbilityController" parent="Abilities" instance=ExtResource("6_f68ql")]
 
 [node name="Visuals" type="Node2D" parent="."]
 

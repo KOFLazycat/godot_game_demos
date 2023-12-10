@@ -3,6 +3,8 @@ extends CharacterBody2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var visuals: Node2D = $Visuals
 @onready var sprite_2d: Sprite2D = $Visuals/Sprite2D
+@onready var axe_ability_controller: Node = $Abilities/AxeAbilityController
+
 
 ## 基本移速
 @export var base_speed: int = 500
@@ -89,18 +91,3 @@ func accelerate_in_direction() -> void:
 
 func speed_up_once() -> void:
 	speed = clamp(speed + speed_up, min_speed, max_speed)
-
-
-func attack() -> void:
-	var enemy:CharacterBody2D = get_tree().get_first_node_in_group("enemy") as CharacterBody2D
-	var axe_instance: Node2D = axe_ability_scene.instantiate() as Node2D
-	if !is_instance_valid(enemy) or !is_instance_valid(axe_instance):
-		return
-	var foreground_layer = get_tree().get_first_node_in_group("foreground_layer") as Node2D
-	if !is_instance_valid(foreground_layer):
-		return
-	foreground_layer.add_child(axe_instance)
-	axe_instance.global_position = global_position
-	#TODO 伤害待优化
-	axe_instance.hitbox_component.damage = 10
-	axe_instance.target_pos = enemy.global_position

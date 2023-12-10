@@ -4,6 +4,7 @@ extends Node
 
 @onready var timer: Timer = $Timer
 
+var base_damage: float = 10.0
 
 func _ready() -> void:
 	timer.timeout.connect(on_timer_timeout)
@@ -23,4 +24,4 @@ func on_timer_timeout() -> void:
 	foreground_layer.add_child(bullet_instance)
 	bullet_instance.global_position = owner.global_position
 	#TODO 伤害待优化
-	bullet_instance.hitbox_component.damage = 10
+	bullet_instance.hitbox_component.damage = base_damage

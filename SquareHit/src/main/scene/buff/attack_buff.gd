@@ -7,5 +7,5 @@ func _ready() -> void:
 
 
 func on_body_entered(boddy: Node2D) -> void:
-	if boddy.is_in_group("player") and boddy.has_method("attack"):
-		boddy.call_deferred("attack")
+	if boddy.is_in_group("player") and is_instance_valid(boddy.axe_ability_controller):
+		boddy.axe_ability_controller.call_deferred("add_axe")

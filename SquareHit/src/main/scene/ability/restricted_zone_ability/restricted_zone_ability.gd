@@ -1,5 +1,7 @@
-extends Area2D
-@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+extends Node2D
+
+@onready var hitbox_component: HitboxComponent = $HitboxComponent
+@onready var collision_shape_2d: CollisionShape2D = $HitboxComponent/CollisionShape2D
 @onready var color_rect: ColorRect = $ColorRect
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var fade_out_timer: Timer = $FadeOutTimer

@@ -47,7 +47,7 @@ func damage(damage_amount: float) -> void:
 	health_changed.emit()
 	
 	# 血条缓慢退下
-	var tween = create_tween()
+	var tween = create_tween().set_parallel(true)
 	var bar_value: float = get_health_percent()
 	if is_decresed:
 		tween.tween_property(health_bar_top, "value", bar_value, change_time).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)

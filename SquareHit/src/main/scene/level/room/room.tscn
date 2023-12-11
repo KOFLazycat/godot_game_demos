@@ -633,10 +633,12 @@ scale = Vector2(4, 4)
 z_index = 10
 
 [node name="RestrictedZoneAbility" parent="Foreground" instance=ExtResource("5_bmg21")]
+visible = false
 position = Vector2(640, 360)
 rotation = 4.71239
 
 [node name="RestrictedZoneAbility2" parent="Foreground" instance=ExtResource("5_bmg21")]
+visible = false
 position = Vector2(640, 360)
 
 [node name="Buffs" type="Node2D" parent="." groups=["buffs_layer"]]
@@ -647,10 +649,6 @@ scale = Vector2(1.5, 1.5)
 
 [node name="SpeedUpBuff2" parent="Buffs" instance=ExtResource("4_333ga")]
 position = Vector2(553, 605)
-scale = Vector2(1.5, 1.5)
-
-[node name="AttackBuff" parent="Buffs" instance=ExtResource("6_ofbx8")]
-position = Vector2(640, 111)
 scale = Vector2(1.5, 1.5)
 
 [node name="AttackBuff2" parent="Buffs" instance=ExtResource("6_ofbx8")]

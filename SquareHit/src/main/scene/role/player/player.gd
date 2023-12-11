@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var visuals: Node2D = $Visuals
 @onready var sprite_2d: Sprite2D = $Visuals/Sprite2D
 @onready var axe_ability_controller: Node = $Abilities/AxeAbilityController
+@onready var health_component: HealthComponent = $HealthComponent
 
 
 ## 基本移速
@@ -31,11 +32,17 @@ const ACCELERATION: int = 5
 var direction: Vector2 = Vector2.ZERO
 ## 本次碰撞后的法线
 var current_normal: Vector2 = Vector2.ZERO
+## 是否死亡
+var is_die: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	animation_player.play("idle")
 	speed = base_speed
+	
+	# 连接信号
+	health_component.died.connect(on_health_component_died)
+	animation_player.animation_finished.connect(on_animation_player_animation_finished)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -57,7 +64,8 @@ func _process(delta: float) -> void:
 			if move_sign != 0:
 				visuals.scale.x = move_sign
 		else:
-			animation_player.play("idle")
+			if !is_die:
+				animation_player.play("idle")
 	else:
 		if velocity != Vector2.ZERO:
 			direction = Vector2.ZERO
@@ -85,9 +93,32 @@ func _input(event: InputEvent) -> void:
 
 
 func accelerate_in_direction() -> void:
-	var desired_velocity: Vector2 = direction * speed
-	velocity = velocity.lerp(desired_velocity, 1.0 - exp(-ACCELERATION * get_process_delta_time()))
+	if !is_die:
+		var desired_velocity: Vector2 = direction * speed
+		velocity = velocity.lerp(desired_velocity, 1.0 - exp(-ACCELERATION * get_process_delta_time()))
+	else:
+		velocity = Vector2.ZERO
 
 
 func speed_up_once() -> void:
 	speed = clamp(speed + speed_up, min_speed, max_speed)
+
+
+func die() -> void:
+	is_die = true
+	velocity = Vector2.ZERO
+	animation_player.play("die")
+
+
+func on_health_component_died() -> void:
+	die()
+
+
+func on_animation_player_animation_finished(anim: StringName) -> void:
+	if anim == "die":
+		queue_free()
+
+
+
+
+

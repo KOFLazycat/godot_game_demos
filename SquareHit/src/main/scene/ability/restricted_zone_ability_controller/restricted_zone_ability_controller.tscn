@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2exx4g0ci6b4"]
+
+[ext_resource type="Script" path="res://src/main/scene/ability/restricted_zone_ability_controller/restricted_zone_ability_controller.gd" id="1_0v23l"]
+[ext_resource type="PackedScene" uid="uid://cmpptk6ucqijf" path="res://src/main/scene/ability/restricted_zone_ability/restricted_zone_ability.tscn" id="2_roin1"]
+
+[node name="RestrictedZoneAbilityController" type="Node"]
+script = ExtResource("1_0v23l")
+restricted_zone_ability_scene = ExtResource("2_roin1")
+
+[node name="Timer" type="Timer" parent="."]

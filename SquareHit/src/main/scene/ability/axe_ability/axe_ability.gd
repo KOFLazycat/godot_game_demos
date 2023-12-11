@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
+## 持续时间
 @onready var timer: Timer = $Timer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 

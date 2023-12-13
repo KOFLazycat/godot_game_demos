@@ -1,0 +1,8 @@
+res://src/main/scene/level/room/room.tscn
+res://src/main/scene/role/player/player.tscn
+res://src/main/scene/role/enemy/enemy.tscn
+res://src/main/scene/component/hurtbox_component.tscn
+res://src/main/scene/ability/restricted_zone_ability/restricted_zone_ability.tscn
+res://src/main/scene/ability/restricted_zone_ability_controller/restricted_zone_ability_controller.tscn
+res://src/main/scene/ability/bullet_ability_controller/bullet_ability_controller.tscn
+res://src/main/scene/ui/main_menu.tscn

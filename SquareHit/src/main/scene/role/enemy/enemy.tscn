@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://spi44mmvknls"]
+[gd_scene load_steps=12 format=3 uid="uid://spi44mmvknls"]
 
 [ext_resource type="Script" path="res://src/main/scene/role/enemy/enemy.gd" id="1_416ad"]
 [ext_resource type="Texture2D" uid="uid://50bkfyyd7vjy" path="res://src/main/assets/textures/simple_tiles/Objects.png" id="2_2lrl0"]
 [ext_resource type="PackedScene" uid="uid://br8kddnw428pw" path="res://src/main/scene/component/hurtbox_component.tscn" id="2_uhpgn"]
 [ext_resource type="PackedScene" uid="uid://cpsyovkn6od5w" path="res://src/main/scene/ability/bullet_ability_controller/bullet_ability_controller.tscn" id="3_t71xq"]
-[ext_resource type="PackedScene" uid="uid://b2exx4g0ci6b4" path="res://src/main/scene/ability/restricted_zone_ability_controller/restricted_zone_ability_controller.tscn" id="4_bdrkr"]
 [ext_resource type="PackedScene" uid="uid://b11swgmrc85j1" path="res://src/main/scene/component/health_component.tscn" id="4_iscpy"]
 
 [sub_resource type="Animation" id="Animation_5mebn"]
@@ -279,8 +278,6 @@ shape = SubResource("RectangleShape2D_iyfrp")
 [node name="Abilities" type="Node" parent="."]
 
 [node name="BulletAbilityController" parent="Abilities" instance=ExtResource("3_t71xq")]
-
-[node name="RestrictedZoneAbilityController" parent="Abilities" instance=ExtResource("4_bdrkr")]
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_iscpy")]
 position = Vector2(0, -10)

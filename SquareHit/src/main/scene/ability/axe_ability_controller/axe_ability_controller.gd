@@ -15,6 +15,7 @@ func add_axe() -> void:
 
 	foreground_layer.add_child(axe_instance)
 	axe_instance.global_position = owner.global_position
+	axe_instance.scale = owner.scale/2
 	#TODO 伤害待优化
 	axe_instance.hitbox_component.damage = base_damage
 	axe_instance.target_pos = enemy.global_position

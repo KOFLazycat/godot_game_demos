@@ -651,7 +651,6 @@ colors = PackedColorArray(1, 1, 1, 1, 0.560784, 0.560784, 0.560784, 0)
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_47tox")
-base_speed = 1000
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -686,7 +685,7 @@ width = 25.0
 width_curve = SubResource("Curve_e73jt")
 gradient = SubResource("Gradient_xqnnp")
 script = ExtResource("6_oymvn")
-length = 25
+length = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 z_index = 10

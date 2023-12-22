@@ -2,17 +2,18 @@ extends CharacterBody2D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var visuals: Node2D = $Visuals
+@onready var trail_2d: Line2D = $Visuals/Trail2D
 @onready var sprite_2d: Sprite2D = $Visuals/Sprite2D
 @onready var axe_ability_controller: Node = $Abilities/AxeAbilityController
 @onready var health_component: HealthComponent = $HealthComponent
 
 
 ## 基本移速
-@export var base_speed: int = 2000
+@export var base_speed: int = 1000
 ## 最小移速
 @export var min_speed: int = 400
 ## 最大移速
-@export var max_speed: int = 2000
+@export var max_speed: int = 4000
 ## 每次加速BUF可提供的加速度
 @export var speed_up: int = 100
 ## 攻击武器
@@ -26,7 +27,7 @@ var speed: int:
 			speed = value
 
 ## 平滑起步加速度
-const ACCELERATION: int = 100
+const ACCELERATION: int = 200
 
 ## 移动方向
 var direction: Vector2 = Vector2.ZERO
@@ -82,7 +83,7 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	# 停止之前不允许修改方向，通过碰撞法线，实现角色不走回头路
 	if event.is_pressed() and direction == Vector2.ZERO:
-		if event.is_action_pressed("move_right") :
+		if event.is_action_pressed("move_right"):
 			if current_normal != Vector2.RIGHT:
 				direction = Vector2.RIGHT
 		elif event.is_action_pressed("move_left"):
@@ -99,6 +100,7 @@ func _input(event: InputEvent) -> void:
 func accelerate_in_direction() -> void:
 	if !is_die:
 		var desired_velocity: Vector2 = direction * speed
+		#velocity = desired_velocity
 		velocity = velocity.lerp(desired_velocity, 1.0 - exp(-ACCELERATION * get_process_delta_time()))
 	else:
 		velocity = Vector2.ZERO
@@ -106,6 +108,8 @@ func accelerate_in_direction() -> void:
 
 func speed_up_once() -> void:
 	speed = clamp(speed + speed_up, min_speed, max_speed)
+	trail_2d.length = floor(speed/200)
+	print(trail_2d.length)
 
 
 func die() -> void:

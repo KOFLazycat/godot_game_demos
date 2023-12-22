@@ -13,6 +13,7 @@ metadata/_edit_vertical_guides_ = [670.0, 50.0]
 metadata/_edit_horizontal_guides_ = [100.0, 1180.0]
 
 [node name="LevelTest" parent="." instance=ExtResource("7_7h2ij")]
+metadata/_edit_vertical_guides_ = [340.0, 670.0]
 
 [node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
 

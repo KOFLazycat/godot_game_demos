@@ -1,17 +1,11 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://dhxupdj0p0wry"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dhxupdj0p0wry"]
 
-[ext_resource type="Texture2D" uid="uid://dq57b8y6wtco4" path="res://src/main/assets/textures/simple_tiles/Floor.png" id="1_2rlte"]
 [ext_resource type="FontFile" uid="uid://di4sc2xpueh7a" path="res://src/main/assets/fonts/VonwaonBitmap-12px.ttf" id="1_7qocj"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hktjg"]
-texture = ExtResource("1_2rlte")
-texture_margin_left = 15.2435
-texture_margin_top = 14.9732
-texture_margin_right = 14.6219
-texture_margin_bottom = 14.7845
-region_rect = Rect2(0, 0, 16, 16)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v2qao"]
+bg_color = Color(0.259294, 0.259294, 0.259294, 1)
 
 [resource]
 default_font = ExtResource("1_7qocj")
 default_font_size = 12
-PanelContainer/styles/panel = SubResource("StyleBoxTexture_hktjg")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_v2qao")

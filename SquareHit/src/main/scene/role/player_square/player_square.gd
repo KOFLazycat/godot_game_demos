@@ -83,18 +83,19 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	# 停止之前不允许修改方向，通过碰撞法线，实现角色不走回头路
 	if event.is_pressed() and direction == Vector2.ZERO:
-		if event.is_action_pressed("move_right"):
-			if current_normal != Vector2.RIGHT:
-				direction = Vector2.RIGHT
-		elif event.is_action_pressed("move_left"):
-			if current_normal != Vector2.LEFT:
-				direction = Vector2.LEFT
-		elif event.is_action_pressed("move_down"):
-			if current_normal != Vector2.DOWN:
-				direction = Vector2.DOWN
-		elif event.is_action_pressed("move_up"):
-			if current_normal != Vector2.UP:
-				direction = Vector2.UP
+		direction = Vector2(event.get_action_strength("move_right") - event.get_action_strength("move_left"), event.get_action_strength("move_down") - event.get_action_strength("move_up")).normalized()
+		#if event.is_action_pressed("move_right"):
+			#if current_normal != Vector2.RIGHT:
+				#direction = Vector2.RIGHT
+		#elif event.is_action_pressed("move_left"):
+			#if current_normal != Vector2.LEFT:
+				#direction = Vector2.LEFT
+		#elif event.is_action_pressed("move_down"):
+			#if current_normal != Vector2.DOWN:
+				#direction = Vector2.DOWN
+		#elif event.is_action_pressed("move_up"):
+			#if current_normal != Vector2.UP:
+				#direction = Vector2.UP
 
 
 func accelerate_in_direction() -> void:

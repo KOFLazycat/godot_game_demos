@@ -33,8 +33,6 @@ const ACCELERATION: int = 200
 var direction: Vector2 = Vector2.ZERO
 ## 本次碰撞后的法线
 var current_normal: Vector2 = Vector2.ZERO
-## 是否死亡
-var is_die: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -69,7 +67,7 @@ func _process(delta: float) -> void:
 			if direction.y < 0:
 				animation_player.play("run_up")
 		else:
-			if !is_die:
+			if !Global._is_game_over:
 				animation_player.play("idle")
 	else:
 		if velocity != Vector2.ZERO:
@@ -99,7 +97,7 @@ func _input(event: InputEvent) -> void:
 
 
 func accelerate_in_direction() -> void:
-	if !is_die:
+	if !Global._is_game_over:
 		var desired_velocity: Vector2 = direction * speed
 		#velocity = desired_velocity
 		velocity = velocity.lerp(desired_velocity, 1.0 - exp(-ACCELERATION * get_process_delta_time()))
@@ -114,7 +112,7 @@ func speed_up_once() -> void:
 
 
 func die() -> void:
-	is_die = true
+	Global.set_game_over()
 	velocity = Vector2.ZERO
 	animation_player.play("die")
 

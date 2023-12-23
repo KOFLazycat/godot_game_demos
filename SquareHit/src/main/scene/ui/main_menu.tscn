@@ -84,7 +84,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_krryf")
-scene = "main_menu"
 
 [node name="BG" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_n1icw")

@@ -1,19 +1,18 @@
 [gd_scene load_steps=7 format=3 uid="uid://bdk34kc46a2xr"]
 
 [ext_resource type="Script" path="res://src/main/scene/level/room/room.gd" id="1_xmj3i"]
+[ext_resource type="PackedScene" uid="uid://kvbno81v53m3" path="res://src/main/scene/level/level_one/level_one.tscn" id="2_uo74j"]
 [ext_resource type="PackedScene" uid="uid://cl5b614ok6i5r" path="res://src/main/scene/role/player_square/player_square.tscn" id="3_tvhce"]
 [ext_resource type="PackedScene" uid="uid://sld408iwhqix" path="res://src/main/scene/buff/speed_up_buff.tscn" id="4_333ga"]
 [ext_resource type="PackedScene" uid="uid://spi44mmvknls" path="res://src/main/scene/role/enemy/enemy.tscn" id="5_42afq"]
 [ext_resource type="PackedScene" uid="uid://cifpyf3khl80t" path="res://src/main/scene/buff/attack_buff.tscn" id="6_ofbx8"]
-[ext_resource type="PackedScene" uid="uid://bsdr230mseday" path="res://src/main/scene/level/test/level_test.tscn" id="7_7h2ij"]
 
 [node name="Room" type="Node2D"]
 script = ExtResource("1_xmj3i")
 metadata/_edit_vertical_guides_ = [670.0, 50.0]
 metadata/_edit_horizontal_guides_ = [100.0, 1180.0]
 
-[node name="LevelTest" parent="." instance=ExtResource("7_7h2ij")]
-metadata/_edit_vertical_guides_ = [340.0, 670.0]
+[node name="LevelOne" parent="." instance=ExtResource("2_uo74j")]
 
 [node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
 

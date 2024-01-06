@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfxyscfwy6tw6"]
+
+[ext_resource type="PackedScene" uid="uid://cvu6k3bltliu4" path="res://src/main/scene/role/border/border.tscn" id="1_8m07y"]
+[ext_resource type="Script" path="res://src/main/scene/level/main.gd" id="1_hqeao"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_hqeao")
+
+[node name="Border" parent="." instance=ExtResource("1_8m07y")]
+position = Vector2(300, 300)

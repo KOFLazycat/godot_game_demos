@@ -1,0 +1,73 @@
+[gd_scene load_steps=4 format=3 uid="uid://bp1dbxl1mgmmh"]
+
+[ext_resource type="FontFile" uid="uid://bmbxs8bgoxf44" path="res://src/main/assets/fonts/VonwaonBitmap-16px.ttf" id="1_nn6xm"]
+[ext_resource type="Script" path="res://src/main/scene/ui/game_over_menu.gd" id="1_y2k51"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_okgu6"]
+bg_color = Color(0.0941176, 0.356863, 0.298039, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.807843, 0.764706, 0.266667, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 6
+
+[node name="GameOverMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y2k51")
+
+[node name="GameOverPanel" type="Panel" parent="."]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -100.0
+offset_right = 200.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(200, 100)
+theme_override_styles/panel = SubResource("StyleBoxFlat_okgu6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+
+[node name="ResultLabel" type="Label" parent="GameOverPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_nn6xm")
+theme_override_font_sizes/font_size = 32
+text = "Player 1 Win!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="GameOverPanel/VBoxContainer"]
+custom_minimum_size = Vector2(240, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_nn6xm")
+theme_override_font_sizes/font_size = 32
+text = "Play Again"

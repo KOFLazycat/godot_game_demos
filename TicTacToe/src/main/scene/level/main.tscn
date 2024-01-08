@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dfxyscfwy6tw6"]
+[gd_scene load_steps=9 format=3 uid="uid://dfxyscfwy6tw6"]
 
 [ext_resource type="PackedScene" uid="uid://cvu6k3bltliu4" path="res://src/main/scene/role/border/border.tscn" id="1_8m07y"]
 [ext_resource type="Script" path="res://src/main/scene/level/main.gd" id="1_hqeao"]
 [ext_resource type="PackedScene" uid="uid://dovgu8dewctvl" path="res://src/main/scene/role/circle/circle.tscn" id="2_5jfxi"]
 [ext_resource type="PackedScene" uid="uid://bxssdrd8056fo" path="res://src/main/scene/role/cross/cross.tscn" id="3_vfwup"]
+[ext_resource type="PackedScene" uid="uid://bp1dbxl1mgmmh" path="res://src/main/scene/ui/game_over_menu.tscn" id="4_fv21n"]
 [ext_resource type="FontFile" uid="uid://bmbxs8bgoxf44" path="res://src/main/assets/fonts/VonwaonBitmap-16px.ttf" id="5_qatoj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6e7of"]
@@ -28,6 +29,7 @@ shadow_size = 7
 script = ExtResource("1_hqeao")
 circle_scene = ExtResource("2_5jfxi")
 cross_scene = ExtResource("3_vfwup")
+game_over_menu_scene = ExtResource("4_fv21n")
 
 [node name="Border" parent="." instance=ExtResource("1_8m07y")]
 position = Vector2(300, 300)

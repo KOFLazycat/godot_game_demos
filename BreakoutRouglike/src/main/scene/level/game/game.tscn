@@ -1,0 +1,102 @@
+[gd_scene load_steps=13 format=3 uid="uid://bdg0nyp04difc"]
+
+[ext_resource type="Script" path="res://src/main/scene/level/game/game.gd" id="1_30ryq"]
+[ext_resource type="Texture2D" uid="uid://brthax48a4cvg" path="res://src/main/assets/textures/background/background.png" id="2_af6a3"]
+[ext_resource type="Shader" path="res://src/main/assets/shaders/pattern.gdshader" id="3_c5dq5"]
+[ext_resource type="Texture2D" uid="uid://xqakbtyjxx11" path="res://src/main/assets/textures/pattern/pattern.png" id="4_d0d4t"]
+[ext_resource type="FontFile" uid="uid://b2t72jiwovi67" path="res://src/main/assets/fonts/AldotheApache.ttf" id="5_fpem7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gr3ki"]
+shader = ExtResource("3_c5dq5")
+shader_parameter/speed = 0.3
+shader_parameter/size_scale = 30.0
+shader_parameter/color = Color(0.74902, 0.74902, 0.74902, 0.254902)
+shader_parameter/pattern = ExtResource("4_d0d4t")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bnhq6"]
+size = Vector2(1185, 83)
+
+[sub_resource type="Gradient" id="Gradient_v7pst"]
+colors = PackedColorArray(1, 0.752941, 0.0117647, 1, 1, 0.517647, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nbcwx"]
+gradient = SubResource("Gradient_v7pst")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xau1c"]
+size = Vector2(90, 1543)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_neufd"]
+size = Vector2(90, 1543)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ryqhx"]
+size = Vector2(1185, 90)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_30ryq")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(540, 960)
+texture = ExtResource("2_af6a3")
+
+[node name="Pattern" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_gr3ki")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1280.0
+offset_top = -960.0
+offset_right = 2320.0
+offset_bottom = 2640.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.785398
+pivot_offset = Vector2(1800, 1800)
+
+[node name="Comber" type="Label" parent="."]
+offset_left = 252.0
+offset_top = 895.0
+offset_right = 846.0
+offset_bottom = 1045.0
+theme_override_colors/font_color = Color(0.295867, 0.295866, 0.295866, 0.282353)
+theme_override_colors/font_outline_color = Color(0.31802, 0.31802, 0.31802, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("5_fpem7")
+theme_override_font_sizes/font_size = 180
+text = "COMBO 4"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(540, 960)
+
+[node name="DeathArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathArea"]
+position = Vector2(540, 1746)
+shape = SubResource("RectangleShape2D_bnhq6")
+
+[node name="Polygon2D" type="Polygon2D" parent="DeathArea"]
+color = Color(1, 0.752941, 0.0117647, 1)
+antialiased = true
+texture = SubResource("GradientTexture2D_nbcwx")
+polygon = PackedVector2Array(-70, 1700, 1150, 1700, 1150, 2000, -70, 2000)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2DLeft" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 1080)
+shape = SubResource("RectangleShape2D_xau1c")
+
+[node name="CollisionShape2DRight" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1080, 1080)
+shape = SubResource("RectangleShape2D_neufd")
+
+[node name="CollisionShape2DTop" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(540, 275)
+shape = SubResource("RectangleShape2D_ryqhx")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+color = Color(0.996078, 0.862745, 0.00784314, 1)
+antialiased = true
+polygon = PackedVector2Array(-50, 230, -50, 1700, 50, 1700, 50, 317, 1036, 317, 1036, 1700, 1130, 1700, 1130, 230)
+
+[node name="ComboTimer" type="Timer" parent="."]
+one_shot = true

@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://bdg0nyp04difc"]
+[gd_scene load_steps=14 format=3 uid="uid://bdg0nyp04difc"]
 
 [ext_resource type="Script" path="res://src/main/scene/level/game/game.gd" id="1_30ryq"]
 [ext_resource type="Texture2D" uid="uid://brthax48a4cvg" path="res://src/main/assets/textures/background/background.png" id="2_af6a3"]
 [ext_resource type="Shader" path="res://src/main/assets/shaders/pattern.gdshader" id="3_c5dq5"]
 [ext_resource type="Texture2D" uid="uid://xqakbtyjxx11" path="res://src/main/assets/textures/pattern/pattern.png" id="4_d0d4t"]
 [ext_resource type="FontFile" uid="uid://b2t72jiwovi67" path="res://src/main/assets/fonts/AldotheApache.ttf" id="5_fpem7"]
+[ext_resource type="PackedScene" uid="uid://bi1rkmulqic6l" path="res://src/main/scene/role/paddle/paddle.tscn" id="6_vej8u"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gr3ki"]
 shader = ExtResource("3_c5dq5")
@@ -61,6 +62,9 @@ theme_override_colors/font_color = Color(0.419608, 0.419608, 0.419608, 0.243137)
 theme_override_fonts/font = ExtResource("5_fpem7")
 theme_override_font_sizes/font_size = 180
 text = "COMBO 4"
+
+[node name="Paddle" parent="." instance=ExtResource("6_vej8u")]
+position = Vector2(540, 1619)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(540, 960)

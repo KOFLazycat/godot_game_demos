@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bdg0nyp04difc"]
+[gd_scene load_steps=15 format=3 uid="uid://bdg0nyp04difc"]
 
 [ext_resource type="Script" path="res://src/main/scene/level/game/game.gd" id="1_30ryq"]
 [ext_resource type="Texture2D" uid="uid://brthax48a4cvg" path="res://src/main/assets/textures/background/background.png" id="2_af6a3"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://xqakbtyjxx11" path="res://src/main/assets/textures/pattern/pattern.png" id="4_d0d4t"]
 [ext_resource type="FontFile" uid="uid://b2t72jiwovi67" path="res://src/main/assets/fonts/AldotheApache.ttf" id="5_fpem7"]
 [ext_resource type="PackedScene" uid="uid://bi1rkmulqic6l" path="res://src/main/scene/role/paddle/paddle.tscn" id="6_vej8u"]
+[ext_resource type="PackedScene" uid="uid://ceha0yendxj8c" path="res://src/main/scene/ui/energy_bar/energy_bar.tscn" id="7_osdkb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gr3ki"]
 shader = ExtResource("3_c5dq5")
@@ -102,3 +103,7 @@ polygon = PackedVector2Array(-50, 230, -50, 1700, 50, 1700, 50, 317, 1036, 317, 
 
 [node name="ComboTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="EnergyBar" parent="CanvasLayer" instance=ExtResource("7_osdkb")]

@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://csyk6y3crq7vk"]
+
+[ext_resource type="Script" path="res://src/main/scene/role/laser/laser.gd" id="1_j1xpf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_27lsa"]
+size = Vector2(120, 1350)
+
+[node name="Laser" type="Area2D"]
+script = ExtResource("1_j1xpf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -675)
+shape = SubResource("RectangleShape2D_27lsa")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, -1350)
+width = 120.0
+default_color = Color(1, 0.0823529, 0.32549, 1)
+
+[node name="ChargeTimer" type="Timer" parent="."]
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.8

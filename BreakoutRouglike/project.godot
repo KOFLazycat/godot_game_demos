@@ -16,6 +16,10 @@ run/main_scene="res://src/main/scene/level/game/game.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Globals="*res://src/main/common/autoload/Globals.tscn"
+
 [display]
 
 window/size/viewport_width=1080

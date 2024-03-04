@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bdg0nyp04difc"]
+[gd_scene load_steps=18 format=3 uid="uid://bdg0nyp04difc"]
 
 [ext_resource type="Script" path="res://src/main/scene/level/game/game.gd" id="1_30ryq"]
 [ext_resource type="Texture2D" uid="uid://brthax48a4cvg" path="res://src/main/assets/textures/background/background.png" id="2_af6a3"]
@@ -7,6 +7,9 @@
 [ext_resource type="FontFile" uid="uid://b2t72jiwovi67" path="res://src/main/assets/fonts/AldotheApache.ttf" id="5_fpem7"]
 [ext_resource type="PackedScene" uid="uid://bi1rkmulqic6l" path="res://src/main/scene/role/paddle/paddle.tscn" id="6_vej8u"]
 [ext_resource type="PackedScene" uid="uid://ceha0yendxj8c" path="res://src/main/scene/ui/energy_bar/energy_bar.tscn" id="7_osdkb"]
+[ext_resource type="PackedScene" uid="uid://dt1kso1s6kybo" path="res://src/main/scene/ui/health_bar/health_bar.tscn" id="8_kott7"]
+[ext_resource type="PackedScene" uid="uid://c0fc3qki4f4fo" path="res://src/main/scene/ui/score/score.tscn" id="9_b7tdo"]
+[ext_resource type="PackedScene" uid="uid://sdp8lwtkci63" path="res://src/main/scene/role/ball/ball.tscn" id="10_dacei"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gr3ki"]
 shader = ExtResource("3_c5dq5")
@@ -64,6 +67,9 @@ theme_override_fonts/font = ExtResource("5_fpem7")
 theme_override_font_sizes/font_size = 180
 text = "COMBO 4"
 
+[node name="Ball" parent="." instance=ExtResource("10_dacei")]
+position = Vector2(540, 1582)
+
 [node name="Paddle" parent="." instance=ExtResource("6_vej8u")]
 position = Vector2(540, 1619)
 
@@ -107,3 +113,13 @@ one_shot = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="EnergyBar" parent="CanvasLayer" instance=ExtResource("7_osdkb")]
+
+[node name="HealthBar" parent="CanvasLayer" instance=ExtResource("8_kott7")]
+offset_top = 89.0
+offset_bottom = 89.0
+
+[node name="Score" parent="CanvasLayer" instance=ExtResource("9_b7tdo")]
+offset_left = 695.0
+offset_top = 89.0
+offset_right = 695.0
+offset_bottom = 89.0

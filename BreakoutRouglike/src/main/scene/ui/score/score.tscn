@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0fc3qki4f4fo"]
+
+[ext_resource type="Script" path="res://src/main/scene/ui/score/score.gd" id="1_dbecq"]
+[ext_resource type="Texture2D" uid="uid://25t0jt5tnlv3" path="res://src/main/assets/textures/background/Container.png" id="2_3cx6n"]
+[ext_resource type="FontFile" uid="uid://b2t72jiwovi67" path="res://src/main/assets/fonts/AldotheApache.ttf" id="3_hb42p"]
+
+[node name="Score" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dbecq")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.0980392, 0.0980392, 0.0980392, 1)
+custom_minimum_size = Vector2(100, 400)
+layout_mode = 0
+offset_left = -9.0
+offset_top = 107.0
+offset_right = 91.0
+offset_bottom = 507.0
+rotation = -1.5708
+texture = ExtResource("2_3cx6n")
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 33.0
+offset_right = 204.0
+offset_bottom = 83.0
+theme_override_fonts/font = ExtResource("3_hb42p")
+theme_override_font_sizes/font_size = 60
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

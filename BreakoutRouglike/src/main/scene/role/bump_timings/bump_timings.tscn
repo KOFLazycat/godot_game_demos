@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://xmk0g11tosmv"]
+
+[ext_resource type="Script" path="res://src/main/scene/role/bump_timings/bump_timings.gd" id="1_0an61"]
+[ext_resource type="FontFile" uid="uid://b2t72jiwovi67" path="res://src/main/assets/fonts/AldotheApache.ttf" id="2_302wc"]
+
+[node name="BumpTimings" type="Node2D"]
+script = ExtResource("1_0an61")
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(0.658824, 0.941176, 0.207843, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -23.0
+offset_right = 84.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_302wc")
+theme_override_font_sizes/font_size = 40
+text = "COMBO 4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

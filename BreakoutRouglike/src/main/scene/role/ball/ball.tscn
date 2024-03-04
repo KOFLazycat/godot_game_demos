@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://sdp8lwtkci63"]
+
+[ext_resource type="Script" path="res://src/main/scene/role/ball/ball.gd" id="1_6jgkx"]
+[ext_resource type="Texture2D" uid="uid://dt3bubx4h61x7" path="res://src/main/assets/textures/ball/ball.png" id="2_sahp6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_atyot"]
+radius = 20.0
+
+[sub_resource type="Curve" id="Curve_l16lt"]
+_data = [Vector2(0, 0.992308), 0.0, 0.0, 0, 0, Vector2(1, 0.353846), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Ball" type="CharacterBody2D" groups=["Ball"]]
+script = ExtResource("1_6jgkx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("2_sahp6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_atyot")
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(0, 0, 88, 0)
+width = 25.0
+width_curve = SubResource("Curve_l16lt")
+default_color = Color(0.996078, 0.0705882, 0.0705882, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

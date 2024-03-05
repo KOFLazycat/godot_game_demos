@@ -83,6 +83,7 @@ func _physics_process(delta: float) -> void:
 			
 			# Paddle is moving
 			if collision.get_collider().velocity.length() > 0:
+				# 碰撞前小球速度，碰撞只会改变速度方向，不会改变速度大小
 				var length_before_collison = velocity.length()
 				
 				velocity.y = -velocity.y
@@ -95,6 +96,7 @@ func _physics_process(delta: float) -> void:
 				# Calculate the distance between the collision point and the center of the paddle
 				var distance = collision.get_position() - collision.get_collider().global_position
 				var amount = distance.x/96.0
+				print(amount)
 				normal = normal.rotated(deg_to_rad(max_normal_angle)*amount)
 				velocity = velocity.bounce(normal)*boost_factor
 		else:

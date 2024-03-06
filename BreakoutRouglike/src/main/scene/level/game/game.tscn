@@ -69,6 +69,7 @@ text = "COMBO 4"
 
 [node name="Ball" parent="." instance=ExtResource("10_dacei")]
 position = Vector2(540, 1582)
+speed = 800.0
 
 [node name="Paddle" parent="." instance=ExtResource("6_vej8u")]
 position = Vector2(540, 1619)
@@ -89,6 +90,7 @@ texture = SubResource("GradientTexture2D_nbcwx")
 polygon = PackedVector2Array(-70, 1700, 1150, 1700, 1150, 2000, -70, 2000)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 6
 
 [node name="CollisionShape2DLeft" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, 1080)

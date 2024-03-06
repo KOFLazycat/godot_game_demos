@@ -63,6 +63,15 @@ special={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Wall"
+2d_physics/layer_2="Paddle"
+2d_physics/layer_3="Ball"
+2d_physics/layer_4="Laser"
+2d_physics/layer_5="Brick"
+2d_physics/layer_6="Explosion"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

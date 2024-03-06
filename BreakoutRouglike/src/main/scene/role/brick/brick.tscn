@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://cql57vi8y5syv"]
+
+[ext_resource type="Script" path="res://src/main/scene/role/brick/brick.gd" id="1_8odwy"]
+[ext_resource type="Texture2D" uid="uid://b8syrfuiix82m" path="res://src/main/assets/textures/brick/BlockSmallFull.png" id="2_hbvco"]
+[ext_resource type="Texture2D" uid="uid://celnb7wh8sf3s" path="res://src/main/assets/textures/brick/One.png" id="3_gnru2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_78neo"]
+size = Vector2(124, 62)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aq7di"]
+size = Vector2(62, 62)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1hm7q"]
+radius = 300.0
+
+[node name="Brick" type="StaticBody2D"]
+collision_layer = 16
+collision_mask = 12
+script = ExtResource("1_8odwy")
+
+[node name="CollisionShapeLong" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_78neo")
+
+[node name="CollisionShapeSmall" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_aq7di")
+disabled = true
+
+[node name="Size" type="Sprite2D" parent="."]
+texture = ExtResource("2_hbvco")
+
+[node name="Type" type="Sprite2D" parent="."]
+texture = ExtResource("3_gnru2")
+
+[node name="ExplosionArea" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea"]
+shape = SubResource("CircleShape2D_1hm7q")

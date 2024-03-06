@@ -96,7 +96,7 @@ func _physics_process(delta: float) -> void:
 				# Calculate the distance between the collision point and the center of the paddle
 				var distance = collision.get_position() - collision.get_collider().global_position
 				var amount = distance.x/96.0
-				print(amount)
+				#print(collision.get_position(), collision.get_collider().global_position)
 				normal = normal.rotated(deg_to_rad(max_normal_angle)*amount)
 				velocity = velocity.bounce(normal)*boost_factor
 		else:
@@ -128,6 +128,7 @@ func _physics_process(delta: float) -> void:
 	
 	velocity = velocity.limit_length(max_speed)
 	
+	# 砖块收到伤害
 	if collision.get_collider().is_in_group("Bricks"):
 		collision.get_collider().damage(1)
 		emit_signal("hit_block", collision.get_collider())

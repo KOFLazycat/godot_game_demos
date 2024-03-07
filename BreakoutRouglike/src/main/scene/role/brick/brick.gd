@@ -17,6 +17,9 @@ extends StaticBody2D
 @onready var explosion_area: Area2D = $ExplosionArea
 @onready var size_sprite: Sprite2D = $Size
 @onready var type_sprite: Sprite2D = $Type
+@onready var collision_shape_long: CollisionShape2D = $CollisionShapeLong
+@onready var collision_shape_small: CollisionShape2D = $CollisionShapeSmall
+
 
 enum TYPE {
 	ONE,
@@ -40,8 +43,9 @@ var health_dict = {
 }
 var _destroyed: bool = false
 
-signal energy_brick_destroyed()
-signal destroyed(which)
+signal energy_brick_destroyed
+signal destroyed(which: Brick)
+
 
 func _ready() -> void:
 	choose_type_random()
@@ -52,9 +56,10 @@ func _ready() -> void:
 	update_size_visuals()
 	update_type_visuals()
 
+
 func choose_type_random() -> void:
 	var rand = randf()
-	# 10% chance for explosives
+	# 5% chance for explosives
 	if rand < 0.05:
 		type = TYPE.EXPLOSIVE
 	elif rand >= 0.05 && rand < 0.15:
@@ -67,7 +72,8 @@ func choose_type_random() -> void:
 		type = TYPE.ONE
 		
 #	type = randi()%TYPE.size()
-	
+
+
 func choose_size_random() -> void:
 	var rand = randf()
 	if rand < 0.65:
@@ -75,22 +81,24 @@ func choose_size_random() -> void:
 	else:
 		size = SIZE.SMALL
 
+
 func update_size_visuals() -> void:
 	match size:
 		SIZE.SMALL:
-			$CollisionShapeSmall.disabled = false
-			$CollisionShapeLong.disabled = true
+			collision_shape_long.disabled = false
+			collision_shape_small.disabled = true
 			if type == TYPE.EXPLOSIVE or type == TYPE.ENERGY:
 				size_sprite.texture = small_border
 			else:
 				size_sprite.texture = small_full
 		SIZE.LONG:
-			$CollisionShapeSmall.disabled = true
-			$CollisionShapeLong.disabled = false
+			collision_shape_long.disabled = true
+			collision_shape_small.disabled = false
 			if type == TYPE.EXPLOSIVE or type == TYPE.ENERGY:
 				size_sprite.texture = long_border
 			else:
 				size_sprite.texture = long_full
+
 
 func update_type_visuals() -> void:
 	match type:
@@ -104,6 +112,7 @@ func update_type_visuals() -> void:
 			type_sprite.texture = bomb
 		TYPE.ENERGY:
 			type_sprite.texture = energy
+
 
 func damage(value: int) -> void:
 	health -= value
@@ -119,6 +128,7 @@ func damage(value: int) -> void:
 	
 	update_type_health()
 
+
 func update_type_health() -> void:
 	match health:
 		3:
@@ -128,9 +138,11 @@ func update_type_health() -> void:
 		1:
 			type = TYPE.ONE
 	update_type_visuals()
-		
+
+
 func give_energy() -> void:
 	emit_signal("energy_brick_destroyed")
+
 
 func explode() -> void:
 	var bodies = explosion_area.get_overlapping_bodies()
@@ -140,6 +152,7 @@ func explode() -> void:
 		# they're destroyed but also trigger any eventual
 		# explosive bricks
 		body.damage(10)
+
 
 func destroy() -> void:
 	emit_signal("destroyed", self)

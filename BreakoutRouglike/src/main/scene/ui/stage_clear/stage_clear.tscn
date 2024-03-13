@@ -1,0 +1,223 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpne5vh5gmg6f"]
+
+[ext_resource type="Script" path="res://src/main/scene/ui/stage_clear/stage_clear.gd" id="1_i4iwo"]
+[ext_resource type="Shader" path="res://src/main/assets/shaders/blur.gdshader" id="1_jccia"]
+[ext_resource type="FontFile" uid="uid://b2t72jiwovi67" path="res://src/main/assets/fonts/AldotheApache.ttf" id="2_g0tie"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_78wb8"]
+shader = ExtResource("1_jccia")
+shader_parameter/lod = 1.5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b887x"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="StageClear" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i4iwo")
+
+[node name="Blur" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_78wb8")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(880, 200)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -440.0
+offset_top = 300.0
+offset_right = 440.0
+offset_bottom = 500.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_g0tie")
+theme_override_font_sizes/font_size = 180
+theme_override_styles/normal = SubResource("StyleBoxFlat_b887x")
+text = "STAGE CLEAR
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VB" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(750, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -370.0
+offset_top = -330.0
+offset_right = 380.0
+offset_bottom = 330.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HB" type="HBoxContainer" parent="VB"]
+layout_mode = 2
+theme_override_constants/separation = 48
+
+[node name="VBName" type="VBoxContainer" parent="VB/HB"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="VB/HB/VBName"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_g0tie")
+theme_override_font_sizes/font_size = 72
+text = "TIME"
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="VB/HB/VBName"]
+auto_translate_mode = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_g0tie")
+theme_override_font_sizes/font_size = 72
+text = "EARLY BUMPS"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="VB/HB/VBName"]
+auto_translate_mode = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_g0tie")
+theme_override_font_sizes/font_size = 72
+text = "LATE BUMPS"
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="VB/HB/VBName"]
+auto_translate_mode = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_g0tie")
+theme_override_font_sizes/font_size = 72
+text = "PERFECT BUMPS"
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="VB/HB/VBName"]
+auto_translate_mode = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_g0tie")
+theme_override_font_sizes/font_size = 72
+text = "BALL BOUNCES"
+vertical_alignment = 1
+
+[node name="Label6" type="Label" parent="VB/HB/VBName"]
+auto_translate_mode = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_g0tie")
+theme_override_font_sizes/font_size = 72
+text = "Score"
+vertical_alignment = 1
+
+[node name="VBValue" type="VBoxContainer" parent="VB/HB"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 24
+
+[node name="Time" type="Label" parent="VB/HB/VBValue"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_g0tie")
+theme_override_font_sizes/font_size = 72
+text = "0000"
+vertical_alignment = 1
+
+[node name="EarlyBumps" type="Label" parent="VB/HB/VBValue"]
+auto_translate_mode = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_g0tie")
+theme_override_font_sizes/font_size = 72
+text = "0000"
+vertical_alignment = 1
+
+[node name="LateBumps" type="Label" parent="VB/HB/VBValue"]
+auto_translate_mode = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_g0tie")
+theme_override_font_sizes/font_size = 72
+text = "0000"
+vertical_alignment = 1
+
+[node name="PerfectBumps" type="Label" parent="VB/HB/VBValue"]
+auto_translate_mode = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_g0tie")
+theme_override_font_sizes/font_size = 72
+text = "0000"
+vertical_alignment = 1
+
+[node name="Bounces" type="Label" parent="VB/HB/VBValue"]
+auto_translate_mode = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_g0tie")
+theme_override_font_sizes/font_size = 72
+text = "0000"
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="VB/HB/VBValue"]
+auto_translate_mode = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_g0tie")
+theme_override_font_sizes/font_size = 72
+text = "0000"
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="VB"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="HB2" type="HBoxContainer" parent="VB"]
+layout_mode = 2
+theme_override_constants/separation = 48
+
+[node name="Label" type="Label" parent="VB/HB2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_g0tie")
+theme_override_font_sizes/font_size = 84
+text = "FINAL SCORE"
+vertical_alignment = 1
+
+[node name="FinalScore" type="Label" parent="VB/HB2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_g0tie")
+theme_override_font_sizes/font_size = 84
+text = "10010170"
+vertical_alignment = 1
+
+[node name="VB2" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(480, 100)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = -420.0
+offset_right = 240.0
+offset_bottom = -320.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="NextBtn" type="Button" parent="VB2"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_g0tie")
+theme_override_font_sizes/font_size = 100
+text = "NEXT"

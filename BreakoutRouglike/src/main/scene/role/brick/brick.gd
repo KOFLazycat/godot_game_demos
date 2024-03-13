@@ -85,15 +85,15 @@ func choose_size_random() -> void:
 func update_size_visuals() -> void:
 	match size:
 		SIZE.SMALL:
-			collision_shape_long.disabled = false
-			collision_shape_small.disabled = true
+			collision_shape_small.disabled = false
+			collision_shape_long.disabled = true
 			if type == TYPE.EXPLOSIVE or type == TYPE.ENERGY:
 				size_sprite.texture = small_border
 			else:
 				size_sprite.texture = small_full
 		SIZE.LONG:
-			collision_shape_long.disabled = true
-			collision_shape_small.disabled = false
+			collision_shape_small.disabled = true
+			collision_shape_long.disabled = false
 			if type == TYPE.EXPLOSIVE or type == TYPE.ENERGY:
 				size_sprite.texture = long_border
 			else:

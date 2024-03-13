@@ -112,6 +112,7 @@ position = Vector2(540, 1619)
 position = Vector2(540, 960)
 
 [node name="DeathArea" type="Area2D" parent="."]
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathArea"]
 position = Vector2(540, 1746)

@@ -33,7 +33,7 @@ var boost_factor_perfect: float = 1.3
 var boost_factor_late_early: float = 1.15
 
 # 信号
-signal hit_block(block)
+signal hit_brick(brick: Brick)
 
 
 func _ready() -> void:
@@ -122,16 +122,14 @@ func _physics_process(delta: float) -> void:
 			velocity = velocity_before_collision
 		else:
 			velocity = velocity.bounce(normal)
+		
+		collision.get_collider().damage(1)
+		emit_signal("hit_brick", collision.get_collider())
 	else:
 #		print("HIT OTHER: ", Globals.stats["ball_bounces"])
 		velocity = velocity.bounce(normal)
 	
 	velocity = velocity.limit_length(max_speed)
-	
-	# 砖块收到伤害
-	if collision.get_collider().is_in_group("Bricks"):
-		collision.get_collider().damage(1)
-		emit_signal("hit_block", collision.get_collider())
 
 
 func attract(global_position) -> void:

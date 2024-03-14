@@ -17,6 +17,7 @@ extends CharacterBody2D
 @onready var sprite = $Sprite2D
 @onready var line_2d: Line2D = $Line2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var sprite_base_scale: Vector2 = sprite.scale
 
 # 普通变量
 var acceleration: Vector2 = Vector2.ZERO
@@ -38,6 +39,10 @@ signal hit_brick(brick: Brick)
 
 func _ready() -> void:
 	randomize()
+
+
+func _process(delta: float) -> void:
+	scale_based_on_velocity()
 
 
 func _physics_process(delta: float) -> void:
@@ -69,7 +74,7 @@ func _physics_process(delta: float) -> void:
 	
 	var normal = collision.get_normal()
 	sprite.rotation = -normal.angle()
-
+	animation_player.play("bounce")
 	# Update the normal with the paddle's velocity if we collide with
 	# the paddle
 	if collision.get_collider().is_in_group("Paddle"):
@@ -130,6 +135,14 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.bounce(normal)
 	
 	velocity = velocity.limit_length(max_speed)
+
+
+## VISUALS ###
+func scale_based_on_velocity() -> void:
+	if animation_player.is_playing():
+		return
+	sprite.scale = sprite_base_scale.lerp(sprite_base_scale * Vector2(1.4, 0.5), velocity.length()/max_speed)
+	sprite.rotation = velocity.angle()
 
 
 func attract(global_position) -> void:

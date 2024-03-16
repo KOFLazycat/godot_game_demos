@@ -3,6 +3,8 @@ extends CharacterBody2D
 
 # 外部变量
 @export var bump_timing_scene: PackedScene = preload("res://src/main/scene/role/bump_timings/bump_timings.tscn")
+@export var bounce_particles_scene: PackedScene = preload("res://src/main/scene/role/ball/bounce_particles.tscn")
+@export var bump_particles_scene: PackedScene = preload("res://src/main/scene/role/ball/bump_particles.tscn")
 @export var speed: float = 400.0
 @export var accel: float = 20.0
 @export var deccel: float = 10.0
@@ -81,7 +83,7 @@ func _physics_process(delta: float) -> void:
 		frames_since_paddle_collison = 0
 #		print("Normal:", normal)
 #		print("Dot:", normal.dot(Vector2.UP))
-		
+		spawn_bump_particles(collision.get_position(), normal)
 		# Collision from the top, most of the cases
 		if normal.dot(Vector2.UP) > 0.0:
 #			print("HIT TOP: ", Globals.stats["ball_bounces"])
@@ -132,6 +134,7 @@ func _physics_process(delta: float) -> void:
 		emit_signal("hit_brick", collision.get_collider())
 	else:
 #		print("HIT OTHER: ", Globals.stats["ball_bounces"])
+		spawn_bounce_particles(collision.get_position(), normal)
 		velocity = velocity.bounce(normal)
 	
 	velocity = velocity.limit_length(max_speed)
@@ -143,6 +146,20 @@ func scale_based_on_velocity() -> void:
 		return
 	sprite.scale = sprite_base_scale.lerp(sprite_base_scale * Vector2(1.4, 0.5), velocity.length()/max_speed)
 	sprite.rotation = velocity.angle()
+
+
+func spawn_bounce_particles(pos: Vector2, normal: Vector2) -> void:
+	var bounce_particles_instance: GPUParticles2D = bounce_particles_scene.instantiate()
+	get_tree().get_current_scene().add_child(bounce_particles_instance)
+	bounce_particles_instance.global_position = pos
+	bounce_particles_instance.rotation = normal.angle()
+
+
+func spawn_bump_particles(pos: Vector2, normal: Vector2) -> void:
+	var bump_particles_instance: GPUParticles2D = bump_particles_scene.instantiate()
+	get_tree().get_current_scene().add_child(bump_particles_instance)
+	bump_particles_instance.global_position = pos
+	bump_particles_instance.rotation = normal.angle()
 
 
 func attract(global_position) -> void:

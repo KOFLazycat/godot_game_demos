@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://b68xi8cu8perh"]
+
+[ext_resource type="Texture2D" uid="uid://dt3bubx4h61x7" path="res://src/main/assets/textures/ball/ball.png" id="1_fbmek"]
+[ext_resource type="Script" path="res://src/main/scene/role/ball/bounce_particles.gd" id="2_shn45"]
+
+[sub_resource type="Curve" id="Curve_up8gn"]
+_data = [Vector2(0, 0.549451), 0.0, 0.0, 0, 0, Vector2(0.261905, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_lx651"]
+curve = SubResource("Curve_up8gn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1kb24"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+initial_velocity_min = 70.0
+initial_velocity_max = 120.0
+gravity = Vector3(0, 0, 0)
+damping_min = 5.935
+damping_max = 30.0
+scale_min = 0.1
+scale_max = 0.35
+scale_curve = SubResource("CurveTexture_lx651")
+
+[node name="BounceParticles" type="GPUParticles2D"]
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_1kb24")
+texture = ExtResource("1_fbmek")
+lifetime = 0.75
+one_shot = true
+explosiveness = 0.8
+script = ExtResource("2_shn45")
+
+[node name="Timer" type="Timer" parent="."]

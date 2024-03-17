@@ -95,6 +95,7 @@ func add_brick(pos: Vector2) -> void:
 func reset_and_attach_ball() -> void:
 	ball.velocity = Vector2.ZERO
 	ball.attached_to = paddle.launch_point
+	ball.appear()
 	paddle.ball_attached = ball
 	paddle.game_over = false
 	paddle.stage_clear = false
@@ -220,6 +221,8 @@ func on_death_area_body_entered(body: Node2D) -> void:
 	health = int(clamp(health, 0, 3))
 	
 	health_bar.set_health(health)
+	
+	body.die()
 	
 	if health == 0:
 		paddle.game_over = true

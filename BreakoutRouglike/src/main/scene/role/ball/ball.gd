@@ -5,14 +5,17 @@ extends CharacterBody2D
 @export var bump_timing_scene: PackedScene = preload("res://src/main/scene/role/bump_timings/bump_timings.tscn")
 @export var bounce_particles_scene: PackedScene = preload("res://src/main/scene/role/ball/bounce_particles.tscn")
 @export var bump_particles_scene: PackedScene = preload("res://src/main/scene/role/ball/bump_particles.tscn")
+@export var explode_particles_scene: PackedScene = preload("res://src/main/scene/role/ball/ball_explode_particles.tscn")
 @export var speed: float = 400.0
 @export var accel: float = 20.0
-@export var deccel: float = 10.0
+@export var deccel: float = 3.0
 @export var max_normal_angle: float = 15.0
-@export var max_speed: float = 1600.0
+@export var max_speed: float = 1200.0
+@export var speed_threshold: float = 100.0
 @export var steering_max_speed: float = 1200.0
-@export var steer_force = 110.0
-@export var steer_speed = 300.0
+@export var steer_force: float = 110.0
+@export var steer_speed: float = 300.0
+@export var max_speed_color: Color
 
 # 就绪变量
 @onready var animation_player = $AnimationPlayer
@@ -20,6 +23,8 @@ extends CharacterBody2D
 @onready var line_2d: Line2D = $Line2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var sprite_base_scale: Vector2 = sprite.scale
+@onready var trail_2d: Line2D = $Trail2D
+@onready var speed_particles: GPUParticles2D = $SpeedParticles
 
 # 普通变量
 var acceleration: Vector2 = Vector2.ZERO
@@ -31,6 +36,7 @@ var attracted: bool = false
 var attracted_to = null
 var frames_since_paddle_collison: int = 0
 var max_bump_distance: float = 40.0
+var boost_factor_base: float = 1.15
 var boost_factor: float = 1.0
 var boost_factor_perfect: float = 1.3
 var boost_factor_late_early: float = 1.15
@@ -49,9 +55,11 @@ signal hit_brick(brick: Brick)
 
 func _ready() -> void:
 	randomize()
+	appear()
 
 
 func _process(delta: float) -> void:
+	color_based_on_velocity()
 	scale_based_on_velocity()
 
 
@@ -64,6 +72,8 @@ func _physics_process(delta: float) -> void:
 	
 	line_2d.rotation = velocity.angle()
 	frames_since_paddle_collison += 1
+	
+	velocity = velocity.lerp(velocity.limit_length(speed), deccel * delta)
 	
 	if attached_to:
 		global_position = attached_to.global_position
@@ -115,7 +125,7 @@ func _physics_process(delta: float) -> void:
 				velocity.x += collision.get_collider().velocity.x * 0.6
 				velocity = velocity.normalized()
 				velocity *= length_before_collison
-				velocity *= boost_factor
+				velocity *= (boost_factor + boost_factor_base)
 			else:
 				## Tilt the normal near the edge
 				# Calculate the distance between the collision point and the center of the paddle
@@ -123,13 +133,13 @@ func _physics_process(delta: float) -> void:
 				var amount = distance.x/96.0
 				#print(collision.get_position(), collision.get_collider().global_position)
 				normal = normal.rotated(deg_to_rad(max_normal_angle)*amount)
-				velocity = velocity.bounce(normal)*boost_factor
+				velocity = velocity.bounce(normal)*(boost_factor + boost_factor_base)
 		else:
 #			print("HIT SIDE: ", Globals.stats["ball_bounces"])
 			# Check if below half of the thickness
 			if collision.get_position().y > collision.get_collider().global_position.y:
 #				print("BELOW HALF")
-				velocity = velocity.bounce(normal)*boost_factor
+				velocity = velocity.bounce(normal)*(boost_factor + boost_factor_base)
 			else:
 				# Lateral normal respecting the sign checked the collision
 				normal = Vector2(sign(normal.x), 0)
@@ -138,7 +148,7 @@ func _physics_process(delta: float) -> void:
 				
 				# Create the new velocity using the velocity length and the normal direction
 				velocity = normal_rotated * velocity.length()
-				velocity *= boost_factor
+				velocity *= (boost_factor + boost_factor_base)
 		# Reset bump boost
 		boost_factor = 1.0
 	elif collision.get_collider().is_in_group("Bricks"):
@@ -161,11 +171,33 @@ func _physics_process(delta: float) -> void:
 
 
 ## VISUALS ###
+# 小球出现动画
+func appear() -> void:
+	# 防止粒子特效无法播放成功，先初始化
+	animation_player.play("RESET")
+	animation_player.play("appear")
+
+
+func die() -> void:
+	spawn_explode_particles(global_position)
+
+
 func scale_based_on_velocity() -> void:
 	if animation_player.is_playing():
 		return
 	sprite.scale = sprite_base_scale.lerp(sprite_base_scale * Vector2(1.4, 0.5), velocity.length()/max_speed)
 	sprite.rotation = velocity.angle()
+
+
+func color_based_on_velocity() -> void:
+	var val = remap(velocity.length(), speed, max_speed, 0, 1.0)
+	sprite.self_modulate = Color.WHITE.lerp(max_speed_color, val)
+	trail_2d.self_modulate = sprite.self_modulate
+	speed_particles.self_modulate = sprite.self_modulate
+	if velocity.length() > speed + speed_threshold and not speed_particles.emitting:
+		speed_particles.emitting = true
+	else:
+		speed_particles.emitting = false
 
 
 func spawn_bounce_particles(pos: Vector2, normal: Vector2) -> void:
@@ -180,6 +212,13 @@ func spawn_bump_particles(pos: Vector2, normal: Vector2) -> void:
 	get_tree().get_current_scene().add_child(bump_particles_instance)
 	bump_particles_instance.global_position = pos
 	bump_particles_instance.rotation = normal.angle()
+
+
+func spawn_explode_particles(pos: Vector2) -> void:
+	var explode_particles_instance: GPUParticles2D = explode_particles_scene.instantiate()
+	get_tree().get_current_scene().add_child(explode_particles_instance)
+	explode_particles_instance.global_position = pos
+
 
 # 启动hitstop
 func start_hitstop(hitstop_amount: int) -> void:

@@ -35,6 +35,14 @@ var boost_factor: float = 1.0
 var boost_factor_perfect: float = 1.3
 var boost_factor_late_early: float = 1.15
 
+# HitStop
+var hitstop_frames: int = 0
+var hitstop_bump_late_late_early: int = 5
+var hitstop_bump_late_perfect: int = 10
+var hitstop_paddle: int = 5
+var hitstop_block: int = 5
+var hitstop_bomb: int = 10
+
 # 信号
 signal hit_brick(brick: Brick)
 
@@ -48,6 +56,12 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if hitstop_frames > 0:
+		hitstop_frames -= 1
+		if hitstop_frames <= 0:
+			stop_hitstop()
+		return
+	
 	line_2d.rotation = velocity.angle()
 	frames_since_paddle_collison += 1
 	
@@ -84,6 +98,10 @@ func _physics_process(delta: float) -> void:
 #		print("Normal:", normal)
 #		print("Dot:", normal.dot(Vector2.UP))
 		spawn_bump_particles(collision.get_position(), normal)
+		# no bump boost == small hitstop
+		if boost_factor == 1.0:
+			start_hitstop(hitstop_paddle)
+		
 		# Collision from the top, most of the cases
 		if normal.dot(Vector2.UP) > 0.0:
 #			print("HIT TOP: ", Globals.stats["ball_bounces"])
@@ -127,8 +145,10 @@ func _physics_process(delta: float) -> void:
 		if collision.get_collider().type == collision.get_collider().TYPE.ENERGY or \
 			collision.get_collider().type == collision.get_collider().TYPE.EXPLOSIVE:
 			velocity = velocity_before_collision
+			start_hitstop(hitstop_bomb)
 		else:
 			velocity = velocity.bounce(normal)
+			start_hitstop(hitstop_block)
 		
 		collision.get_collider().damage(1)
 		emit_signal("hit_brick", collision.get_collider())
@@ -160,6 +180,16 @@ func spawn_bump_particles(pos: Vector2, normal: Vector2) -> void:
 	get_tree().get_current_scene().add_child(bump_particles_instance)
 	bump_particles_instance.global_position = pos
 	bump_particles_instance.rotation = normal.angle()
+
+# 启动hitstop
+func start_hitstop(hitstop_amount: int) -> void:
+	animation_player.pause()
+	hitstop_frames = hitstop_amount
+
+# 停止hitstop
+func stop_hitstop() -> void:
+	animation_player.play()
+	hitstop_frames = 0
 
 
 func attract(global_position) -> void:

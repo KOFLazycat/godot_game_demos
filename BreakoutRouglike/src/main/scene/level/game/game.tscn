@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bdg0nyp04difc"]
+[gd_scene load_steps=19 format=3 uid="uid://bdg0nyp04difc"]
 
 [ext_resource type="Script" path="res://src/main/scene/level/game/game.gd" id="1_30ryq"]
 [ext_resource type="Texture2D" uid="uid://brthax48a4cvg" path="res://src/main/assets/textures/background/background.png" id="2_af6a3"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://b2t72jiwovi67" path="res://src/main/assets/fonts/AldotheApache.ttf" id="5_fpem7"]
 [ext_resource type="PackedScene" uid="uid://bi1rkmulqic6l" path="res://src/main/scene/role/paddle/paddle.tscn" id="6_vej8u"]
 [ext_resource type="PackedScene" uid="uid://ceha0yendxj8c" path="res://src/main/scene/ui/energy_bar/energy_bar.tscn" id="7_osdkb"]
+[ext_resource type="Script" path="res://src/main/scene/level/game/camera_final.gd" id="8_attqx"]
 [ext_resource type="PackedScene" uid="uid://dt1kso1s6kybo" path="res://src/main/scene/ui/health_bar/health_bar.tscn" id="8_kott7"]
 [ext_resource type="PackedScene" uid="uid://c0fc3qki4f4fo" path="res://src/main/scene/ui/score/score.tscn" id="9_b7tdo"]
 [ext_resource type="PackedScene" uid="uid://sdp8lwtkci63" path="res://src/main/scene/role/ball/ball.tscn" id="10_dacei"]
@@ -110,6 +111,7 @@ position = Vector2(540, 1619)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(540, 960)
+script = ExtResource("8_attqx")
 
 [node name="DeathArea" type="Area2D" parent="."]
 collision_mask = 4

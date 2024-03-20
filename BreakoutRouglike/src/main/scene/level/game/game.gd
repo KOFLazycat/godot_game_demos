@@ -18,6 +18,7 @@ extends Node2D
 @onready var spawn_pos_container: Node = $SpawnPos
 @onready var bricks_container: Node = $Bricks
 @onready var death_area: Area2D = $DeathArea
+@onready var camera_2d: Camera2D = $Camera2D
 
 var health: int = 3
 var energy: float = 0.0
@@ -33,6 +34,8 @@ var started: bool = false
 
 func _ready() -> void:
 	randomize()
+	
+	Globals.camera = camera_2d
 	
 	# 信号连接
 	paddle.start.connect(on_paddle_start)

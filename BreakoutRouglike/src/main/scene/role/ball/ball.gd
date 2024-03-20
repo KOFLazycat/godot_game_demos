@@ -105,6 +105,7 @@ func _physics_process(delta: float) -> void:
 	# the paddle
 	if collision.get_collider().is_in_group("Paddle"):
 		frames_since_paddle_collison = 0
+		Globals.camera.shake(0.3, 20, 20)
 #		print("Normal:", normal)
 #		print("Dot:", normal.dot(Vector2.UP))
 		spawn_bump_particles(collision.get_position(), normal)
@@ -154,15 +155,18 @@ func _physics_process(delta: float) -> void:
 	elif collision.get_collider().is_in_group("Bricks"):
 		if collision.get_collider().type == collision.get_collider().TYPE.ENERGY or \
 			collision.get_collider().type == collision.get_collider().TYPE.EXPLOSIVE:
+			Globals.camera.shake(1.0, 25, 30)
 			velocity = velocity_before_collision
 			start_hitstop(hitstop_bomb)
 		else:
+			Globals.camera.shake(0.25, 20, 20)
 			velocity = velocity.bounce(normal)
 			start_hitstop(hitstop_block)
 		
 		collision.get_collider().damage(1)
 		emit_signal("hit_brick", collision.get_collider())
 	else:
+		Globals.camera.shake(0.15, 20, 10)
 #		print("HIT OTHER: ", Globals.stats["ball_bounces"])
 		spawn_bounce_particles(collision.get_position(), normal)
 		velocity = velocity.bounce(normal)
@@ -179,6 +183,7 @@ func appear() -> void:
 
 
 func die() -> void:
+	Globals.camera.shake(0.45, 30, 40)
 	spawn_explode_particles(global_position)
 
 

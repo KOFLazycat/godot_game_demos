@@ -7,12 +7,15 @@ extends CharacterBody2D
 @export var deccel: float = 10.0
 @export var dash_speed: float = 1000.0
 @export var dash_duration: float = 0.1
+@export var max_lean_angle: float = 4.0
+@export var lean_speed: float = 8.0
 
 @onready var dash_timer: Timer = $DashTimer
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var launch_point: Marker2D = $LaunchPoint
 @onready var laser: Area2D = $Laser
 @onready var thickness: float = $CollisionShape2D.shape.extents.y
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 var dashing: bool = false
 var ball_attached = null
@@ -32,8 +35,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if dashing or game_over or stage_clear: return
 	var dir: float = Input.get_action_strength("right") - Input.get_action_strength("left")
+	# 平滑移动
+	if dir != 0:
+		velocity.x = lerp(velocity.x, dir * speed, accel * delta)
+	else:
+		velocity.x = lerp(velocity.x, 0.0, deccel * delta)
 	
-	velocity.x = dir * speed
+	#velocity.x = dir * speed
+	# 模板角度平滑旋转
+	sprite_2d.rotation = lerp_angle(sprite_2d.rotation, deg_to_rad(max_lean_angle) * dir, lean_speed * delta)
 	
 	if Input.is_action_just_pressed("bump"):
 		frames_since_bump = 0

@@ -10,15 +10,16 @@ extends Node2D
 
 @onready var ball: Ball = $Ball
 @onready var paddle: Paddle = $Paddle
-@onready var energy_bar: Control = $CanvasLayer/EnergyBar
-@onready var health_bar: Control = $CanvasLayer/HealthBar
-@onready var score_ui: Control = $CanvasLayer/Score
+@onready var energy_bar: Control = $HUDCanvasLayer/EnergyBar
+@onready var health_bar: Control = $HUDCanvasLayer/HealthBar
+@onready var score_ui: Control = $HUDCanvasLayer/Score
 @onready var combo_lbl: Label = $Comber
 @onready var combo_timer: Timer = $ComboTimer
 @onready var spawn_pos_container: Node = $SpawnPos
 @onready var bricks_container: Node = $Bricks
 @onready var death_area: Area2D = $DeathArea
 @onready var camera_2d: Camera2D = $Camera2D
+@onready var ui_canvas_layer: CanvasLayer = $UICanvasLayer
 
 var health: int = 3
 var energy: float = 0.0
@@ -36,6 +37,7 @@ func _ready() -> void:
 	randomize()
 	
 	Globals.camera = camera_2d
+	Globals.camera.objects = [ball]
 	
 	# 信号连接
 	paddle.start.connect(on_paddle_start)
@@ -91,7 +93,6 @@ func add_brick(pos: Vector2) -> void:
 	bricks.append(brick_instance)
 	if brick_instance.type != brick_instance.TYPE.EXPLOSIVE and brick_instance.type != brick_instance.TYPE.ENERGY:
 		bricks_to_destroy.append(brick_instance)
-	print(brick_instance.size, brick_instance.collision_shape_long.disabled, brick_instance.size_sprite.texture.get_width())
 
 
 ######### Ball ###########
@@ -149,14 +150,14 @@ func hide_combo() -> void:
 ######### GameOver ###########
 func show_game_over() -> void:
 	var game_over_instance = game_over_scene.instantiate()
-	$CanvasLayer.add_child(game_over_instance)
+	ui_canvas_layer.add_child(game_over_instance)
 	game_over_instance.retry.connect(on_game_over_retry)
 
 
 ######### StageClear ###########
 func show_stage_clear() -> void:
 	var stage_clear_instance = stage_clear_scene.instantiate()
-	$CanvasLayer.add_child(stage_clear_instance)
+	ui_canvas_layer.add_child(stage_clear_instance)
 	stage_clear_instance.next.connect(on_stage_clear_next)
 
 

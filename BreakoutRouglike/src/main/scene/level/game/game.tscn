@@ -112,6 +112,8 @@ position = Vector2(540, 1619)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(540, 960)
 script = ExtResource("8_attqx")
+dynamic_enabled = true
+dynamic_factor = 0.3
 
 [node name="DeathArea" type="Area2D" parent="."]
 collision_mask = 4
@@ -149,16 +151,19 @@ polygon = PackedVector2Array(-50, 230, -50, 1700, 50, 1700, 50, 317, 1036, 317, 
 [node name="ComboTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="HUDCanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
 
-[node name="EnergyBar" parent="CanvasLayer" instance=ExtResource("7_osdkb")]
+[node name="EnergyBar" parent="HUDCanvasLayer" instance=ExtResource("7_osdkb")]
 
-[node name="HealthBar" parent="CanvasLayer" instance=ExtResource("8_kott7")]
+[node name="HealthBar" parent="HUDCanvasLayer" instance=ExtResource("8_kott7")]
 offset_top = 89.0
 offset_bottom = 89.0
 
-[node name="Score" parent="CanvasLayer" instance=ExtResource("9_b7tdo")]
+[node name="Score" parent="HUDCanvasLayer" instance=ExtResource("9_b7tdo")]
 offset_left = 695.0
 offset_top = 89.0
 offset_right = 695.0
 offset_bottom = 89.0
+
+[node name="UICanvasLayer" type="CanvasLayer" parent="."]

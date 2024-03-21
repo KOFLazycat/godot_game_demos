@@ -26,7 +26,9 @@ var objects = null
 #var max_dist = 2000.0
 
 func _ready():
-	noise.seed = randi()
+	randomize()
+	noise.seed = randi_range(0, 100000)
+	#print(noise.seed)
 	noise.noise_type = FastNoiseLite.TYPE_PERLIN
 	set_process(true)
 

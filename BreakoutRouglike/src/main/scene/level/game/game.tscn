@@ -108,6 +108,9 @@ position = Vector2(896, 590)
 
 [node name="Paddle" parent="." instance=ExtResource("6_vej8u")]
 position = Vector2(540, 1619)
+spring = 180.0
+damp = 7.0
+velocity_multiplier = 0.3
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(540, 960)

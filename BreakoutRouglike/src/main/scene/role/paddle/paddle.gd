@@ -7,8 +7,16 @@ extends CharacterBody2D
 @export var deccel: float = 10.0
 @export var dash_speed: float = 1000.0
 @export var dash_duration: float = 0.1
-@export var max_lean_angle: float = 4.0
+@export var max_lean_angle: float = 8.0
 @export var lean_speed: float = 8.0
+## Oscillator
+@export_category("Oscillator")
+## 弹簧阻力
+@export var spring: float = 150.0
+## 阻尼
+@export var damp: float = 10.0
+## 移动速度系数
+@export var velocity_multiplier: float = 1.0
 
 @onready var dash_timer: Timer = $DashTimer
 @onready var anim: AnimationPlayer = $AnimationPlayer
@@ -16,6 +24,7 @@ extends CharacterBody2D
 @onready var laser: Area2D = $Laser
 @onready var thickness: float = $CollisionShape2D.shape.extents.y
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 var dashing: bool = false
 var ball_attached = null
@@ -24,6 +33,10 @@ var game_over: bool = false
 var stage_clear: bool = false
 var ball = null
 var frames_since_bump: int = 0
+
+## Oscillator
+var displacement: float = 0.0
+var oscillator_velocity: float = 0.0
 
 signal start
 
@@ -43,10 +56,19 @@ func _process(delta: float) -> void:
 	
 	#velocity.x = dir * speed
 	# 模板角度平滑旋转
-	sprite_2d.rotation = lerp_angle(sprite_2d.rotation, deg_to_rad(max_lean_angle) * dir, lean_speed * delta)
+	# 使用lerp方式旋转
+	#sprite_2d.rotation = lerp_angle(sprite_2d.rotation, deg_to_rad(max_lean_angle) * dir, lean_speed * delta)
+	# 使用Oscillator方式旋转
+	# 弹簧公式，可以用于速度、旋转、缩放、位置等
+	oscillator_velocity += (velocity.x / speed) * velocity_multiplier
+	var force: float = -spring * displacement + damp * oscillator_velocity
+	oscillator_velocity -= force * delta
+	displacement -= oscillator_velocity * delta
+	sprite_2d.rotation = -displacement
 	
 	if Input.is_action_just_pressed("bump"):
 		frames_since_bump = 0
+		anim.stop()
 		anim.play("bump")
 		if ball_attached:
 			launch_ball()
@@ -80,6 +102,11 @@ func _physics_process(delta: float) -> void:
 	if not collision: return
 	if collision.get_collider().is_in_group("Ball"):
 		pass
+
+
+func ball_bounce() -> void:
+	anim.stop()
+	anim.play("bounce")
 
 
 func set_bumping(new_value: bool) -> void:

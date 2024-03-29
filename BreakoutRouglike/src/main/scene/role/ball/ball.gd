@@ -113,6 +113,7 @@ func _physics_process(delta: float) -> void:
 		# no bump boost == small hitstop
 		if boost_factor == 1.0:
 			start_hitstop(hitstop_paddle)
+			collision.get_collider().start_hitstop(hitstop_paddle)
 		
 		# Collision from the top, most of the cases
 		if normal.dot(Vector2.UP) > 0.0:
@@ -266,6 +267,8 @@ func bump_boost(who) -> void:
 		boost_factor = boost_factor_late_early
 		Globals.stats["bumps_late"] += 1
 		spawn_bump_timing(Globals.BUMP.LATE)
+		start_hitstop(hitstop_bump_late_late_early)
+		who.start_hitstop(hitstop_bump_late_late_early)
 	
 	# Bump perfect
 	elif frames_since_paddle_collison < 5:
@@ -273,6 +276,8 @@ func bump_boost(who) -> void:
 		boost_factor = boost_factor_perfect
 		Globals.stats["bumps_perfect"] += 1
 		spawn_bump_timing(Globals.BUMP.PERFECT)
+		start_hitstop(hitstop_bump_late_perfect)
+		who.start_hitstop(hitstop_bump_late_perfect)
 	
 	# Bump early
 	else:
@@ -280,6 +285,8 @@ func bump_boost(who) -> void:
 		boost_factor = boost_factor_late_early
 		Globals.stats["bumps_early"] += 1
 		spawn_bump_timing(Globals.BUMP.EARLY)
+		start_hitstop(hitstop_bump_late_late_early)
+		who.start_hitstop(hitstop_bump_late_late_early)
 
 
 func launch() -> void:

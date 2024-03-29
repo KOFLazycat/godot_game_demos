@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var accel: float = 20.0
 @export var deccel: float = 10.0
 @export var dash_speed: float = 1000.0
-@export var dash_duration: float = 0.1
+@export var dash_duration: float = 0.2
 @export var max_lean_angle: float = 8.0
 @export var lean_speed: float = 8.0
 ## Oscillator
@@ -25,6 +25,7 @@ extends CharacterBody2D
 @onready var thickness: float = $CollisionShape2D.shape.extents.y
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var ghost_spawner: Node2D = $GhostSpawner
 
 var dashing: bool = false
 var ball_attached = null
@@ -37,6 +38,9 @@ var frames_since_bump: int = 0
 ## Oscillator
 var displacement: float = 0.0
 var oscillator_velocity: float = 0.0
+
+# HitStop
+var hitstop_frames: int = 0
 
 signal start
 
@@ -78,6 +82,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("dash") and not dashing:
 		dashing = true
 		dash_timer.start(dash_duration)
+		ghost_spawner.start_spawn()
 		velocity.x = sign(velocity.x) * dash_speed
 		
 	if Input.is_action_just_pressed("special"):
@@ -95,6 +100,12 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if game_over or stage_clear: return
 	
+	if hitstop_frames > 0:
+		hitstop_frames -= 1
+		if hitstop_frames <= 0:
+			stop_hitstop()
+		return
+	
 	frames_since_bump += 1
 	
 	var collision = move_and_collide(velocity * delta)
@@ -107,6 +118,17 @@ func _physics_process(delta: float) -> void:
 func ball_bounce() -> void:
 	anim.stop()
 	anim.play("bounce")
+
+
+# 启动hitstop
+func start_hitstop(hitstop_amount: int) -> void:
+	anim.pause()
+	hitstop_frames = hitstop_amount
+
+# 停止hitstop
+func stop_hitstop() -> void:
+	anim.play()
+	hitstop_frames = 0
 
 
 func set_bumping(new_value: bool) -> void:
@@ -125,3 +147,4 @@ func launch_ball() -> void:
 
 func on_dash_timer_timeout() -> void:
 	dashing = false
+	ghost_spawner.stop_spawn()

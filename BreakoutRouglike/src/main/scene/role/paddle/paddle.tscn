@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://bi1rkmulqic6l"]
+[gd_scene load_steps=17 format=3 uid="uid://bi1rkmulqic6l"]
 
 [ext_resource type="Texture2D" uid="uid://k8ndrwxi37mj" path="res://src/main/assets/textures/paddle/Paddle.png" id="1_7v7h8"]
 [ext_resource type="Script" path="res://src/main/scene/role/paddle/paddle.gd" id="1_yjlyp"]
 [ext_resource type="Shader" path="res://src/main/assets/shaders/deform.gdshader" id="3_277xd"]
 [ext_resource type="PackedScene" uid="uid://csyk6y3crq7vk" path="res://src/main/scene/role/laser/laser.tscn" id="3_s1jat"]
+[ext_resource type="PackedScene" uid="uid://blmddjc4cslx8" path="res://src/main/scene/role/paddle/ghost_spawner.tscn" id="5_8pwdu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2wmh4"]
 shader = ExtResource("3_277xd")
@@ -82,23 +83,6 @@ tracks/2/keys = {
 "values": [Vector2(1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_2lv14"]
-resource_name = "bump"
-length = 0.25
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.14, 0.25),
-"transitions": PackedFloat32Array(-2, -2, -2, -2),
-"update": 0,
-"values": [Vector2(0, 4), Vector2(0, -10), Vector2(0, 10), Vector2(0, 4)]
-}
-
 [sub_resource type="Animation" id="Animation_f3p7h"]
 resource_name = "bounce"
 length = 0.5
@@ -126,6 +110,23 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(-2, -2, -2, -2),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1, 0.59), Vector2(1, 1.37), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2lv14"]
+resource_name = "bump"
+length = 0.25
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.14, 0.25),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [Vector2(0, 4), Vector2(0, -10), Vector2(0, 10), Vector2(0, 4)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4sbhc"]
@@ -171,3 +172,7 @@ libraries = {
 one_shot = true
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="GhostSpawner" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("5_8pwdu")]
+sprite = NodePath("../Sprite2D")
+color = Color(1, 1, 1, 0.729412)

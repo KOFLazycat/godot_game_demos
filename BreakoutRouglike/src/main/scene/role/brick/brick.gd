@@ -10,6 +10,7 @@ extends StaticBody2D
 @export var three: CompressedTexture2D = preload("res://src/main/assets/textures/brick/Three.png")
 @export var bomb: CompressedTexture2D = preload("res://src/main/assets/textures/brick/Bomb.png")
 @export var energy: CompressedTexture2D = preload("res://src/main/assets/textures/brick/Energy.png")
+@export var brick_explosion: PackedScene = preload("res://src/main/scene/role/brick/brick_explode_particles.tscn")
 @export var type: TYPE = TYPE.ONE
 @export var size: SIZE = SIZE.SMALL
 
@@ -42,6 +43,7 @@ var health_dict = {
 	TYPE.ENERGY: 1,    # 0.1
 }
 var _destroyed: bool = false
+var bounce_tween: Tween
 
 signal energy_brick_destroyed
 signal destroyed(which: Brick)
@@ -114,6 +116,23 @@ func update_type_visuals() -> void:
 			type_sprite.texture = energy
 
 
+func bounce() -> void:
+	if is_instance_valid(bounce_tween) and bounce_tween.is_running():
+		bounce_tween.kill()
+	bounce_tween = create_tween()
+	bounce_tween.tween_property(size_sprite, "scale", Vector2(1.15, 1.15), 0.15).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
+	bounce_tween.parallel().tween_property(size_sprite, "rotation_degrees", randf_range(-10.0, 10.0), 0.15).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
+	# 恢复
+	bounce_tween.tween_property(size_sprite, "scale", Vector2.ONE, 0.2).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+	bounce_tween.parallel().tween_property(size_sprite, "rotation_degrees", 0.0, 0.2).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+
+
+func spawn_brick_explosion() -> void:
+	var brick_explosion_instance: GPUParticles2D = brick_explosion.instantiate()
+	get_tree().get_current_scene().add_child(brick_explosion_instance)
+	brick_explosion_instance.global_position = global_position
+
+
 func damage(value: int) -> void:
 	health -= value
 	
@@ -126,6 +145,7 @@ func damage(value: int) -> void:
 				give_energy()
 		destroy()
 	
+	bounce()
 	update_type_health()
 
 
@@ -155,5 +175,6 @@ func explode() -> void:
 
 
 func destroy() -> void:
+	spawn_brick_explosion()
 	emit_signal("destroyed", self)
 	queue_free()

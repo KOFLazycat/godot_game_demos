@@ -75,13 +75,17 @@ func remove_all_bricks() -> void:
 
 
 func layout_bricks() -> void:
+	var bricks_tween: Tween = create_tween()
 	var max_bricks: int = spawn_pos_container.get_child_count()
 	#max_bricks = 3
 	for i in range(max_bricks):
 		# 90% chance of having a block
 		if randf() < 0.1: 
 			continue
-		add_brick(spawn_pos_container.get_child(i).global_position)
+		# bricks 逐个创建
+		bricks_tween.tween_callback(add_brick.bind(spawn_pos_container.get_child(i).global_position))
+		bricks_tween.tween_interval(0.1)
+		#add_brick(spawn_pos_container.get_child(i).global_position)
 
 
 func add_brick(pos: Vector2) -> void:

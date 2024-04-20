@@ -11,6 +11,7 @@ extends StaticBody2D
 @export var bomb: CompressedTexture2D = preload("res://src/main/assets/textures/brick/Bomb.png")
 @export var energy: CompressedTexture2D = preload("res://src/main/assets/textures/brick/Energy.png")
 @export var brick_explosion: PackedScene = preload("res://src/main/scene/role/brick/brick_explode_particles.tscn")
+@export var bomb_explosion: PackedScene = preload("res://src/main/scene/role/brick/bomb_explode_particles.tscn")
 @export var type: TYPE = TYPE.ONE
 @export var size: SIZE = SIZE.SMALL
 
@@ -20,6 +21,7 @@ extends StaticBody2D
 @onready var type_sprite: Sprite2D = $Type
 @onready var collision_shape_long: CollisionShape2D = $CollisionShapeLong
 @onready var collision_shape_small: CollisionShape2D = $CollisionShapeSmall
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 enum TYPE {
@@ -57,6 +59,8 @@ func _ready() -> void:
 	
 	update_size_visuals()
 	update_type_visuals()
+	
+	animation_player.animation_finished.connect(on_animation_player_animation_finished)
 
 
 func choose_type_random() -> void:
@@ -126,11 +130,17 @@ func bounce() -> void:
 	bounce_tween.tween_property(size_sprite, "scale", Vector2.ONE, 0.2).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 	bounce_tween.parallel().tween_property(size_sprite, "rotation_degrees", 0.0, 0.2).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 
-
+# 普通砖块爆炸粒子特效
 func spawn_brick_explosion() -> void:
 	var brick_explosion_instance: GPUParticles2D = brick_explosion.instantiate()
 	get_tree().get_current_scene().add_child(brick_explosion_instance)
 	brick_explosion_instance.global_position = global_position
+
+# 炸弹砖块爆炸粒子特效
+func spawn_bomb_explosion() -> void:
+	var bomb_explosion_instance: GPUParticles2D = bomb_explosion.instantiate()
+	get_tree().get_current_scene().add_child(bomb_explosion_instance)
+	bomb_explosion_instance.global_position = global_position
 
 
 func damage(value: int) -> void:
@@ -175,6 +185,15 @@ func explode() -> void:
 
 
 func destroy() -> void:
-	spawn_brick_explosion()
+	if type == TYPE.EXPLOSIVE:
+		spawn_bomb_explosion()
+	else:
+		spawn_brick_explosion()
 	emit_signal("destroyed", self)
 	queue_free()
+
+
+func on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "appear":
+		if type == TYPE.ENERGY or type == TYPE.EXPLOSIVE:
+			animation_player.play("wiggle")

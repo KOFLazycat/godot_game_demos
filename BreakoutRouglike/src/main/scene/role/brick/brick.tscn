@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cql57vi8y5syv"]
+[gd_scene load_steps=11 format=3 uid="uid://cql57vi8y5syv"]
 
 [ext_resource type="Script" path="res://src/main/scene/role/brick/brick.gd" id="1_8odwy"]
-[ext_resource type="Texture2D" uid="uid://b8syrfuiix82m" path="res://src/main/assets/textures/brick/BlockSmallFull.png" id="2_hbvco"]
-[ext_resource type="Texture2D" uid="uid://celnb7wh8sf3s" path="res://src/main/assets/textures/brick/One.png" id="3_gnru2"]
+[ext_resource type="Texture2D" uid="uid://dbn4ikf5uof12" path="res://src/main/assets/textures/brick/BlockSmallBorder.png" id="2_k1lnu"]
+[ext_resource type="Texture2D" uid="uid://dev8c84kkfwr5" path="res://src/main/assets/textures/brick/Bomb.png" id="3_yocsd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_78neo"]
 size = Vector2(124, 62)
@@ -12,6 +12,65 @@ size = Vector2(62, 62)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1hm7q"]
 radius = 300.0
+
+[sub_resource type="Animation" id="Animation_2rc8u"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Size:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Size:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Type:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Type:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Type:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_36cnk"]
 resource_name = "appear"
@@ -62,57 +121,28 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0.1, 0.6)
 }
 
-[sub_resource type="Animation" id="Animation_2rc8u"]
-length = 0.001
-tracks/0/type = "bezier"
+[sub_resource type="Animation" id="Animation_5mumw"]
+resource_name = "wiggle"
+length = 2.5
+loop_mode = 1
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Size:scale:x")
+tracks/0/path = NodePath("Type:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Size:scale:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Type:scale:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Type:scale:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.725, 1.1),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2),
+"update": 0,
+"values": [0.0, -0.701622, 0.488692, -0.244346, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_88lor"]
 _data = {
 "RESET": SubResource("Animation_2rc8u"),
-"appear": SubResource("Animation_36cnk")
+"appear": SubResource("Animation_36cnk"),
+"wiggle": SubResource("Animation_5mumw")
 }
 
 [node name="Brick" type="StaticBody2D" groups=["Bricks"]]
@@ -128,10 +158,10 @@ shape = SubResource("RectangleShape2D_aq7di")
 disabled = true
 
 [node name="Size" type="Sprite2D" parent="."]
-texture = ExtResource("2_hbvco")
+texture = ExtResource("2_k1lnu")
 
 [node name="Type" type="Sprite2D" parent="."]
-texture = ExtResource("3_gnru2")
+texture = ExtResource("3_yocsd")
 
 [node name="ExplosionArea" type="Area2D" parent="."]
 visible = false

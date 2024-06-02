@@ -1,0 +1,148 @@
+[gd_scene load_steps=10 format=3 uid="uid://dn22poce15fmy"]
+
+[ext_resource type="Script" path="res://src/main/scene/level/main/main.gd" id="1_1afbv"]
+[ext_resource type="Texture2D" uid="uid://cwxphnyf8a4yb" path="res://src/main/assets/textures/BG.png" id="1_6aexd"]
+[ext_resource type="Texture2D" uid="uid://bidjx730qq6ir" path="res://src/main/assets/textures/tile1.png" id="2_wfc4a"]
+[ext_resource type="Texture2D" uid="uid://bg6oegn1sfq5e" path="res://src/main/assets/textures/参照.png" id="3_gkmfg"]
+[ext_resource type="FontFile" uid="uid://dg2hixxgydx7m" path="res://src/main/assets/resouces/sourcehansans_32.tres" id="3_lqiux"]
+[ext_resource type="FontFile" uid="uid://l3o8upi7uxc5" path="res://src/main/assets/fonts/MTC-7-Segment.TTF" id="3_ydn18"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2y1fv"]
+texture = ExtResource("2_wfc4a")
+texture_region_size = Vector2i(44, 44)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_a7x5r"]
+tile_size = Vector2i(44, 44)
+sources/0 = SubResource("TileSetAtlasSource_2y1fv")
+
+[sub_resource type="TileSet" id="TileSet_4t3a4"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_1afbv")
+
+[node name="BG" type="Sprite2D" parent="."]
+texture = ExtResource("1_6aexd")
+centered = false
+
+[node name="MainTileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(27, 24)
+tile_set = SubResource("TileSet_a7x5r")
+
+[node name="NextTileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(542, 525)
+tile_set = SubResource("TileSet_4t3a4")
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 480.0
+offset_right = 740.0
+offset_bottom = 930.0
+
+[node name="ScoreText" type="Label" parent="GUI"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 29.0
+offset_right = 128.0
+offset_bottom = 62.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lqiux")
+theme_override_font_sizes/font_size = 32
+text = "SCORE"
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="GUI"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 77.0
+offset_right = 237.0
+offset_bottom = 139.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_ydn18")
+theme_override_font_sizes/font_size = 60
+text = "00000"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="LevelText" type="Label" parent="GUI"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 177.0
+offset_right = 136.0
+offset_bottom = 210.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lqiux")
+theme_override_font_sizes/font_size = 32
+text = "LEVELS"
+vertical_alignment = 1
+
+[node name="Level" type="Label" parent="GUI"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 225.0
+offset_right = 237.0
+offset_bottom = 287.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_ydn18")
+theme_override_font_sizes/font_size = 60
+text = "00000"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SpeedText" type="Label" parent="GUI"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 325.0
+offset_right = 136.0
+offset_bottom = 358.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lqiux")
+theme_override_font_sizes/font_size = 32
+text = "SPEED"
+vertical_alignment = 1
+
+[node name="Speed" type="Label" parent="GUI"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 373.0
+offset_right = 237.0
+offset_bottom = 435.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_ydn18")
+theme_override_font_sizes/font_size = 60
+text = "00000"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="NextText" type="Label" parent="GUI"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 473.0
+offset_right = 136.0
+offset_bottom = 506.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_lqiux")
+theme_override_font_sizes/font_size = 32
+text = "NEXT"
+vertical_alignment = 1
+
+[node name="Speed2" type="Label" parent="GUI"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 373.0
+offset_right = 237.0
+offset_bottom = 435.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_ydn18")
+theme_override_font_sizes/font_size = 60
+text = "00000"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="参照" type="Sprite2D" parent="."]
+position = Vector2(1133, 669)
+texture = ExtResource("3_gkmfg")

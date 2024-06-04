@@ -51,6 +51,13 @@ func _ready():
 	drawGrid()
 	drawDroppingPoint()
 
+
+func _physics_process(delta: float) -> void:
+	var sthHappened: bool = false
+	if Input.is_action_just_pressed("quit"):
+		get_tree().quit()
+
+
 # 生成新的方块数组
 func newBag() -> Array[Node2D]:
 	var bagIndexes: Array = [0,1,2,3,4,5,6]

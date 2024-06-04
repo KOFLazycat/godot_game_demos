@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://qabp7wk22aca"]
+[gd_scene load_steps=8 format=3 uid="uid://qabp7wk22aca"]
 
 [ext_resource type="FontFile" uid="uid://bugx6o74m7ei2" path="res://src/main/assets/fonts/SourceHanSans-Medium.otf" id="1_8o3rq"]
 [ext_resource type="Texture2D" uid="uid://d24t6ngb4ln7f" path="res://src/main/assets/textures/poke/holdPiece.png" id="3_ji370"]
+[ext_resource type="Script" path="res://src/main/scene/ui/next_pieces.gd" id="3_tugex"]
 [ext_resource type="Texture2D" uid="uid://xulacuc17l24" path="res://src/main/assets/textures/poke/nextPiece.png" id="5_atd1p"]
 [ext_resource type="Texture2D" uid="uid://bc174o8lji64g" path="res://src/main/assets/textures/poke/button.png" id="6_ftp8a"]
 [ext_resource type="Texture2D" uid="uid://cnmsmjb7ske0j" path="res://src/main/assets/textures/poke/russia.png" id="7_5pgp6"]
@@ -48,6 +49,7 @@ offset_left = 484.963
 offset_top = 72.0892
 offset_right = 591.963
 offset_bottom = 599.089
+script = ExtResource("3_tugex")
 
 [node name="Label" type="Label" parent="NextPieces"]
 layout_mode = 0

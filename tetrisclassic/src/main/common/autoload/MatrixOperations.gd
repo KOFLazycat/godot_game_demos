@@ -1,5 +1,6 @@
 extends Node
 
+# 初始换二维数组
 func create2DMatrix(width: int, height: int, value: int = 0) -> Array[Array]:
 	var retArray: Array[Array]= []
 	for x in range(width):
@@ -11,23 +12,24 @@ func create2DMatrix(width: int, height: int, value: int = 0) -> Array[Array]:
 	return retArray
 
 
-func invert2DMatrix(matrix):
-	var newMatrix = MatrixOperations.create2DMatrix(matrix[0].size(), matrix.size(), 0)
+# 矩阵转置
+func invert2DMatrix(matrix: Array[Array]) -> Array[Array]:
+	var newMatrix: Array[Array] = MatrixOperations.create2DMatrix(matrix[0].size(), matrix.size(), 0)
 	for i in matrix.size():
 		for j in matrix[i].size():
 			newMatrix[j][i] = matrix[i][j]
 	return newMatrix
 
-
-func swap2DMatrixColumns(matrix):
-	var newMatrix = MatrixOperations.create2DMatrix(matrix.size(), matrix[0].size(), 0)
+# 交换列
+func swap2DMatrixColumns(matrix: Array[Array]) -> Array[Array]:
+	var newMatrix: Array[Array] = MatrixOperations.create2DMatrix(matrix.size(), matrix[0].size(), 0)
 	for i in matrix.size():
 		for j in matrix[i].size():
 			newMatrix[i][j] = matrix[matrix.size() -1 - i][j]
 	return newMatrix
 
-
-func swap2DMatrixRows(matrix):
+# 交换行
+func swap2DMatrixRows(matrix: Array[Array]) -> Array[Array]:
 	var newMatrix = MatrixOperations.create2DMatrix(matrix.size(), matrix[0].size(), 0)
 	for j in matrix[0].size():
 		for i in matrix.size():

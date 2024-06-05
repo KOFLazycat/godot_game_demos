@@ -1,7 +1,7 @@
 extends Node2D
 
 const dasDelay = 8
-const infinityValue = 15
+const infinityValue: int = 15
 const gridWidth: int = 10
 const gridHeight: int = 23
 const vanishZone: int = 3
@@ -20,14 +20,14 @@ var gridOffsetY: float
 var currentPiece: Piece
 
 var timer: float = 0
-var deltaSum = 0
+var deltaSum: float = 0
 var clearedLines = 0
 var dasCounter = 0
 var lines = 0
 var level = 1
 var score = 0
-var actions = 0
-var prevActions = 0
+var actions: int = 0
+var prevActions: int = 0
 var speed: float = 1
 var hasSwapped = false
 
@@ -56,11 +56,73 @@ func _physics_process(delta: float) -> void:
 	var sthHappened: bool = false
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
+	# 右移
+	if Input.is_action_just_pressed("right"):
+		if canPieceMoveRight():
+			movePieceInGrid(1,0)
+			sthHappened = true
+			actions += 1
+		#deltaSum = 0
+		#dasCounter = 0
+	# 左移	
+	if Input.is_action_just_pressed("left"):
+		if canPieceMoveLeft():
+			movePieceInGrid(-1,0)
+			sthHappened = true
+			actions += 1
+		#deltaSum = 0
+		#dasCounter = 0
+	
+	#deltaSum += delta
+	#if (deltaSum > 2 * delta) && (dasCounter > dasDelay):
+		#if Input.is_action_pressed("right"):
+			#if canPieceMoveRight():
+				#movePieceInGrid(1,0)
+				#sthHappened = true
+				#actions += 1
+		#if Input.is_action_pressed("left"):
+			#if canPieceMoveLeft():
+				#movePieceInGrid(-1,0)
+				#sthHappened = true
+				#actions += 1
+		#deltaSum = 0
+	
+	#dasCounter += 1
+	# 下移
+	if Input.is_action_pressed("down"):
+		if canPieceMoveDown():
+			movePieceInGrid(0,1)
+			score += 1
+			$UI/Score/ScoreNumber.text = str(score)
+			sthHappened = true
+		actions = 0
+	# 直接下落
+	if Input.is_action_just_pressed("hard_drop"):	
+		hardDropPiece()
+		afterDrop()
+		sthHappened = true
+		timer=0
+		actions = 0
+	# 顺时针旋转
+	if Input.is_action_just_pressed("rotate_clockwise"):
+		var kickValues = getPosibleRotation(Direction.CLOCKWISE)
+		if kickValues != null:
+			rotatePiece(Direction.CLOCKWISE, kickValues)
+			sthHappened = true
+			actions += 1
+	# 逆时针旋转
+	if Input.is_action_just_pressed("rotate_anticlockwise"):
+		var kickValues = getPosibleRotation(Direction.ANTICLOCKWISE)
+		if kickValues != null:
+			rotatePiece(Direction.ANTICLOCKWISE, kickValues)
+			sthHappened = true
+			actions += 1
 	
 	timer += delta
 	if timer >= speed:
+		# 自动下移
 		if canPieceMoveDown():
-			movePieceInGrid(0,1)
+			movePieceInGrid(0, 1)
 			actions = 0
 			sthHappened = true
 		else:
@@ -127,9 +189,9 @@ func drawGrid() -> void:
 			if (y == 2):
 				circle.region_enabled = true
 				circle.region_rect = Rect2(0, 6, 16, 10)
-				circle.position = Vector2(x*spriteSize + gridOffsetX, y*spriteSize + gridOffsetY + 16)
+				circle.position = Vector2(x * spriteSize + gridOffsetX, y * spriteSize + gridOffsetY + 16)
 			else:
-				circle.position = Vector2(x*spriteSize + gridOffsetX, y*spriteSize + gridOffsetY)
+				circle.position = Vector2(x * spriteSize + gridOffsetX, y * spriteSize + gridOffsetY)
 			circle.texture = PokeballTextures.getTextureForColorIndex(grid[x][y])
 			circle.scale = Vector2(2,2)
 			circle.centered = false
@@ -237,6 +299,7 @@ func movePieceInGrid(xMovement: int, yMovement: int) -> void:
 	currentPiece.positionInGrid.y = currentPiece.positionInGrid.y + yMovement
 
 
+# 下落完成后作
 func afterDrop() -> void:
 	currentPiece = Piece.new()
 	checkAndClearFullLines()
@@ -246,6 +309,7 @@ func afterDrop() -> void:
 	hasSwapped = false
 
 
+# 检查并清空满行
 func checkAndClearFullLines() -> void:
 	var cleared: int = 0
 	for y in range(gridHeight):
@@ -294,11 +358,100 @@ func checkAndClearFullLines() -> void:
 			$UI/Level/LevelNumber.text = str(level)
 
 
+# 校验游戏是否结束
 func checkGameOver() -> bool:
 	for i in range (gridWidth):
 		if grid[i][vanishZone-1] != 0:
 			return true
 	return false
+
+
+# 直接下落
+func hardDropPiece() -> void:
+	while (canPieceMoveDown()):
+		score += 2
+		$UI/Score/ScoreNumber.text = str(score)
+		movePieceInGrid(0,1)
+	var particle = DropParticle.instantiate()
+	particle.position.x = gridOffsetX + ((currentPiece.positionInGrid.x + currentPiece.shape.size()/float(2))) * spriteSize
+	var pixelPosy = (currentPiece.positionInGrid.y+1) * spriteSize
+	particle.position.y = (pixelPosy)/2 + gridOffsetY
+	particle.setBoxRanges(Vector2(currentPiece.shape.size()/float(2) * spriteSize, pixelPosy/2 -spriteSize))
+	particle.amount = pixelPosy/20
+	match currentPiece.getColorIndex():
+		1: particle.setColor(Color.RED)
+		2: particle.setColor(Color.BLUE)
+		3: particle.setColor(Color.YELLOW)
+		4: particle.setColor(Color.CYAN)
+		5: particle.setColor(Color.GREEN)
+		6: particle.setColor(Color.FUCHSIA)
+		7: particle.setColor(Color.ORANGE)
+	add_child(particle)
+	particle.emit()
+
+
+# 矩阵旋转
+func rotatePiece(direction: Direction, kickValues: Vector2) -> void:
+	deletePieceFromGrid()
+	var newShape: Array[Array] = MatrixOperations.invert2DMatrix(currentPiece.shape)
+	if (direction == Direction.CLOCKWISE):
+		newShape = MatrixOperations.swap2DMatrixColumns(newShape)
+		currentPiece.rotationState = (currentPiece.rotationState + 1) % 4
+	else:
+		newShape = MatrixOperations.swap2DMatrixRows(newShape)
+		currentPiece.rotationState = (currentPiece.rotationState + 3) % 4 # +3 mod 4 goes to the left (0 1<--(2) 3)
+	currentPiece.shape = newShape
+	currentPiece.positionInGrid += kickValues
+	addPiece()
+
+
+# 获取可旋转的偏移量
+func getPosibleRotation(direction: Direction):
+	var newShape: Array[Array] = MatrixOperations.invert2DMatrix(currentPiece.shape)
+	if (direction == Direction.CLOCKWISE):
+		newShape = MatrixOperations.swap2DMatrixColumns(newShape)
+	else:
+		newShape = MatrixOperations.swap2DMatrixRows(newShape)
+	
+	var rotationState: int = currentPiece.rotationState
+	# rotation state for 0>>1 is the same as 1>>0 but negative, 
+	# so if anticlowise we go to the next state (0 to 1) by adding 3 and modding by 4
+	if (direction == Direction.ANTICLOCKWISE):
+		rotationState = (rotationState + 3) % 4
+	
+	var rotationArray: Array
+	if (currentPiece.shape.size() == 4): #Check for I and O shapes
+		rotationArray = Constants.KICK_TABLE_I[rotationState]
+	else:
+		rotationArray = Constants.KICK_TABLE[rotationState]
+	
+	for r in rotationArray.size():
+		var kickValues: Vector2 = rotationArray[r]
+		if (direction == Direction.ANTICLOCKWISE):
+			kickValues = -kickValues
+		var newPosition: Vector2 = currentPiece.positionInGrid + kickValues
+		var canRotate: bool = true
+		deletePieceFromGrid()
+		for i in newShape.size():
+			for j in newShape[i].size():
+				if (newShape[i][j]) != 0:
+					#Check borders
+					if (newPosition.x + i < 0) || (newPosition.x + i >= gridWidth):
+						addPiece()
+						canRotate = false
+						break
+					if (newPosition.y + j + 1 > gridHeight):
+						addPiece()
+						canRotate = false
+						break
+					if (grid[newPosition.x + i][newPosition.y + j] != 0):
+						addPiece()
+						canRotate = false
+						break
+		addPiece()
+		if canRotate:
+			return kickValues
+	return Vector2.ZERO
 
 
 func _on_lock_timer_timeout() -> void:

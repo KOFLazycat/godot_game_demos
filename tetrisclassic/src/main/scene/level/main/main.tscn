@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ds44v7k1aq16"]
+[gd_scene load_steps=5 format=3 uid="uid://ds44v7k1aq16"]
 
 [ext_resource type="Script" path="res://src/main/scene/level/main/main.gd" id="1_tinob"]
 [ext_resource type="Script" path="res://src/main/scene/level/main/grid.gd" id="2_2oou3"]
 [ext_resource type="PackedScene" uid="uid://qabp7wk22aca" path="res://src/main/scene/ui/ui.tscn" id="2_o7qb1"]
+[ext_resource type="AudioStream" uid="uid://dk2e6b3n7njiw" path="res://src/main/assets/sounds/Tetris.wav" id="4_tb6gc"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tinob")
@@ -15,5 +16,10 @@ script = ExtResource("2_2oou3")
 [node name="LockTimer" type="Timer" parent="Grid"]
 wait_time = 0.5
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_tb6gc")
+volume_db = -10.0
+autoplay = true
 
 [connection signal="timeout" from="Grid/LockTimer" to="Grid" method="_on_lock_timer_timeout"]

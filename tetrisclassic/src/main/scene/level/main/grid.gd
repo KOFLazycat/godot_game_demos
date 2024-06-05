@@ -29,7 +29,7 @@ var score = 0
 var actions: int = 0
 var prevActions: int = 0
 var speed: float = 1
-var hasSwapped = false
+var hasSwapped: bool = false
 
 var currentBag: Array[Node2D]
 var nextBag: Array[Node2D]
@@ -117,6 +117,29 @@ func _physics_process(delta: float) -> void:
 			rotatePiece(Direction.ANTICLOCKWISE, kickValues)
 			sthHappened = true
 			actions += 1
+	
+	# 保存、交换方块
+	if Input.is_action_just_pressed("hold_swap"):
+		if (!hasSwapped):
+			deletePieceFromGrid()
+			
+			#Particle
+			var particle: GPUParticles2D = HoldParticle.instantiate()
+			particle.setDestination($UI/Hold.position + $UI/Hold.size/2)
+			particle.texture = currentPiece.getTextureForPiece()
+			add_child(particle)
+			particle.emit(Vector2(spriteSize*(currentPiece.positionInGrid.x + currentPiece.getShapeWithoutBorders().size()/2.0) + gridOffsetX ,spriteSize*(currentPiece.positionInGrid.y++ currentPiece.getShapeWithoutBorders()[0].size()/2.0) + gridOffsetY ))
+			
+			var heldPiece = $UI/Hold.swapPiece(currentPiece)
+			if heldPiece:
+				currentPiece = heldPiece
+				spawnPiece()
+			else:
+				spawnFromBag()
+				
+			sthHappened = true
+			hasSwapped = true
+			actions = 0
 	
 	timer += delta
 	if timer >= speed:

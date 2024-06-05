@@ -11,3 +11,9 @@ script = ExtResource("1_tinob")
 script = ExtResource("2_2oou3")
 
 [node name="UI" parent="Grid" instance=ExtResource("2_o7qb1")]
+
+[node name="LockTimer" type="Timer" parent="Grid"]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="Grid/LockTimer" to="Grid" method="_on_lock_timer_timeout"]

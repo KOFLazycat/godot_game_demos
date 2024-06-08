@@ -63,7 +63,7 @@ const PIECE_SIZE: Vector2 = Vector2(42, 42)
 const MIN_BOUNDS_X: float = 46
 const MIN_BOUNDS_Y: float = 46
 const MAX_BOUNDS_X: float = 424
-const MAX_BOUNDS_Y: float = 844
+const MAX_BOUNDS_Y: float = 886
 # 行列数
 const ROW_COUNT: int = 20
 const COLUMN_COUNT: int = 10

@@ -1,0 +1,114 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2t3v4l0627hd"]
+
+[ext_resource type="Script" path="res://src/main/scene/ui/ui.gd" id="1_qcjc8"]
+[ext_resource type="FontFile" uid="uid://bvb16wxv1jcem" path="res://src/main/assets/fonts/VonwaonBitmap-12px.ttf" id="2_l15q4"]
+[ext_resource type="FontFile" uid="uid://dwm7j7aqckcbl" path="res://src/main/assets/fonts/MTC-7-Segment.TTF" id="3_xs6yi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_81k4l"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qcjc8")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(220, 400)
+layout_mode = 0
+offset_right = 220.0
+offset_bottom = 400.0
+
+[node name="VBScore" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="ScoreTextLabel" type="Label" parent="MarginContainer/VBScore"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("2_l15q4")
+theme_override_font_sizes/font_size = 36
+text = "SCORE"
+vertical_alignment = 1
+
+[node name="ScoreValueLabel" type="Label" parent="MarginContainer/VBScore"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_xs6yi")
+theme_override_font_sizes/font_size = 60
+text = "0000"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="VBLevels" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="LevelsTextLabel" type="Label" parent="MarginContainer/VBLevels"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("2_l15q4")
+theme_override_font_sizes/font_size = 36
+text = "LEVELS"
+vertical_alignment = 1
+
+[node name="LevelsValueLabel" type="Label" parent="MarginContainer/VBLevels"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_xs6yi")
+theme_override_font_sizes/font_size = 60
+text = "1"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="VBSpeed" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 0
+
+[node name="SpeedTextLabel" type="Label" parent="MarginContainer/VBSpeed"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("2_l15q4")
+theme_override_font_sizes/font_size = 36
+text = "SPEED"
+vertical_alignment = 1
+
+[node name="SpeedValueLabel" type="Label" parent="MarginContainer/VBSpeed"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_xs6yi")
+theme_override_font_sizes/font_size = 60
+text = "1"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+offset_top = 430.0
+offset_right = 220.0
+offset_bottom = 466.0
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxEmpty_81k4l")
+
+[node name="NextTextLabel" type="Label" parent="PanelContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("2_l15q4")
+theme_override_font_sizes/font_size = 36
+text = "NEXT"
+vertical_alignment = 1

@@ -14,12 +14,12 @@ var tetromino_cells: Array = []
 var wall_kicks: Array = []
 var ghost_tetromino
 
-# 锁定方块信号
+# 锁定指定方块信号
 signal lock_tetromino(tetromino: Tetromino)
 
 
 func _ready():
-	tetromino_cells = Constants.CELLS[tetromino_resource.tetromino_type]
+	tetromino_cells = Constants.cells[tetromino_resource.tetromino_type]
 	for cell in tetromino_cells:
 		var piece = piece_scene.instantiate() as Piece
 		pieces.append(piece)
@@ -81,6 +81,80 @@ func is_colliding_with_other_tetrominos(direction: Vector2, starting_global_posi
 	return false
 
 
+# 旋转方块
+func rotate_tetromino(direction: int) -> void:
+	# 每次旋转90度，所以方块旋转方向应该有0-3四个状态，通过顺时针、逆时针相互切换状态
+	var original_rotation_index: int = rotation_index
+	# O型方块不需要旋转
+	if tetromino_resource.tetromino_type == Constants.TETROMINO.O:
+		return
+	
+	apply_rotation(direction)
+	
+	rotation_index = wrap(rotation_index + direction, 0, 4)
+	
+	if !test_wall_kicks(rotation_index, direction):
+		rotation_index = original_rotation_index
+		apply_rotation(-direction)
+	
+	#hard_drop_ghost.call_deferred()
+
+
+# 测试墙踢
+func test_wall_kicks(rotation_index: int, rotation_direction: int) -> bool:
+	var wall_kick_index = get_wall_kick_index(rotation_index, rotation_direction)
+	
+	for i in wall_kicks[0].size():
+		var translation = wall_kicks[wall_kick_index][i]
+		# 将方块踢离墙壁
+		if move(translation):
+			return true
+	return false
+
+
+# 获取墙踢矩阵索引
+func get_wall_kick_index(rotation_index: int, rotation_direction: int) -> int:
+	var wall_kick_index: int = rotation_index * 2
+	if rotation_direction < 0:
+		wall_kick_index -= 1
+		
+	return wrap(wall_kick_index, 0 , wall_kicks.size())
+
+
+# 矩阵旋转
+func apply_rotation(direction: int) -> void:
+	# 获取对应的旋转矩阵
+	var rotation_matrix: Array = Constants.CLOCKWISE_ROTATION_MATRIX if direction == 1 else Constants.COUNTER_CLOCKWISE_ROTATION_MATRIX
+	
+	var tetromino_cells: Array = Constants.cells[tetromino_resource.tetromino_type]
+
+	for i in tetromino_cells.size():
+		var cell = tetromino_cells[i]
+		# 旋转90或者-90之后坐标
+		var coordinates: Vector2 = rotation_matrix[0] * cell.x + rotation_matrix[1]* cell.y
+		tetromino_cells[i] = coordinates
+	
+	for i in pieces.size():
+		var piece = pieces[i]
+		# 更新方块位置
+		piece.position = tetromino_cells[i] * piece.get_size()
+
+
+# 快速下落
+func hard_drop() -> void:
+	while(move(Vector2.DOWN)):
+		continue
+	lock()
+
+
+# 固定方块，不能移动
+func lock() -> void:
+	timer.stop()
+	lock_tetromino.emit(self)
+	set_process_input(false)
+	#ghost_tetromino.queue_free()
+
+
 # 输入
 func _input(_event):
 	if Input.is_action_just_pressed("left"):
@@ -89,12 +163,12 @@ func _input(_event):
 		move(Vector2.RIGHT)
 	elif Input.is_action_just_pressed("down"):
 		move(Vector2.DOWN)
-	#elif Input.is_action_just_pressed("hard_drop"):
-		#hard_drop()
-	#elif Input.is_action_just_pressed("rotate_anticlockwise"):
-		#rotate_tetromino(-1)
-	#elif Input.is_action_just_pressed("rotate_clockwise"):
-		#rotate_tetromino(1)
+	elif Input.is_action_just_pressed("hard_drop"):
+		hard_drop()
+	elif Input.is_action_just_pressed("rotate_anticlockwise"):
+		rotate_tetromino(-1)
+	elif Input.is_action_just_pressed("rotate_clockwise"):
+		rotate_tetromino(1)
 
 
 func _on_timer_timeout() -> void:

@@ -5,6 +5,7 @@ class_name Board
 
 @onready var line_scene = preload("res://src/main/scene/world/Line/line.tscn")
 
+
 const PIECE_SIZE: Vector2 = Vector2(42, 42)
 var next_tetromino: Tetromino
 var tetrominos: Array[Tetromino] = []
@@ -29,11 +30,12 @@ func spawn_tetromino(type: Constants.TETROMINO, is_next_piece: bool = false, spa
 		tetromino.other_tetrominoes_pieces = other_pieces
 		add_child(tetromino)
 		tetromino.lock_tetromino.connect(_on_tetromino_locked)
-	#else: 
+	else:
 		#tetromino.scale = Vector2(0.5, 0.5)
 		#panel_container.add_child(tetromino)
-		#tetromino.set_position(spawn_position)
-		#next_tetromino = tetromino
+		tetromino.set_position(spawn_position) 
+		#ui.add_next_tetromino(tetromino, spawn_position)
+		next_tetromino = tetromino
 
 
 # 获取所有行
@@ -91,13 +93,13 @@ func move_lines_down(y_position_remove: float) -> void:
 # 检查游戏是否结束
 func check_game_over() -> void:
 		for piece in get_all_pieces():
-			if piece.global_position.y <= Constants.MIN_Y:
+			if piece.global_position.y <= Constants.MIN_BOUNDS_Y:
 				game_over.emit() 
 
 
 # 方块锁定信号处理函数
 func _on_tetromino_locked(tetromino: Tetromino) -> void:
-	next_tetromino.queue_free()
+	#next_tetromino.queue_free()
 	# 保存已锁定方块
 	tetrominos.append(tetromino)
 	add_tetromino_to_lines(tetromino)

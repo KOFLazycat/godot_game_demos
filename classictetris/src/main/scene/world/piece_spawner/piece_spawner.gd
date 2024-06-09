@@ -12,5 +12,5 @@ func _ready():
 	current_tetromino = Constants.TETROMINO.values().pick_random()	
 	next_tetromino = Constants.TETROMINO.values().pick_random()	 
 	board.spawn_tetromino(current_tetromino, false)
-	#board.spawn_tetromino(next_tetromino, true, Vector2(100, 50))
+	#board.spawn_tetromino(next_tetromino, true, Vector2(590, 550)) # Next 方块出现位置
 	

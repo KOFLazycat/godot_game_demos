@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 Constants="*res://src/main/common/autoload/constants.gd"
+LoadSaveSystem="*res://src/main/common/global/load_save_system/load_save_system.tscn"
+StringUtil="*res://src/main/common/util/string_util.gd"
 
 [display]
 

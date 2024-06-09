@@ -34,11 +34,14 @@ func _ready():
 		ghost_tetromino.tetromino_resource = tetromino_resource
 		get_tree().root.add_child.call_deferred(ghost_tetromino)
 		hard_drop_ghost.call_deferred()
-	else: 
-		timer.stop()
+		
+		# 计算方块下落的计时器时间，等级越高时间越短
+		var cur_level: int = LoadSaveSystem.load_level()
+		timer.wait_time = pow(0.8 - (cur_level - 1) * 0.007, cur_level - 1)
+		timer.timeout.connect(_on_timer_timeout)
+		timer.start()
+	else:
 		set_process_input(false)
-	
-	timer.timeout.connect(_on_timer_timeout)
 
 
 # 按照指定方向移动一格，并判断能否移动成功（出界或者发送碰撞，移动均不能成功）
@@ -97,7 +100,7 @@ func rotate_tetromino(direction: int) -> void:
 		rotation_index = original_rotation_index
 		apply_rotation(-direction)
 	
-	#hard_drop_ghost.call_deferred()
+	hard_drop_ghost.call_deferred()
 
 
 # 测试墙踢

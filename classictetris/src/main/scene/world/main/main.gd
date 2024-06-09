@@ -9,12 +9,17 @@ var is_game_over: bool = false
 
 
 func _ready() -> void:
+	LoadSaveSystem.save_score(0)
+	LoadSaveSystem.save_level(1)
 	init_tetromino()
 
 
+# 初始化方块
 func init_tetromino() -> void:
 	current_tetromino = Constants.TETROMINO.values().pick_random()	
 	next_tetromino = Constants.TETROMINO.values().pick_random()
+	current_tetromino = Constants.TETROMINO.O
+	next_tetromino = Constants.TETROMINO.O
 	board.spawn_tetromino(current_tetromino, false)
 	board.spawn_tetromino(next_tetromino, true, Vector2(100, 90)) # Next 方块出现位置
 	board.tetromino_locked.connect(_on_tetromino_locked)
@@ -27,6 +32,7 @@ func _on_tetromino_locked():
 		return
 	current_tetromino = next_tetromino
 	next_tetromino = Constants.TETROMINO.values().pick_random()	
+	next_tetromino = Constants.TETROMINO.O
 	board.spawn_tetromino(current_tetromino, false)
 	board.spawn_tetromino(next_tetromino, true, Vector2(100, 90)) # Next 方块出现位置
 

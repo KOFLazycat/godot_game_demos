@@ -10,6 +10,7 @@ class_name Board
 const PIECE_SIZE: Vector2 = Vector2(42, 42)
 var next_tetromino: Tetromino
 var tetrominos: Array[Tetromino] = []
+var clear_lines_count: int = 0
 
 # 方块已锁定信号
 signal tetromino_locked
@@ -77,11 +78,12 @@ func add_tetromino_to_lines(tetromino: Tetromino) -> void:
 
 
 # 删除已经满了的Line
-func remove_full_lines() -> void:
+func remove_full_lines():
 	for line in get_lines():
 		if line.is_line_full(Constants.COLUMN_COUNT):
 			move_lines_down(line.global_position.y)
 			line.free()
+			clear_lines_count += 1
 
 
 # Line向下移动
@@ -105,7 +107,12 @@ func _on_tetromino_locked(tetromino: Tetromino) -> void:
 	# 保存已锁定方块
 	tetrominos.append(tetromino)
 	add_tetromino_to_lines(tetromino)
+	# 清理可消除行
 	remove_full_lines()
+	# 更新分数和等级
+	#print(clear_lines_count)
+	ui.update_score_value(clear_lines_count)
+	ui.update_level_value(clear_lines_count)
 	# 方块已锁定信号发出
 	tetromino_locked.emit()
 	check_game_over()

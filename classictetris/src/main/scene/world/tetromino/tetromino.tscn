@@ -6,4 +6,3 @@
 script = ExtResource("1_janqn")
 
 [node name="Timer" type="Timer" parent="."]
-autostart = true

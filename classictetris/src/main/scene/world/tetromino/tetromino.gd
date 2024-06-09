@@ -2,8 +2,8 @@ extends Node2D
 class_name Tetromino
 
 @onready var timer = $Timer
-@onready var piece_scene = preload("res://src/main/scene/world/Piece/piece.tscn")
-#@onready var ghost_tetromino_scene = preload("res://Scenes/ghost_tetromino.tscn")
+@onready var piece_scene = preload("res://src/main/scene/world/piece/piece.tscn")
+@onready var ghost_tetromino_scene = preload("res://src/main/scene/world/ghost_tetromino/ghost_tetromino.tscn")
 
 var tetromino_resource: Resource
 var pieces: Array = [] # 当前移动方块的Piece
@@ -30,10 +30,10 @@ func _ready():
 	if is_next_piece == false:
 		position = tetromino_resource.spawn_position	
 		wall_kicks = Constants.WALL_KICKS_I if (tetromino_resource.tetromino_type == Constants.TETROMINO.I) else Constants.WALL_KICKS_JLOSTZ
-		#ghost_tetromino = ghost_tetromino_scene.instantiate() as GhostTetromino
-		#ghost_tetromino.tetromino_resource = tetromino_resource
-		#get_tree().root.add_child.call_deferred(ghost_tetromino)
-		#hard_drop_ghost.call_deferred()
+		ghost_tetromino = ghost_tetromino_scene.instantiate() as GhostTetromino
+		ghost_tetromino.tetromino_resource = tetromino_resource
+		get_tree().root.add_child.call_deferred(ghost_tetromino)
+		hard_drop_ghost.call_deferred()
 	else: 
 		timer.stop()
 		set_process_input(false)
@@ -46,8 +46,8 @@ func move(direction: Vector2) -> bool:
 	var new_position: Vector2 = calculate_global_position(direction, global_position)
 	if new_position != Vector2.ZERO:
 		global_position = new_position
-		#if direction != Vector2.DOWN:
-			#hard_drop_ghost.call_deferred()
+		if direction != Vector2.DOWN:
+			hard_drop_ghost.call_deferred()
 		return true
 	return false
 
@@ -101,8 +101,8 @@ func rotate_tetromino(direction: int) -> void:
 
 
 # 测试墙踢
-func test_wall_kicks(rotation_index: int, rotation_direction: int) -> bool:
-	var wall_kick_index = get_wall_kick_index(rotation_index, rotation_direction)
+func test_wall_kicks(rot_index: int, rotation_direction: int) -> bool:
+	var wall_kick_index = get_wall_kick_index(rot_index, rotation_direction)
 	
 	for i in wall_kicks[0].size():
 		var translation = wall_kicks[wall_kick_index][i]
@@ -113,8 +113,8 @@ func test_wall_kicks(rotation_index: int, rotation_direction: int) -> bool:
 
 
 # 获取墙踢矩阵索引
-func get_wall_kick_index(rotation_index: int, rotation_direction: int) -> int:
-	var wall_kick_index: int = rotation_index * 2
+func get_wall_kick_index(rot_index: int, rotation_direction: int) -> int:
+	var wall_kick_index: int = rot_index * 2
 	if rotation_direction < 0:
 		wall_kick_index -= 1
 		
@@ -126,8 +126,6 @@ func apply_rotation(direction: int) -> void:
 	# 获取对应的旋转矩阵
 	var rotation_matrix: Array = Constants.CLOCKWISE_ROTATION_MATRIX if direction == 1 else Constants.COUNTER_CLOCKWISE_ROTATION_MATRIX
 	
-	var tetromino_cells: Array = Constants.cells[tetromino_resource.tetromino_type]
-
 	for i in tetromino_cells.size():
 		var cell = tetromino_cells[i]
 		# 旋转90或者-90之后坐标
@@ -147,12 +145,34 @@ func hard_drop() -> void:
 	lock()
 
 
+func hard_drop_ghost() -> Vector2:
+	var final_hard_drop_position: Vector2 = Vector2.ZERO
+	var ghost_position_update: Vector2 = calculate_global_position(Vector2.DOWN, global_position)
+	
+	while ghost_position_update != Vector2.ZERO:
+		# 不停下移，以获取最终ghost位置
+		ghost_position_update = calculate_global_position(Vector2.DOWN, ghost_position_update)
+		if ghost_position_update != Vector2.ZERO:
+			final_hard_drop_position = ghost_position_update
+	
+	if final_hard_drop_position != Vector2.ZERO:
+		var children: Array[Node] = get_children().filter(func (c): return c is Piece)
+		var pieces_position: Array[Vector2] = []
+		for i in children.size():
+			var piece_position: Vector2 = children[i].position
+			pieces_position.append(piece_position)
+		
+		ghost_tetromino.set_ghost_tetromino(final_hard_drop_position, pieces_position)
+	
+	return final_hard_drop_position
+
+
 # 固定方块，不能移动
 func lock() -> void:
 	timer.stop()
 	lock_tetromino.emit(self)
 	set_process_input(false)
-	#ghost_tetromino.queue_free()
+	ghost_tetromino.queue_free()
 
 
 # 输入
@@ -173,4 +193,6 @@ func _input(_event):
 
 func _on_timer_timeout() -> void:
 	# 不能移动时，锁定方块
-	move(Vector2.DOWN)
+	var should_lock: bool =  !move(Vector2.DOWN)
+	if should_lock:
+		lock()

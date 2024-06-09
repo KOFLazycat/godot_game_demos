@@ -3,7 +3,8 @@ class_name Board
 
 @export var tetromino_scene: PackedScene
 
-@onready var line_scene = preload("res://src/main/scene/world/Line/line.tscn")
+@onready var line_scene = preload("res://src/main/scene/world/line/line.tscn")
+@onready var ui: Control = $"../UI"
 
 
 const PIECE_SIZE: Vector2 = Vector2(42, 42)
@@ -14,6 +15,10 @@ var tetrominos: Array[Tetromino] = []
 signal tetromino_locked
 # 游戏结束
 signal game_over
+
+
+func _ready() -> void:
+	pass
 
 
 # 生产方块
@@ -31,10 +36,7 @@ func spawn_tetromino(type: Constants.TETROMINO, is_next_piece: bool = false, spa
 		add_child(tetromino)
 		tetromino.lock_tetromino.connect(_on_tetromino_locked)
 	else:
-		#tetromino.scale = Vector2(0.5, 0.5)
-		#panel_container.add_child(tetromino)
-		tetromino.set_position(spawn_position) 
-		#ui.add_next_tetromino(tetromino, spawn_position)
+		ui.add_next_tetromino(tetromino, spawn_position)
 		next_tetromino = tetromino
 
 
@@ -99,7 +101,7 @@ func check_game_over() -> void:
 
 # 方块锁定信号处理函数
 func _on_tetromino_locked(tetromino: Tetromino) -> void:
-	#next_tetromino.queue_free()
+	next_tetromino.queue_free()
 	# 保存已锁定方块
 	tetrominos.append(tetromino)
 	add_tetromino_to_lines(tetromino)

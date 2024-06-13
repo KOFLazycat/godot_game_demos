@@ -87,9 +87,10 @@ func is_within_game_bounds(direction: Vector2, starting_global_position: Vector2
 # 检测是否会与其他方块发生碰撞
 func is_colliding_with_other_tetrominos(direction: Vector2, starting_global_position: Vector2) -> bool:
 	for tetromino_piece in other_tetrominoes_pieces:
-		for piece in pieces:
-			if starting_global_position + piece.position + direction * piece.get_size() == tetromino_piece.global_position:
-				return true
+		if is_instance_valid(tetromino_piece):
+			for piece in pieces:
+				if starting_global_position + piece.position + direction * piece.get_size() == tetromino_piece.global_position:
+					return true
 	return false
 
 

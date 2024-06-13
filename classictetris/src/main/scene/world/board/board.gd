@@ -84,6 +84,8 @@ func remove_full_lines():
 			move_lines_down(line.global_position.y)
 			line.free()
 			clear_lines_count += 1
+			# 消除音效
+			AudioSystem.play_sfx(AudioSystem.SFXS_INDEX.CLEAR)
 
 
 # Line向下移动
@@ -98,7 +100,9 @@ func move_lines_down(y_position_remove: float) -> void:
 func check_game_over() -> void:
 		for piece in get_all_pieces():
 			if piece.global_position.y <= Constants.MIN_BOUNDS_Y:
-				game_over.emit() 
+				game_over.emit()
+				# 游戏结束
+				AudioSystem.play_sfx(AudioSystem.SFXS_INDEX.GAME_OVER)
 
 
 # 方块锁定信号处理函数

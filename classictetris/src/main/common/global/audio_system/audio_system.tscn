@@ -1,0 +1,19 @@
+[gd_scene load_steps=9 format=3 uid="uid://dso7uh1t4nd1p"]
+
+[ext_resource type="Script" path="res://src/main/common/global/audio_system/audio_system.gd" id="1_1gvuf"]
+[ext_resource type="AudioStream" uid="uid://cw7a445savogh" path="res://src/main/assets/sounds/musics/Tetris.wav" id="2_mv443"]
+[ext_resource type="AudioStream" uid="uid://co1rjmen42s15" path="res://src/main/assets/sounds/sfxs/clear.wav" id="3_brsd7"]
+[ext_resource type="AudioStream" uid="uid://dkh1qxt1srkuy" path="res://src/main/assets/sounds/sfxs/gameover.wav" id="4_6bokt"]
+[ext_resource type="AudioStream" uid="uid://b3htiahx6kw75" path="res://src/main/assets/sounds/sfxs/harddrop.wav" id="5_3rij4"]
+[ext_resource type="AudioStream" uid="uid://dt2x2jvxflnv3" path="res://src/main/assets/sounds/sfxs/move.wav" id="6_81nn0"]
+[ext_resource type="AudioStream" uid="uid://dwuv1fyygw1al" path="res://src/main/assets/sounds/sfxs/rotate.wav" id="7_rk6rp"]
+[ext_resource type="AudioStream" uid="uid://cb5vc22lh14pm" path="res://src/main/assets/sounds/sfxs/start.wav" id="8_3nwrt"]
+
+[node name="AudioSystem" type="Node"]
+script = ExtResource("1_1gvuf")
+musics = Array[AudioStreamWAV]([ExtResource("2_mv443")])
+sfxs = Array[AudioStreamWAV]([ExtResource("3_brsd7"), ExtResource("4_6bokt"), ExtResource("5_3rij4"), ExtResource("6_81nn0"), ExtResource("7_rk6rp"), ExtResource("8_3nwrt")])
+
+[node name="BGMAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[node name="SFXAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

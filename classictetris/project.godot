@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Constants="*res://src/main/common/autoload/constants.gd"
 LoadSaveSystem="*res://src/main/common/global/load_save_system/load_save_system.tscn"
 StringUtil="*res://src/main/common/util/string_util.gd"
+AudioSystem="*res://src/main/common/global/audio_system/audio_system.tscn"
 
 [display]
 

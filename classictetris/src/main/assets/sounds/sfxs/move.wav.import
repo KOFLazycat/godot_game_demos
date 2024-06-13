@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://bd8b5xrm8f7cv"
-path="res://.godot/imported/Tetris.wav-31932c0f734dda6723171d1c5b540044.sample"
+uid="uid://dt2x2jvxflnv3"
+path="res://.godot/imported/move.wav-f5fd8934fbf5c21bcce86a05f3db44b3.sample"
 
 [deps]
 
-source_file="res://src/main/assets/sounds/Tetris.wav"
-dest_files=["res://.godot/imported/Tetris.wav-31932c0f734dda6723171d1c5b540044.sample"]
+source_file="res://src/main/assets/sounds/sfxs/move.wav"
+dest_files=["res://.godot/imported/move.wav-f5fd8934fbf5c21bcce86a05f3db44b3.sample"]
 
 [params]
 

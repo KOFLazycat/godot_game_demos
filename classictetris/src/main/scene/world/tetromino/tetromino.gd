@@ -1,7 +1,10 @@
 extends Node2D
 class_name Tetromino
 
-@onready var timer = $Timer
+# 自动下落计时器
+@onready var auto_move_down_timer: Timer = $AutoMoveDownTimer
+# 持续移动计时器
+@onready var continuous_move_timer: Timer = $ContinuousMoveTimer
 @onready var piece_scene = preload("res://src/main/scene/world/piece/piece.tscn")
 @onready var ghost_tetromino_scene = preload("res://src/main/scene/world/ghost_tetromino/ghost_tetromino.tscn")
 
@@ -12,6 +15,7 @@ var is_next_piece: bool
 var rotation_index: int = 0
 var tetromino_cells: Array = []
 var wall_kicks: Array = []
+var current_move_direction: Vector2 = Vector2.ZERO # 当前移动方向
 var ghost_tetromino
 
 # 锁定指定方块信号
@@ -37,15 +41,19 @@ func _ready():
 		
 		# 计算方块下落的计时器时间，等级越高时间越短
 		var cur_level: int = LoadSaveSystem.load_level()
-		timer.wait_time = pow(0.8 - (cur_level - 1) * 0.007, cur_level - 1)
-		timer.timeout.connect(_on_timer_timeout)
-		timer.start()
+		auto_move_down_timer.wait_time = pow(0.8 - (cur_level - 1) * 0.007, cur_level - 1)
+		auto_move_down_timer.timeout.connect(_on_auto_move_down_timer_timeout)
+		auto_move_down_timer.start()
+		
+		continuous_move_timer.timeout.connect(_on_continuous_move_timer_timeout)
 	else:
 		set_process_input(false)
 
 
 # 按照指定方向移动一格，并判断能否移动成功（出界或者发送碰撞，移动均不能成功）
-func move(direction: Vector2) -> bool:
+func move(direction: Vector2 = Vector2.ZERO) -> bool:
+	if direction == Vector2.ZERO:
+		direction = current_move_direction
 	var new_position: Vector2 = calculate_global_position(direction, global_position)
 	if new_position != Vector2.ZERO:
 		global_position = new_position
@@ -86,6 +94,8 @@ func is_colliding_with_other_tetrominos(direction: Vector2, starting_global_posi
 
 # 旋转方块
 func rotate_tetromino(direction: int) -> void:
+	# 旋转音效
+	AudioSystem.play_sfx(AudioSystem.SFXS_INDEX.ROTATE)
 	# 每次旋转90度，所以方块旋转方向应该有0-3四个状态，通过顺时针、逆时针相互切换状态
 	var original_rotation_index: int = rotation_index
 	# O型方块不需要旋转
@@ -143,6 +153,8 @@ func apply_rotation(direction: int) -> void:
 
 # 快速下落
 func hard_drop() -> void:
+	# harddrop 音效
+	AudioSystem.play_sfx(AudioSystem.SFXS_INDEX.HARD_DROP)
 	while(move(Vector2.DOWN)):
 		continue
 	lock()
@@ -172,7 +184,7 @@ func hard_drop_ghost() -> Vector2:
 
 # 固定方块，不能移动
 func lock() -> void:
-	timer.stop()
+	auto_move_down_timer.stop()
 	lock_tetromino.emit(self)
 	set_process_input(false)
 	ghost_tetromino.queue_free()
@@ -181,21 +193,42 @@ func lock() -> void:
 # 输入
 func _input(_event):
 	if Input.is_action_just_pressed("left"):
-		move(Vector2.LEFT)
+		# 移动音效
+		AudioSystem.play_sfx(AudioSystem.SFXS_INDEX.MOVE)
+		current_move_direction = Vector2.LEFT
+		move(current_move_direction)
+		continuous_move_timer.start()
 	elif Input.is_action_just_pressed("right"):
-		move(Vector2.RIGHT)
+		# 移动音效
+		AudioSystem.play_sfx(AudioSystem.SFXS_INDEX.MOVE)
+		current_move_direction = Vector2.RIGHT
+		move(current_move_direction)
+		continuous_move_timer.start()
 	elif Input.is_action_just_pressed("down"):
-		move(Vector2.DOWN)
+		# 移动音效
+		AudioSystem.play_sfx(AudioSystem.SFXS_INDEX.MOVE)
+		current_move_direction = Vector2.DOWN
+		move(current_move_direction)
+		continuous_move_timer.start()
 	elif Input.is_action_just_pressed("hard_drop"):
 		hard_drop()
 	elif Input.is_action_just_pressed("rotate_anticlockwise"):
 		rotate_tetromino(-1)
 	elif Input.is_action_just_pressed("rotate_clockwise"):
 		rotate_tetromino(1)
+	elif Input.is_action_just_released("left") or Input.is_action_just_released("right") or Input.is_action_just_released("down"):
+		continuous_move_timer.stop()
 
 
-func _on_timer_timeout() -> void:
+func _on_auto_move_down_timer_timeout() -> void:
 	# 不能移动时，锁定方块
 	var should_lock: bool =  !move(Vector2.DOWN)
 	if should_lock:
 		lock()
+
+
+func _on_continuous_move_timer_timeout() -> void:
+	# 移动音效
+	AudioSystem.play_sfx(AudioSystem.SFXS_INDEX.MOVE)
+	# 持续移动
+	move(current_move_direction)

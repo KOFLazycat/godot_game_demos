@@ -24,6 +24,8 @@ func init_tetromino() -> void:
 	board.spawn_tetromino(next_tetromino, true, Vector2(100, 90)) # Next 方块出现位置
 	board.tetromino_locked.connect(_on_tetromino_locked)
 	board.game_over.connect(_on_game_over)
+	# 播放背景音乐
+	AudioSystem.play_bgm(AudioSystem.MUSICS_INDEX.TETRIS)
 
 
 # 方块已锁定信号处理函数

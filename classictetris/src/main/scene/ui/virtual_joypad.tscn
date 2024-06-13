@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://byk4ddcl5sgaw"]
+
+[ext_resource type="Texture2D" uid="uid://cr3405ogyjtdg" path="res://src/main/assets/textures/btn2.png" id="1_rbajp"]
+[ext_resource type="Texture2D" uid="uid://k08i7wevft5r" path="res://src/main/assets/textures/btn3.png" id="3_tt36p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_agjer"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tj3es"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_burhx"]
+radius = 80.0
+
+[node name="VirtualJoypad" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftTouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2(46, 1026)
+texture_normal = ExtResource("1_rbajp")
+shape = SubResource("CircleShape2D_agjer")
+action = "left"
+
+[node name="RightTouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2(226, 1025)
+texture_normal = ExtResource("1_rbajp")
+shape = SubResource("CircleShape2D_tj3es")
+action = "right"
+
+[node name="DownTouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2(135, 1114)
+texture_normal = ExtResource("1_rbajp")
+shape = SubResource("CircleShape2D_tj3es")
+action = "down"
+
+[node name="HardDropTouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2(135, 932)
+texture_normal = ExtResource("1_rbajp")
+shape = SubResource("CircleShape2D_tj3es")
+action = "hard_drop"
+
+[node name="RotateTouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2(437, 1031)
+texture_normal = ExtResource("3_tt36p")
+shape = SubResource("CircleShape2D_burhx")
+action = "rotate_clockwise"

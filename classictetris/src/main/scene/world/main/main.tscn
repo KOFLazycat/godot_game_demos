@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://gosvgnvu35ww"]
+[gd_scene load_steps=10 format=4 uid="uid://gosvgnvu35ww"]
 
 [ext_resource type="Texture2D" uid="uid://dq76nnhludtil" path="res://src/main/assets/textures/BG.png" id="1_coiaq"]
 [ext_resource type="Script" path="res://src/main/scene/world/main/main.gd" id="1_iwgxp"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://duhwi0w4ddfm" path="res://src/main/scene/world/board/board.tscn" id="4_3qrd7"]
 [ext_resource type="PackedScene" uid="uid://bxqgkux4nx8h" path="res://src/main/scene/world/tetromino/tetromino.tscn" id="5_ioyd6"]
 [ext_resource type="PackedScene" uid="uid://d2t3v4l0627hd" path="res://src/main/scene/ui/ui.tscn" id="6_2bpr7"]
+[ext_resource type="PackedScene" uid="uid://byk4ddcl5sgaw" path="res://src/main/scene/ui/virtual_joypad.tscn" id="7_q5s7t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sa810"]
 texture = ExtResource("2_ctyh5")
@@ -40,3 +41,5 @@ offset_left = 478.0
 offset_top = 34.0
 offset_right = 478.0
 offset_bottom = 34.0
+
+[node name="VirtualJoypad" parent="." instance=ExtResource("7_q5s7t")]

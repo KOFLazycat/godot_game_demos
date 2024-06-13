@@ -8,4 +8,8 @@ script = ExtResource("1_janqn")
 [node name="AutoMoveDownTimer" type="Timer" parent="."]
 
 [node name="ContinuousMoveTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.2
+
+[node name="HardDropColdDownTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true

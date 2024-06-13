@@ -116,7 +116,7 @@ func piece_tween_down(offset_y: float = 10.0, duration: float = 0.1) -> void:
 			var tween: Tween = create_tween()
 			tween.tween_property(piece, "position", Vector2(tmp_pos.x, tmp_pos.y + offset_y), duration).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 			tween.tween_property(piece, "position", tmp_pos, duration).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-
+	#await get_tree().create_timer(0.1).timeout 
 
 # 方块锁定信号处理函数
 func _on_tetromino_locked(tetromino: Tetromino, is_hard_drop: bool) -> void:

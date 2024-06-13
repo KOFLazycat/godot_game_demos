@@ -5,6 +5,8 @@ class_name Tetromino
 @onready var auto_move_down_timer: Timer = $AutoMoveDownTimer
 # 持续移动计时器
 @onready var continuous_move_timer: Timer = $ContinuousMoveTimer
+# harddrop 冷却时间
+@onready var hard_drop_cold_down_timer: Timer = $HardDropColdDownTimer
 @onready var piece_scene = preload("res://src/main/scene/world/piece/piece.tscn")
 @onready var ghost_tetromino_scene = preload("res://src/main/scene/world/ghost_tetromino/ghost_tetromino.tscn")
 
@@ -43,12 +45,12 @@ func _ready():
 		# 计算方块下落的计时器时间，等级越高时间越短
 		var cur_level: int = LoadSaveSystem.load_level()
 		auto_move_down_timer.wait_time = pow(0.8 - (cur_level - 1) * 0.007, cur_level - 1)
-		auto_move_down_timer.timeout.connect(_on_auto_move_down_timer_timeout)
 		auto_move_down_timer.start()
-		
-		continuous_move_timer.timeout.connect(_on_continuous_move_timer_timeout)
 	else:
 		set_process_input(false)
+	
+	auto_move_down_timer.timeout.connect(_on_auto_move_down_timer_timeout)
+	continuous_move_timer.timeout.connect(_on_continuous_move_timer_timeout)
 
 
 # 按照指定方向移动一格，并判断能否移动成功（出界或者发送碰撞，移动均不能成功）
@@ -87,7 +89,7 @@ func is_within_game_bounds(direction: Vector2, starting_global_position: Vector2
 # 检测是否会与其他方块发生碰撞
 func is_colliding_with_other_tetrominos(direction: Vector2, starting_global_position: Vector2) -> bool:
 	for tetromino_piece in other_tetrominoes_pieces:
-		if is_instance_valid(tetromino_piece):
+		if tetromino_piece:
 			for piece in pieces:
 				if starting_global_position + piece.position + direction * piece.get_size() == tetromino_piece.global_position:
 					return true
@@ -160,13 +162,13 @@ func hard_drop() -> void:
 	while(move(Vector2.DOWN)):
 		is_hard_drop = true
 		continue
-	lock(is_hard_drop)
+	lock()
 	
 	if is_hard_drop:
 		for piece in pieces:
 			if is_instance_valid(piece):
 				piece.hard_drop_flash.play_flash()
-	
+		
 	is_hard_drop = false
 
 
@@ -193,7 +195,7 @@ func hard_drop_ghost() -> Vector2:
 
 
 # 固定方块，不能移动
-func lock(is_hard_drop: bool = false) -> void:
+func lock() -> void:
 	auto_move_down_timer.stop()
 	lock_tetromino.emit(self, is_hard_drop)
 	set_process_input(false)
@@ -201,7 +203,10 @@ func lock(is_hard_drop: bool = false) -> void:
 
 
 # 输入
-func _input(_event):
+func _input(event):
+	# 只接受键盘和触屏控制
+	if event is not InputEventKey and event is not InputEventScreenTouch:
+		return
 	if Input.is_action_just_pressed("left"):
 		# 移动音效
 		AudioSystem.play_sfx(AudioSystem.SFXS_INDEX.MOVE)
@@ -221,7 +226,7 @@ func _input(_event):
 		move(current_move_direction)
 		continuous_move_timer.start()
 	elif Input.is_action_just_pressed("hard_drop"):
-		hard_drop()
+			hard_drop()
 	elif Input.is_action_just_pressed("rotate_anticlockwise"):
 		rotate_tetromino(-1)
 	elif Input.is_action_just_pressed("rotate_clockwise"):

@@ -106,11 +106,21 @@ func check_game_over() -> void:
 
 
 # 方块锁定信号处理函数
-func _on_tetromino_locked(tetromino: Tetromino) -> void:
+func _on_tetromino_locked(tetromino: Tetromino, is_hard_drop: bool) -> void:
 	next_tetromino.queue_free()
 	# 保存已锁定方块
 	tetrominos.append(tetromino)
 	add_tetromino_to_lines(tetromino)
+	
+	# 如果是harddrop锁定，播放方块整体会下顿一次
+	if is_hard_drop:
+		for piece in get_all_pieces():
+			if piece.global_position.y > Constants.MIN_BOUNDS_Y:
+				var tmp_pos: Vector2 = piece.position
+				var tween: Tween = create_tween()
+				tween.tween_property(piece, "position", Vector2(tmp_pos.x, tmp_pos.y + 10), 0.1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+				tween.tween_property(piece, "position", tmp_pos, 0.1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	
 	# 清理可消除行
 	remove_full_lines()
 	# 更新分数和等级

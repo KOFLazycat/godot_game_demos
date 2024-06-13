@@ -16,10 +16,11 @@ var rotation_index: int = 0
 var tetromino_cells: Array = []
 var wall_kicks: Array = []
 var current_move_direction: Vector2 = Vector2.ZERO # 当前移动方向
+var is_hard_drop: bool = false # 是否使用hard_drop
 var ghost_tetromino
 
 # 锁定指定方块信号
-signal lock_tetromino(tetromino: Tetromino)
+signal lock_tetromino(tetromino: Tetromino, is_hard_drop: bool)
 
 
 func _ready():
@@ -156,8 +157,16 @@ func hard_drop() -> void:
 	# harddrop 音效
 	AudioSystem.play_sfx(AudioSystem.SFXS_INDEX.HARD_DROP)
 	while(move(Vector2.DOWN)):
+		is_hard_drop = true
 		continue
-	lock()
+	lock(is_hard_drop)
+	
+	if is_hard_drop:
+		for piece in pieces:
+			if is_instance_valid(piece):
+				piece.hard_drop_flash.play_flash()
+	
+	is_hard_drop = false
 
 
 func hard_drop_ghost() -> Vector2:
@@ -183,9 +192,9 @@ func hard_drop_ghost() -> Vector2:
 
 
 # 固定方块，不能移动
-func lock() -> void:
+func lock(is_hard_drop: bool = false) -> void:
 	auto_move_down_timer.stop()
-	lock_tetromino.emit(self)
+	lock_tetromino.emit(self, is_hard_drop)
 	set_process_input(false)
 	ghost_tetromino.queue_free()
 

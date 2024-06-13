@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkdeeatuxfyyt"]
+[gd_scene load_steps=5 format=3 uid="uid://bkdeeatuxfyyt"]
 
 [ext_resource type="Script" path="res://src/main/scene/world/piece/piece.gd" id="1_w6l7d"]
+[ext_resource type="Script" path="res://src/main/scene/world/piece/hard_drop_flash.gd" id="2_kkaj2"]
+[ext_resource type="Material" uid="uid://c3rp4dvm85eo8" path="res://src/main/assets/shaders/hit_flash_component_material.tres" id="3_eqvl5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_drkd5"]
 size = Vector2(42, 42)
@@ -12,3 +14,8 @@ script = ExtResource("1_w6l7d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_drkd5")
+
+[node name="HardDropFlash" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("2_kkaj2")
+sprite = NodePath("../Sprite2D")
+hit_flash_material = ExtResource("3_eqvl5")

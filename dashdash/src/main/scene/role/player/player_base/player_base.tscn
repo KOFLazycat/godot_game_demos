@@ -1,8 +1,9 @@
-[gd_scene load_steps=33 format=3 uid="uid://d35rtmbnewt8a"]
+[gd_scene load_steps=41 format=3 uid="uid://d35rtmbnewt8a"]
 
 [ext_resource type="Script" path="res://src/main/scene/role/player/player_base/player_base.gd" id="1_au0ot"]
 [ext_resource type="Texture2D" uid="uid://ctoyq6dhqa3rq" path="res://src/main/assets/textures/player/Tiny Alchemist Sprite Sheet 48x32.png" id="2_hk0tc"]
 [ext_resource type="Texture2D" uid="uid://dnj73mg2hfe32" path="res://src/main/assets/textures/player/undead_shadow.png" id="3_k7cn1"]
+[ext_resource type="Texture2D" uid="uid://bwb8646gq5aho" path="res://src/main/assets/textures/effect/lights1.png" id="4_4dnik"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s3y4q"]
 atlas = ExtResource("2_hk0tc")
@@ -218,6 +219,48 @@ scale_max = 3.0
 scale_curve = SubResource("CurveTexture_l5kif")
 color = Color(0.823529, 0.823529, 0.823529, 1)
 
+[sub_resource type="Curve" id="Curve_ehadx"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, -360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yhsta"]
+curve = SubResource("Curve_ehadx")
+
+[sub_resource type="Gradient" id="Gradient_2aklr"]
+colors = PackedColorArray(0.580392, 0.870588, 0.74902, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_55i5b"]
+gradient = SubResource("Gradient_2aklr")
+
+[sub_resource type="Curve" id="Curve_osod6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rigic"]
+curve = SubResource("Curve_osod6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1rv5r"]
+lifetime_randomness = 0.13
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 28.2
+angle_min = 15.0
+angle_max = 100.0
+angle_curve = SubResource("CurveTexture_yhsta")
+direction = Vector3(-1, 0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+orbit_velocity_min = 0.0500001
+orbit_velocity_max = 0.1
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = 20.0
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_rigic")
+color_ramp = SubResource("GradientTexture1D_55i5b")
+
 [node name="PlayerBase" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_au0ot")
@@ -226,9 +269,9 @@ script = ExtResource("1_au0ot")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Body"]
 sprite_frames = SubResource("SpriteFrames_gfccx")
-animation = &"run"
-frame = 3
-frame_progress = 0.0746646
+animation = &"dash"
+frame = 4
+frame_progress = 1.0
 offset = Vector2(0, -16)
 
 [node name="UndeadShadow" type="Sprite2D" parent="."]
@@ -245,3 +288,11 @@ amount = 6
 process_material = SubResource("ParticleProcessMaterial_fe3pf")
 lifetime = 0.4
 explosiveness = 0.8
+
+[node name="DashGPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_1rv5r")
+texture = ExtResource("4_4dnik")
+lifetime = 0.5
+explosiveness = 0.4

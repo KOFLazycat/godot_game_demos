@@ -22,11 +22,13 @@ func _input(_event: InputEvent) -> void:
 		is_dash = true
 		dash_gpu_particles_2d.emitting = true
 		animated_sprite_2d.play("dash")
+		AudioSystem.play_sfx(AudioSystem.SFX_INDEX.DASH)
 		await get_tree().create_timer(0.1).timeout
 		is_dash = false
 		dash_gpu_particles_2d.emitting = false
 	elif Input.get_vector("left", "right", "up", "down"):
 		animated_sprite_2d.play("run")
+		#AudioSystem.play_sfx(AudioSystem.SFX_INDEX.RUN)
 		run_dust_gpu_particles_2d.emitting = true
 	else :
 		animated_sprite_2d.play("idle")

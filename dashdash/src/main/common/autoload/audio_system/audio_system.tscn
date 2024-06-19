@@ -1,0 +1,16 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvd6as4k0wobr"]
+
+[ext_resource type="Script" path="res://src/main/common/autoload/audio_system/audio_system.gd" id="1_ilsf2"]
+[ext_resource type="AudioStream" uid="uid://xelcxaaphw8x" path="res://src/main/assets/sounds/bgm/Cephalopod.mp3" id="2_mjig7"]
+[ext_resource type="AudioStream" uid="uid://betl5xucan7i" path="res://src/main/assets/sounds/sfx/BLLTImpt_Hit Marker_07.wav" id="3_gaqco"]
+[ext_resource type="AudioStream" uid="uid://b3lsu7e8ccl0l" path="res://src/main/assets/sounds/sfx/body_hit_finisher_52.wav" id="4_t163b"]
+[ext_resource type="AudioStream" uid="uid://chqjeoq1h6g3p" path="res://src/main/assets/sounds/sfx/GUNSupr_Silenced Pistol Fire Reflections_01.wav" id="5_aw72o"]
+
+[node name="AudioSystem" type="Node"]
+script = ExtResource("1_ilsf2")
+musics = Array[AudioStreamMP3]([ExtResource("2_mjig7")])
+sfxs = Array[AudioStreamWAV]([ExtResource("3_gaqco"), ExtResource("4_t163b"), ExtResource("5_aw72o")])
+
+[node name="BGMAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[node name="SFXAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

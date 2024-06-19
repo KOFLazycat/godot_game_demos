@@ -40,6 +40,7 @@ func die() -> void:
 	navigation_agent_2d.avoidance_enabled = false
 	undead_shadow.visible = false
 	animated_sprite_2d.play("die")
+	AudioSystem.play_sfx(AudioSystem.SFX_INDEX.BODY_HIT)
 	await animated_sprite_2d.animation_finished
 	queue_free()
 

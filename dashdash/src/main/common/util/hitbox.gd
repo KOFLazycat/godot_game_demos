@@ -9,6 +9,6 @@ func _init() -> void:
 
 
 func _on_area_entered(hurtbox: HurtBox) -> void:
-	print("[HIT] %s => %s" % [owner.name, hurtbox.owner.name])
+	#print("[HIT] %s => %s" % [owner.name, hurtbox.owner.name])
 	hit.emit(hurtbox)
 	hurtbox.hurt.emit(self)

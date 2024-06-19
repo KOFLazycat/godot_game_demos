@@ -5,10 +5,11 @@ extends Node2D
 @onready var enemy_spawn_flash_scene: PackedScene = preload("res://src/main/scene/role/enemy/enemy_spawn_flash/enemy_spawn_flash.tscn")
 @onready var enemy_base_scene: PackedScene = preload("res://src/main/scene/role/enemy/enemy_base/enemy_base.tscn")
 
-const MAX_ENEMY_COUNT: int = 40
+const MAX_ENEMY_COUNT: int = 100
 var total_enemy_num: int = 0
 
 func _ready() -> void:
+	AudioSystem.play_bgm(AudioSystem.BGM_INDEX.CEPHALOPOD)
 	enemy_spawn_timer.timeout.connect(_on_enemy_spawn_timer_timeout)
 
 

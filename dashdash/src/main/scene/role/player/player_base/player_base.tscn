@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://d35rtmbnewt8a"]
+[gd_scene load_steps=44 format=3 uid="uid://d35rtmbnewt8a"]
 
 [ext_resource type="Script" path="res://src/main/scene/role/player/player_base/player_base.gd" id="1_au0ot"]
 [ext_resource type="Texture2D" uid="uid://ctoyq6dhqa3rq" path="res://src/main/assets/textures/player/Tiny Alchemist Sprite Sheet 48x32.png" id="2_hk0tc"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bwb8646gq5aho" path="res://src/main/assets/textures/effect/lights1.png" id="4_4dnik"]
 [ext_resource type="PackedScene" uid="uid://do8djv4raagc5" path="res://src/main/common/util/hitbox.tscn" id="5_i2neu"]
 [ext_resource type="PackedScene" uid="uid://bt7i3lb8okskh" path="res://src/main/common/util/hurtbox.tscn" id="6_v082b"]
+[ext_resource type="PackedScene" uid="uid://ck2k0eckgylaa" path="res://src/main/common/component/health_system/health_system.tscn" id="7_s5e7k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s3y4q"]
 atlas = ExtResource("2_hk0tc")
@@ -230,12 +231,6 @@ point_count = 2
 [sub_resource type="CurveTexture" id="CurveTexture_yhsta"]
 curve = SubResource("Curve_ehadx")
 
-[sub_resource type="Gradient" id="Gradient_2aklr"]
-colors = PackedColorArray(0.580392, 0.870588, 0.74902, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_55i5b"]
-gradient = SubResource("Gradient_2aklr")
-
 [sub_resource type="Curve" id="Curve_osod6"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -261,7 +256,6 @@ linear_accel_min = -2.23517e-06
 linear_accel_max = 20.0
 scale_min = 0.0
 scale_curve = SubResource("CurveTexture_rigic")
-color_ramp = SubResource("GradientTexture1D_55i5b")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_it17c"]
 radius = 7.0
@@ -316,3 +310,8 @@ shape = SubResource("CircleShape2D_it17c")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_nshv1")
+
+[node name="HealthSystem" parent="." instance=ExtResource("7_s5e7k")]
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true

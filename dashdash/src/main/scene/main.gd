@@ -4,6 +4,7 @@ extends Node2D
 @onready var player_base: PlayerBase = $PlayerBase
 @onready var enemy_spawn_flash_scene: PackedScene = preload("res://src/main/scene/role/enemy/enemy_spawn_flash/enemy_spawn_flash.tscn")
 @onready var enemy_base_scene: PackedScene = preload("res://src/main/scene/role/enemy/enemy_base/enemy_base.tscn")
+@onready var health_bar: HealthBar = $UI/HealthBar
 
 const MAX_ENEMY_COUNT: int = 100
 var total_enemy_num: int = 0
@@ -11,6 +12,7 @@ var total_enemy_num: int = 0
 func _ready() -> void:
 	AudioSystem.play_bgm(AudioSystem.BGM_INDEX.CEPHALOPOD)
 	enemy_spawn_timer.timeout.connect(_on_enemy_spawn_timer_timeout)
+	health_bar.player.health_system.health_update.connect(_on_health_bar_health_update)
 
 
 func _on_enemy_spawn_timer_timeout() -> void:
@@ -32,4 +34,8 @@ func _on_enemy_spawn_flash_spawn_enemy(pos: Vector2) -> void:
 	enemy_base.global_position = pos
 	enemy_base.player = player_base
 	add_child(enemy_base)
-	
+
+
+func _on_health_bar_health_update(health: float, max_health: float) -> void:
+	var v: float = health / max_health
+	health_bar.update_value(v)

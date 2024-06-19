@@ -8,7 +8,7 @@ class_name EnemyBase  # Enemy基类
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 @onready var undead_shadow: Sprite2D = $UndeadShadow
 @onready var timer: Timer = $Timer
-@onready var hurtbox: HurtBox = $Hurtbox
+@onready var hurt_box: HurtBox = $Hurtbox
 
 var is_dead: bool = false
 
@@ -33,7 +33,7 @@ func init_enemy() -> void:
 	timer.timeout.connect(_on_timer_timeout)
 	#navigation_agent_2d.navigation_finished.connect(_on_navigation_agent_2d_navigation_finished)
 	navigation_agent_2d.velocity_computed.connect(_on_navigation_agent_2d_velocity_computed)
-	hurtbox.hurt.connect(_on_hurtbox_hurt)
+	hurt_box.hurt.connect(_on_hurt_box_hurt)
 
 
 func die() -> void:
@@ -49,9 +49,6 @@ func _on_timer_timeout() -> void:
 	navigation_agent_2d.target_position = player.global_position
 
 
-#func _on_navigation_agent_2d_navigation_finished() -> void:
-	#pass
-
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	velocity = safe_velocity
@@ -62,5 +59,5 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 		animated_sprite_2d.play("idle")
 
 
-func _on_hurtbox_hurt(hitbox: HitBox) -> void:
+func _on_hurt_box_hurt(hitbox: HitBox) -> void:
 	die()

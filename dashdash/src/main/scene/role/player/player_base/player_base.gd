@@ -6,6 +6,11 @@ class_name PlayerBase # Player基类
 @onready var run_dust_gpu_particles_2d: GPUParticles2D = $RunDustGPUParticles2D
 @onready var dash_gpu_particles_2d: GPUParticles2D = $DashGPUParticles2D
 @onready var dash_ghost_scene: PackedScene = preload("res://src/main/scene/role/player/dash_ghost/dash_ghost.tscn")
+@onready var health_system: HealthSystem = $HealthSystem
+@onready var hurt_box: HurtBox = $Hurtbox
+@onready var timer: Timer = $Timer
+
+
 
 # 玩家移动速度
 var speed: float = 50.0
@@ -15,6 +20,10 @@ var dash_speed: float = 1000.0
 var move_vector: Vector2 = Vector2.ZERO
 # 是否dash
 var is_dash: bool = false
+
+
+func _ready() -> void:
+	timer.timeout.connect(_on_timer_timeout)
 
 
 func _input(_event: InputEvent) -> void:
@@ -57,3 +66,13 @@ func show_dash():
 	dash_ghost.global_position = global_position
 	dash_ghost.flip_h = animated_sprite_2d.flip_h
 	get_tree().root.call_deferred("add_child",dash_ghost)
+
+
+func _on_hurt_box_hurt(hitbox: HitBox) -> void:
+	print(hitbox)
+
+
+func _on_timer_timeout() -> void:
+	health_system.health -= 10 * randi_range(1, 4)
+	if health_system.health <= health_system.min_health:
+		health_system.health = health_system.max_health

@@ -1,8 +1,9 @@
-[gd_scene load_steps=39 format=3 uid="uid://18hsk2ar7kas"]
+[gd_scene load_steps=41 format=3 uid="uid://18hsk2ar7kas"]
 
 [ext_resource type="Script" path="res://src/main/scene/role/enemy/enemy_base/enemy_base.gd" id="1_jftvx"]
 [ext_resource type="Texture2D" uid="uid://dyrse8e4134ni" path="res://src/main/assets/textures/enemy/Ghoul Sprite Sheet 62 x 33.png" id="2_8en82"]
 [ext_resource type="Texture2D" uid="uid://dnj73mg2hfe32" path="res://src/main/assets/textures/player/undead_shadow.png" id="3_r15va"]
+[ext_resource type="PackedScene" uid="uid://bt7i3lb8okskh" path="res://src/main/common/util/hurtbox.tscn" id="4_x3ebk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_skfdf"]
 atlas = ExtResource("2_8en82")
@@ -262,6 +263,10 @@ animations = [{
 radius = 4.0
 height = 18.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_erf0r"]
+radius = 6.0
+height = 22.0
+
 [node name="EnemyBase" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 3
@@ -271,8 +276,7 @@ script = ExtResource("1_jftvx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Body"]
 sprite_frames = SubResource("SpriteFrames_txnvl")
-animation = &"idle"
-frame_progress = 0.00868919
+animation = &"die"
 offset = Vector2(0, -15)
 
 [node name="UndeadShadow" type="Sprite2D" parent="."]
@@ -292,3 +296,9 @@ max_speed = 40.0
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
+
+[node name="Hurtbox" parent="." instance=ExtResource("4_x3ebk")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -11)
+shape = SubResource("CapsuleShape2D_erf0r")

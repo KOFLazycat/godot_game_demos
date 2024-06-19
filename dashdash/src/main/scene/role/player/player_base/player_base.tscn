@@ -1,9 +1,11 @@
-[gd_scene load_steps=41 format=3 uid="uid://d35rtmbnewt8a"]
+[gd_scene load_steps=45 format=3 uid="uid://d35rtmbnewt8a"]
 
 [ext_resource type="Script" path="res://src/main/scene/role/player/player_base/player_base.gd" id="1_au0ot"]
 [ext_resource type="Texture2D" uid="uid://ctoyq6dhqa3rq" path="res://src/main/assets/textures/player/Tiny Alchemist Sprite Sheet 48x32.png" id="2_hk0tc"]
 [ext_resource type="Texture2D" uid="uid://dnj73mg2hfe32" path="res://src/main/assets/textures/player/undead_shadow.png" id="3_k7cn1"]
 [ext_resource type="Texture2D" uid="uid://bwb8646gq5aho" path="res://src/main/assets/textures/effect/lights1.png" id="4_4dnik"]
+[ext_resource type="PackedScene" uid="uid://do8djv4raagc5" path="res://src/main/common/util/hitbox.tscn" id="5_i2neu"]
+[ext_resource type="PackedScene" uid="uid://bt7i3lb8okskh" path="res://src/main/common/util/hurtbox.tscn" id="6_v082b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s3y4q"]
 atlas = ExtResource("2_hk0tc")
@@ -261,6 +263,12 @@ scale_min = 0.0
 scale_curve = SubResource("CurveTexture_rigic")
 color_ramp = SubResource("GradientTexture1D_55i5b")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_it17c"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nshv1"]
+radius = 5.0
+
 [node name="PlayerBase" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_au0ot")
@@ -296,3 +304,15 @@ process_material = SubResource("ParticleProcessMaterial_1rv5r")
 texture = ExtResource("4_4dnik")
 lifetime = 0.5
 explosiveness = 0.4
+
+[node name="Hitbox" parent="." instance=ExtResource("5_i2neu")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_it17c")
+
+[node name="Hurtbox" parent="." instance=ExtResource("6_v082b")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_nshv1")

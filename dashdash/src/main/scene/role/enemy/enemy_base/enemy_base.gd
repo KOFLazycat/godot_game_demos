@@ -6,13 +6,15 @@ class_name EnemyBase  # Enemy基类
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $Body/AnimatedSprite2D
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
+@onready var undead_shadow: Sprite2D = $UndeadShadow
 @onready var timer: Timer = $Timer
+@onready var hurtbox: HurtBox = $Hurtbox
+
+var is_dead: bool = false
 
 
 func _ready() -> void:
-	timer.timeout.connect(_on_timer_timeout)
-	navigation_agent_2d.navigation_finished.connect(_on_navigation_agent_2d_navigation_finished)
-	navigation_agent_2d.velocity_computed.connect(_on_navigation_agent_2d_velocity_computed)
+	init_enemy()
 
 
 func _physics_process(_delta: float) -> void:
@@ -24,12 +26,30 @@ func _physics_process(_delta: float) -> void:
 	navigation_agent_2d.velocity = direction * speed
 
 
+func init_enemy() -> void:
+	# 生成动画
+	animated_sprite_2d.play("create")
+	await animated_sprite_2d.animation_finished
+	timer.timeout.connect(_on_timer_timeout)
+	#navigation_agent_2d.navigation_finished.connect(_on_navigation_agent_2d_navigation_finished)
+	navigation_agent_2d.velocity_computed.connect(_on_navigation_agent_2d_velocity_computed)
+	hurtbox.hurt.connect(_on_hurtbox_hurt)
+
+
+func die() -> void:
+	navigation_agent_2d.avoidance_enabled = false
+	undead_shadow.visible = false
+	animated_sprite_2d.play("die")
+	await animated_sprite_2d.animation_finished
+	queue_free()
+
+
 func _on_timer_timeout() -> void:
 	navigation_agent_2d.target_position = player.global_position
 
 
-func _on_navigation_agent_2d_navigation_finished() -> void:
-	animated_sprite_2d.stop()
+#func _on_navigation_agent_2d_navigation_finished() -> void:
+	#pass
 
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
@@ -39,3 +59,7 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 		animated_sprite_2d.play("run")
 	else :
 		animated_sprite_2d.play("idle")
+
+
+func _on_hurtbox_hurt(hitbox: HitBox) -> void:
+	die()

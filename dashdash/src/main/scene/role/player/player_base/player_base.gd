@@ -23,6 +23,7 @@ var is_dash: bool = false
 func _ready() -> void:
 	health_system.health = 100.0
 	hurt_system.hurt.connect(_on_hurt_system_hurt)
+	health_system.health_update.connect(_on_health_system_health_update)
 	health_system.die.connect(_on_health_system_die)
 
 
@@ -32,7 +33,7 @@ func _input(_event: InputEvent) -> void:
 		dash_gpu_particles_2d.emitting = true
 		animated_sprite_2d.play("dash")
 		AudioSystem.play_sfx(AudioSystem.SFX_INDEX.DASH)
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0.2, true, false, true).timeout
 		is_dash = false
 		dash_gpu_particles_2d.emitting = false
 	elif Input.get_vector("left", "right", "up", "down"):
@@ -77,6 +78,11 @@ func player_die() -> void:
 
 func _on_hurt_system_hurt(damage: float, knockback_amount: float, angle: Vector2) -> void:
 	health_system.health -= damage
+
+
+func _on_health_system_health_update(health: float, is_heal: bool) -> void:
+	var v: float = health / health_system.max_health
+	get_tree().get_first_node_in_group("player_health_bar").update_value(v)
 
 
 func _on_health_system_die() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://18hsk2ar7kas"]
+[gd_scene load_steps=46 format=3 uid="uid://18hsk2ar7kas"]
 
 [ext_resource type="Script" path="res://src/main/scene/role/enemy/enemy_base/enemy_base.gd" id="1_jftvx"]
 [ext_resource type="Texture2D" uid="uid://dyrse8e4134ni" path="res://src/main/assets/textures/enemy/Ghoul Sprite Sheet 62 x 33.png" id="2_8en82"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bfwmi3jc08w6q" path="res://src/main/common/component/hit_system/hit_system.tscn" id="5_ssnoe"]
 [ext_resource type="PackedScene" uid="uid://ck2k0eckgylaa" path="res://src/main/common/component/health_system/health_system.tscn" id="6_rbycc"]
 [ext_resource type="PackedScene" uid="uid://uhfxrobvkbqg" path="res://src/main/scene/ui/health_bar/health_bar.tscn" id="7_yo87q"]
+[ext_resource type="PackedScene" uid="uid://bhhtbhjnebegd" path="res://src/main/common/component/hit_flash_system/hit_flash_system.tscn" id="8_iiqwl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_skfdf"]
 atlas = ExtResource("2_8en82")
@@ -305,6 +306,10 @@ wait_time = 0.1
 autostart = true
 
 [node name="HealthSystem" parent="." instance=ExtResource("6_rbycc")]
+
+[node name="HitFlashSystem" parent="." node_paths=PackedStringArray("health_system", "sprite") instance=ExtResource("8_iiqwl")]
+health_system = NodePath("../HealthSystem")
+sprite = NodePath("../Body/AnimatedSprite2D")
 
 [node name="HitSystem" parent="." groups=["enemy_hit"] instance=ExtResource("5_ssnoe")]
 collision_layer = 4

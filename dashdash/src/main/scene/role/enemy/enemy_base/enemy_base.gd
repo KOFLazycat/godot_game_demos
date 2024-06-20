@@ -13,8 +13,6 @@ class_name EnemyBase  # Enemy基类
 @onready var health_bar: HealthBar = $HealthBar
 @onready var floating_text_scene: PackedScene = preload("res://src/main/scene/ui/floating_text/floating_text.tscn")
 
-var is_dead: bool = false
-
 
 func _ready() -> void:
 	init_enemy()
@@ -38,7 +36,7 @@ func init_enemy() -> void:
 	navigation_agent_2d.velocity_computed.connect(_on_navigation_agent_2d_velocity_computed)
 	hurt_system.hurt.connect(_on_hurt_system_hurt)
 	
-	health_system.health = 100.0
+	health_system.health_update.connect(_on_health_system_health_update)
 	health_system.die.connect(_on_health_system_die)
 
 
@@ -67,7 +65,7 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 
 
 func _on_hurt_system_hurt(damage: float, knockback_amount: float, angle: Vector2) -> void:
-	var damage_i: int = int(damage)
+	var damage_i: int = round(damage)
 	# 伤害飘字
 	if damage_i > 0:
 		var floating_text_instance = floating_text_scene.instantiate()
@@ -76,7 +74,10 @@ func _on_hurt_system_hurt(damage: float, knockback_amount: float, angle: Vector2
 		floating_text_instance.floating(str(damage_i))
 	
 	health_system.health -= damage
-	var v: float = health_system.health / health_system.max_health
+
+
+func _on_health_system_health_update(health: float, is_heal: bool) -> void:
+	var v: float = health / health_system.max_health
 	health_bar.update_value(v)
 
 

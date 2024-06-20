@@ -5,7 +5,7 @@ class_name HealthSystem
 @export var max_health: float = 100.0
 
 # 生命变化信号
-signal health_update(health: float, max_health: float)
+signal health_update(health: float, is_heal: bool)
 # 死亡信号
 signal die
 
@@ -14,9 +14,10 @@ var health: float = 100.0 :
 		var old_health: float = health
 		# 限制health范围
 		health = clampf(v, min_health, max_health)
+		var is_heal: bool = old_health < health
 		# 有在生命值发生变化是才会发射号
 		if health != old_health:
-			health_update.emit(health, max_health)
+			health_update.emit(health, is_heal)
 		if health <= 0:
 			die.emit()
 

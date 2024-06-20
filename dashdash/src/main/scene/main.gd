@@ -12,7 +12,6 @@ var total_enemy_num: int = 0
 func _ready() -> void:
 	AudioSystem.play_bgm(AudioSystem.BGM_INDEX.CEPHALOPOD)
 	enemy_spawn_timer.timeout.connect(_on_enemy_spawn_timer_timeout)
-	player_base.health_system.health_update.connect(_on_health_bar_health_update)
 
 
 func _on_enemy_spawn_timer_timeout() -> void:
@@ -33,12 +32,7 @@ func _on_enemy_spawn_timer_timeout() -> void:
 
 
 func _on_enemy_spawn_flash_spawn_enemy(pos: Vector2) -> void:
-	var enemy_base: EnemyBase = enemy_base_scene.instantiate()
+	var enemy_base:  = enemy_base_scene.instantiate()
 	enemy_base.global_position = pos
 	enemy_base.player = player_base
 	add_child(enemy_base)
-
-
-func _on_health_bar_health_update(health: float, max_health: float) -> void:
-	var v: float = health / max_health
-	health_bar.update_value(v)

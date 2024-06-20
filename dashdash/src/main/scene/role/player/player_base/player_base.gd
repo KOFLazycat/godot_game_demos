@@ -7,7 +7,7 @@ class_name PlayerBase # Player基类
 @onready var dash_gpu_particles_2d: GPUParticles2D = $DashGPUParticles2D
 @onready var dash_ghost_scene: PackedScene = preload("res://src/main/scene/role/player/dash_ghost/dash_ghost.tscn")
 @onready var health_system: HealthSystem = $HealthSystem
-@onready var timer: Timer = $Timer
+@onready var hurt_system: HurtSystem = $HurtSystem
 
 
 # 玩家移动速度
@@ -21,7 +21,9 @@ var is_dash: bool = false
 
 
 func _ready() -> void:
-	timer.timeout.connect(_on_timer_timeout)
+	health_system.health = 100.0
+	hurt_system.hurt.connect(_on_hurt_system_hurt)
+	health_system.die.connect(_on_health_system_die)
 
 
 func _input(_event: InputEvent) -> void:
@@ -66,7 +68,16 @@ func show_dash():
 	get_tree().root.call_deferred("add_child",dash_ghost)
 
 
-func _on_timer_timeout() -> void:
-	health_system.health -= 10 * randi_range(1, 4)
-	if health_system.health <= health_system.min_health:
-		health_system.health = health_system.max_health
+func player_die() -> void:
+	animated_sprite_2d.play("die")
+	#AudioSystem.play_sfx(AudioSystem.SFX_INDEX.BODY_HIT)
+	await animated_sprite_2d.animation_finished
+	#queue_free()
+
+
+func _on_hurt_system_hurt(damage: float, knockback_amount: float, angle: Vector2) -> void:
+	health_system.health -= damage
+
+
+func _on_health_system_die() -> void:
+	player_die()

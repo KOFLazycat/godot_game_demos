@@ -1,9 +1,12 @@
-[gd_scene load_steps=41 format=3 uid="uid://18hsk2ar7kas"]
+[gd_scene load_steps=45 format=3 uid="uid://18hsk2ar7kas"]
 
 [ext_resource type="Script" path="res://src/main/scene/role/enemy/enemy_base/enemy_base.gd" id="1_jftvx"]
 [ext_resource type="Texture2D" uid="uid://dyrse8e4134ni" path="res://src/main/assets/textures/enemy/Ghoul Sprite Sheet 62 x 33.png" id="2_8en82"]
 [ext_resource type="Texture2D" uid="uid://dnj73mg2hfe32" path="res://src/main/assets/textures/player/undead_shadow.png" id="3_r15va"]
 [ext_resource type="PackedScene" uid="uid://dovqdbr87wq8w" path="res://src/main/common/component/hurt_system/hurt_system.tscn" id="5_46um4"]
+[ext_resource type="PackedScene" uid="uid://bfwmi3jc08w6q" path="res://src/main/common/component/hit_system/hit_system.tscn" id="5_ssnoe"]
+[ext_resource type="PackedScene" uid="uid://ck2k0eckgylaa" path="res://src/main/common/component/health_system/health_system.tscn" id="6_rbycc"]
+[ext_resource type="PackedScene" uid="uid://uhfxrobvkbqg" path="res://src/main/scene/ui/health_bar/health_bar.tscn" id="7_yo87q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_skfdf"]
 atlas = ExtResource("2_8en82")
@@ -263,6 +266,10 @@ animations = [{
 radius = 4.0
 height = 18.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8he4s"]
+radius = 5.0
+height = 20.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3eep7"]
 radius = 6.0
 height = 22.0
@@ -297,11 +304,30 @@ max_speed = 40.0
 wait_time = 0.1
 autostart = true
 
+[node name="HealthSystem" parent="." instance=ExtResource("6_rbycc")]
+max_health = 10.0
+
+[node name="HitSystem" parent="." groups=["enemy_hit"] instance=ExtResource("5_ssnoe")]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="HitSystem" index="0"]
+position = Vector2(0, -11)
+shape = SubResource("CapsuleShape2D_8he4s")
+
 [node name="HurtSystem" parent="." instance=ExtResource("5_46um4")]
+collision_layer = 4
+collision_mask = 2
 hurt_type = 1
 
 [node name="CollisionShape2D" parent="HurtSystem" index="0"]
 position = Vector2(0, -11)
 shape = SubResource("CapsuleShape2D_3eep7")
 
+[node name="HealthBar" parent="." instance=ExtResource("7_yo87q")]
+offset_top = -25.0
+offset_bottom = -25.0
+scale = Vector2(0.03, 0.1)
+
+[editable path="HitSystem"]
 [editable path="HurtSystem"]

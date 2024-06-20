@@ -1,8 +1,6 @@
 extends Control
 class_name HealthBar ## 血条UI
 
-## 指定玩家
-@export var player: PlayerBase
 ## 血量变化tween变化时间
 @export var change_time: float = 0.1 
 ## 血量变化底部缓冲tween变化时间

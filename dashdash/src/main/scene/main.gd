@@ -6,16 +6,19 @@ extends Node2D
 @onready var enemy_base_scene: PackedScene = preload("res://src/main/scene/role/enemy/enemy_base/enemy_base.tscn")
 @onready var health_bar: HealthBar = $UI/HealthBar
 
-const MAX_ENEMY_COUNT: int = 100
+const MAX_ENEMY_COUNT: int = 40
 var total_enemy_num: int = 0
 
 func _ready() -> void:
 	AudioSystem.play_bgm(AudioSystem.BGM_INDEX.CEPHALOPOD)
 	enemy_spawn_timer.timeout.connect(_on_enemy_spawn_timer_timeout)
-	health_bar.player.health_system.health_update.connect(_on_health_bar_health_update)
+	player_base.health_system.health_update.connect(_on_health_bar_health_update)
 
 
 func _on_enemy_spawn_timer_timeout() -> void:
+	if MAX_ENEMY_COUNT <= 0:
+		return
+		
 	for i in range(10):
 		var spawn_pos: Vector2 = Vector2(400+randf_range(-50, 50), 400+randf_range(-50, 50))
 		var enemy_spawn_flash: Node2D = enemy_spawn_flash_scene.instantiate()

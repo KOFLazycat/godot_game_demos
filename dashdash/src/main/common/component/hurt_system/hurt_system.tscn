@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dovqdbr87wq8w"]
+
+[ext_resource type="Script" path="res://src/main/common/component/hurt_system/hurt_system.gd" id="1_aengs"]
+
+[node name="HurtSystem" type="Area2D"]
+script = ExtResource("1_aengs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="DisableTimer" type="Timer" parent="."]

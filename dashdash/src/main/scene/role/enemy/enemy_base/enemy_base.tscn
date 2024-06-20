@@ -305,7 +305,6 @@ wait_time = 0.1
 autostart = true
 
 [node name="HealthSystem" parent="." instance=ExtResource("6_rbycc")]
-max_health = 10.0
 
 [node name="HitSystem" parent="." groups=["enemy_hit"] instance=ExtResource("5_ssnoe")]
 collision_layer = 4

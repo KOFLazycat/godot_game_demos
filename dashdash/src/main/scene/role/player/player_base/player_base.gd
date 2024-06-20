@@ -72,7 +72,7 @@ func player_die() -> void:
 	animated_sprite_2d.play("die")
 	#AudioSystem.play_sfx(AudioSystem.SFX_INDEX.BODY_HIT)
 	await animated_sprite_2d.animation_finished
-	#queue_free()
+	queue_free()
 
 
 func _on_hurt_system_hurt(damage: float, knockback_amount: float, angle: Vector2) -> void:

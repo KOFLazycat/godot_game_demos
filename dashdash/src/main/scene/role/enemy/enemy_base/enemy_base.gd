@@ -11,6 +11,7 @@ class_name EnemyBase  # Enemy基类
 @onready var hurt_system: HurtSystem = $HurtSystem
 @onready var health_system: HealthSystem = $HealthSystem
 @onready var health_bar: HealthBar = $HealthBar
+@onready var floating_text_scene: PackedScene = preload("res://src/main/scene/ui/floating_text/floating_text.tscn")
 
 var is_dead: bool = false
 
@@ -52,7 +53,8 @@ func enemy_die() -> void:
 
 
 func _on_timer_timeout() -> void:
-	navigation_agent_2d.target_position = player.global_position
+	if is_instance_valid(player):
+		navigation_agent_2d.target_position = player.global_position
 
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
@@ -65,6 +67,14 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 
 
 func _on_hurt_system_hurt(damage: float, knockback_amount: float, angle: Vector2) -> void:
+	var damage_i: int = int(damage)
+	# 伤害飘字
+	if damage_i > 0:
+		var floating_text_instance = floating_text_scene.instantiate()
+		add_child(floating_text_instance)
+		floating_text_instance.global_position = global_position + Vector2.UP * 8
+		floating_text_instance.floating(str(damage_i))
+	
 	health_system.health -= damage
 	var v: float = health_system.health / health_system.max_health
 	health_bar.update_value(v)

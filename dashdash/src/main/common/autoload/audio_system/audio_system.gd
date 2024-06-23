@@ -16,6 +16,7 @@ enum SFX_INDEX {
 	RUN, BODY_HIT, DASH
 }
 
+
 ## 播放指定索引的音乐
 func play_bgm(bgm_index: int) -> void:
 	if bgm_audio_stream_player_2d.playing:
@@ -32,7 +33,7 @@ func play_bgm(bgm_index: int) -> void:
 
 
 func play_sfx(sfx_index: int) -> void:
-	if sfx_audio_stream_player_2d.playing:
+	if is_instance_valid(sfx_audio_stream_player_2d) and sfx_audio_stream_player_2d.playing:
 		var new_sfx_audio_stream_player_2d: AudioStreamPlayer2D = sfx_audio_stream_player_2d.duplicate() as AudioStreamPlayer2D
 		new_sfx_audio_stream_player_2d.finished.connect(on_sfx_finished.bind(new_sfx_audio_stream_player_2d))
 		new_sfx_audio_stream_player_2d.stream = sfxs[sfx_index]

@@ -8,16 +8,22 @@ class_name PlayerBase # Player基类
 @onready var dash_ghost_scene: PackedScene = preload("res://src/main/scene/role/player/dash_ghost/dash_ghost.tscn")
 @onready var health_system: HealthSystem = $HealthSystem
 @onready var hurt_system: HurtSystem = $HurtSystem
+@onready var fsm: Fsm = $Fsm
+@onready var input_manager: InputManager = InputManager.new()
 
-
+# 加速度
+var accel: float = 1000.0
 # 玩家移动速度
 var speed: float = 50.0
 # dash移动速度
 var dash_speed: float = 1000.0
-# 玩家移动方向
-var move_vector: Vector2 = Vector2.ZERO
-# 是否dash
-var is_dash: bool = false
+# 朝向
+var facing = Vector2.RIGHT :
+	get: return facing
+	set(value):
+		if value == Vector2.ZERO: return
+		facing = value
+		animated_sprite_2d.flip_h = (value.x == -1)
 
 
 func _ready() -> void:
@@ -25,40 +31,17 @@ func _ready() -> void:
 	hurt_system.hurt.connect(_on_hurt_system_hurt)
 	health_system.health_update.connect(_on_health_system_health_update)
 	health_system.die.connect(_on_health_system_die)
+	fsm.change_state("player_idle_state")
 
 
-func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("dash") && !is_dash:
-		is_dash = true
-		dash_gpu_particles_2d.emitting = true
-		animated_sprite_2d.play("dash")
-		AudioSystem.play_sfx(AudioSystem.SFX_INDEX.DASH)
-		await get_tree().create_timer(0.2, true, false, true).timeout
-		is_dash = false
-		dash_gpu_particles_2d.emitting = false
-	elif Input.get_vector("left", "right", "up", "down"):
-		animated_sprite_2d.play("run")
-		#AudioSystem.play_sfx(AudioSystem.SFX_INDEX.RUN)
-		run_dust_gpu_particles_2d.emitting = true
-	else :
-		animated_sprite_2d.play("idle")
-		run_dust_gpu_particles_2d.emitting = false
-		
+func _process(delta: float) -> void:
+	fsm.update(delta)
 
 
-func _physics_process(_delta: float) -> void:
-	move_vector = Input.get_vector("left", "right", "up", "down").normalized()
-	if move_vector.x < 0:
-		animated_sprite_2d.flip_h = true
-	elif move_vector.x > 0:
-		animated_sprite_2d.flip_h = false
-	
-	if is_dash:
-		velocity = move_vector * dash_speed
-		show_dash()
-	else:
-		velocity = move_vector * speed
-	move_and_slide()
+func _physics_process(delta: float) -> void:
+	input_manager.update(delta)
+	fsm.physics_update(delta)
+
 
 # dash的影子
 func show_dash():
@@ -70,6 +53,8 @@ func show_dash():
 
 
 func player_die() -> void:
+	set_process(false)
+	set_process_input(false)
 	animated_sprite_2d.play("die")
 	#AudioSystem.play_sfx(AudioSystem.SFX_INDEX.BODY_HIT)
 	await animated_sprite_2d.animation_finished

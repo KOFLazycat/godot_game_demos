@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://c07e3gn6qttvg"]
+[gd_scene load_steps=38 format=4 uid="uid://c07e3gn6qttvg"]
 
 [ext_resource type="Script" path="res://src/main/scene/level/island/island.gd" id="1_kgdlj"]
 [ext_resource type="Texture2D" uid="uid://dxqwv0r1ec0dx" path="res://src/main/assets/textures/tiny_world/terrain/water/water.png" id="2_xktbl"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://d35rtmbnewt8a" path="res://src/main/scene/role/player/player_base/player_base.tscn" id="11_cpg2a"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="12_hv5gw"]
 [ext_resource type="Resource" uid="uid://euybd2w0bax" path="res://addons/phantom_camera/examples/resources/tween/PlayerPhantomCamera2DTween.tres" id="13_v0p15"]
+[ext_resource type="PackedScene" uid="uid://uhfxrobvkbqg" path="res://src/main/scene/ui/health_bar/health_bar.tscn" id="14_anr0t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_726xt"]
 texture = ExtResource("2_xktbl")
@@ -243,6 +244,30 @@ terrain_set_0/terrain_0/name = "Yellow"
 terrain_set_0/terrain_0/color = Color(0.501961, 0.345098, 1, 1)
 sources/0 = SubResource("TileSetAtlasSource_yoibk")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_wh56d"]
+vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_v2dmx"]
+vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_peghh"]
+vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_0cvad"]
+vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)])
+agent_radius = 0.0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dwqw1"]
 texture = ExtResource("4_e3eut")
 texture_region_size = Vector2i(64, 64)
@@ -336,9 +361,13 @@ texture_region_size = Vector2i(64, 64)
 2:3/0 = 0
 2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 0:7/0 = 0
+0:7/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_wh56d")
 1:7/0 = 0
+1:7/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_v2dmx")
 2:7/0 = 0
+2:7/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_peghh")
 3:7/0 = 0
+3:7/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_0cvad")
 0:4/size_in_atlas = Vector2i(1, 2)
 0:4/0 = 0
 0:4/0/terrain_set = 0
@@ -372,6 +401,7 @@ physics_layer_0/collision_mask = 6
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Elevation"
 terrain_set_0/terrain_0/color = Color(0.160784, 0.345098, 0.839216, 1)
+navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_dwqw1")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_vikcb"]
@@ -565,7 +595,7 @@ tile_map_data = PackedByteArray("AAAbAA4AAAAHAAIAAAAbAA0AAAAHAAEAAAAbAAwAAAAHAAE
 tile_set = SubResource("TileSet_rvhqj")
 
 [node name="ElevationTileMapLayer" type="TileMapLayer" parent="Map"]
-tile_map_data = PackedByteArray("AAAaAAwAAAACAAIAAAAaAAsAAAACAAEAAAAaAAoAAAACAAEAAAAaAAkAAAACAAEAAAAaAAgAAAACAAEAAAAaAAcAAAACAAEAAAAaAAYAAAACAAEAAAAaAAUAAAACAAEAAAAaAAQAAAACAAEAAAAaAAMAAAACAAAAAAAZAAwAAAABAAIAAAAZAAMAAAABAAAAAAAYAAwAAAABAAIAAAAYAAMAAAABAAAAAAAXAAwAAAABAAIAAAAXAAMAAAABAAAAAAAWAAwAAAABAAIAAAAWAAMAAAABAAAAAAAVAAwAAAABAAIAAAAVAAMAAAABAAAAAAAUAAwAAAABAAIAAAAUAAMAAAABAAAAAAATAAwAAAABAAIAAAATAAMAAAABAAAAAAASAAwAAAABAAIAAAASAAMAAAABAAAAAAARAAwAAAABAAIAAAARAAMAAAABAAAAAAAQAAwAAAABAAIAAAAQAAMAAAABAAAAAAAPAAwAAAABAAIAAAAPAAMAAAABAAAAAAAOAAwAAAABAAIAAAAOAAMAAAABAAAAAAANAAwAAAABAAIAAAANAAMAAAABAAAAAAAMAAwAAAABAAIAAAAMAAMAAAABAAAAAAALAAwAAAABAAIAAAALAAMAAAABAAAAAAAKAAwAAAABAAIAAAAKAAMAAAABAAAAAAAJAAwAAAABAAIAAAAJAAMAAAABAAAAAAAIAAwAAAABAAIAAAAIAAMAAAABAAAAAAAHAAwAAAABAAIAAAAHAAMAAAABAAAAAAAGAAwAAAABAAIAAAAGAAMAAAABAAAAAAAFAAwAAAABAAIAAAAFAAMAAAABAAAAAAAEAAwAAAABAAIAAAAEAAMAAAABAAAAAAADAAwAAAAAAAIAAAADAAsAAAAAAAEAAAADAAoAAAAAAAEAAAADAAkAAAAAAAEAAAADAAgAAAAAAAEAAAADAAcAAAAAAAEAAAADAAYAAAAAAAEAAAADAAUAAAAAAAEAAAADAAQAAAAAAAEAAAADAAMAAAAAAAAAAAADAA0AAAAAAAMAAAAaAA0AAAACAAMAAAAEAA0AAAABAAMAAAAFAA0AAAABAAMAAAAGAA0AAAABAAMAAAAHAA0AAAABAAMAAAAIAA0AAAABAAMAAAAJAA0AAAABAAMAAAAKAA0AAAABAAMAAAALAA0AAAAAAAcAAAAMAA0AAAABAAcAAAASAA0AAAACAAcAAAATAA0AAAABAAMAAAAUAA0AAAABAAMAAAAVAA0AAAABAAMAAAAWAA0AAAABAAMAAAAXAA0AAAABAAMAAAAYAA0AAAABAAMAAAAZAA0AAAABAAMAAAANAA0AAAABAAcAAAARAA0AAAABAAcAAAAOAA0AAAABAAcAAAAPAA0AAAABAAcAAAAQAA0AAAABAAcAAAA=")
+tile_map_data = PackedByteArray("AAAaAAwAAAACAAIAAAAaAAsAAAACAAEAAAAaAAoAAAACAAEAAAAaAAkAAAACAAEAAAAaAAgAAAACAAEAAAAaAAcAAAACAAEAAAAaAAYAAAACAAEAAAAaAAUAAAACAAEAAAAaAAQAAAACAAEAAAAaAAMAAAACAAAAAAAZAAwAAAABAAIAAAAZAAMAAAABAAAAAAAYAAwAAAABAAIAAAAYAAMAAAABAAAAAAAXAAwAAAABAAIAAAAXAAMAAAABAAAAAAAWAAwAAAABAAIAAAAWAAMAAAABAAAAAAAVAAwAAAABAAIAAAAVAAMAAAABAAAAAAAUAAwAAAABAAIAAAAUAAMAAAABAAAAAAATAAwAAAABAAIAAAATAAMAAAABAAAAAAASAAwAAAABAAIAAAASAAMAAAABAAAAAAARAAwAAAABAAIAAAARAAMAAAABAAAAAAAQAAwAAAABAAIAAAAQAAMAAAABAAAAAAAPAAwAAAABAAIAAAAPAAMAAAABAAAAAAAOAAwAAAABAAIAAAAOAAMAAAABAAAAAAANAAwAAAABAAIAAAANAAMAAAABAAAAAAAMAAwAAAABAAIAAAAMAAMAAAABAAAAAAALAAwAAAABAAIAAAALAAMAAAABAAAAAAAKAAwAAAABAAIAAAAKAAMAAAABAAAAAAAJAAwAAAABAAIAAAAJAAMAAAABAAAAAAAIAAwAAAABAAIAAAAIAAMAAAABAAAAAAAHAAwAAAABAAIAAAAHAAMAAAABAAAAAAAGAAwAAAABAAIAAAAGAAMAAAABAAAAAAAFAAwAAAABAAIAAAAFAAMAAAABAAAAAAAEAAwAAAABAAIAAAAEAAMAAAABAAAAAAADAAwAAAAAAAIAAAADAAsAAAAAAAEAAAADAAoAAAAAAAEAAAADAAkAAAAAAAEAAAADAAgAAAAAAAEAAAADAAcAAAAAAAEAAAADAAYAAAAAAAEAAAADAAUAAAAAAAEAAAADAAQAAAAAAAEAAAADAAMAAAAAAAAAAAADAA0AAAAAAAMAAAAaAA0AAAACAAMAAAAEAA0AAAABAAMAAAAFAA0AAAABAAMAAAAGAA0AAAABAAMAAAAHAA0AAAABAAMAAAAIAA0AAAABAAMAAAAJAA0AAAABAAMAAAAKAA0AAAABAAMAAAALAA0AAAABAAMAAAAMAA0AAAABAAMAAAASAA0AAAABAAMAAAATAA0AAAABAAMAAAAUAA0AAAABAAMAAAAVAA0AAAABAAMAAAAWAA0AAAABAAMAAAAXAA0AAAABAAMAAAAYAA0AAAABAAMAAAAZAA0AAAABAAMAAAANAA0AAAABAAMAAAARAA0AAAABAAMAAAAOAA0AAAABAAMAAAAPAA0AAAABAAMAAAAQAA0AAAABAAMAAAA=")
 tile_set = SubResource("TileSet_jvro8")
 
 [node name="GreenFlatTileMapLayer" type="TileMapLayer" parent="Map"]
@@ -600,3 +630,12 @@ follow_parameters/damping_value = 10.0
 tween_parameters = ExtResource("13_v0p15")
 tween_on_load = true
 inactive_update_mode = 0
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" parent="UI" groups=["player_health_bar"] instance=ExtResource("14_anr0t")]
+metadata/_edit_use_anchors_ = true
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true

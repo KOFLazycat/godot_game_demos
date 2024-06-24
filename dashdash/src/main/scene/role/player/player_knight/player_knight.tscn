@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://h42jy5phaos3"]
+
+[ext_resource type="Script" path="res://src/main/scene/role/player/player_knight/player_knight.gd" id="1_cuino"]
+
+[node name="PlayerKnight" type="CharacterBody2D"]
+script = ExtResource("1_cuino")

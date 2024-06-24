@@ -12,11 +12,11 @@ class_name PlayerBase # Player基类
 @onready var input_manager: InputManager = InputManager.new()
 
 # 加速度
-var accel: float = 1000.0
+var accel: float = 2000.0
 # 玩家移动速度
-var speed: float = 50.0
+var speed: float = 200.0
 # dash移动速度
-var dash_speed: float = 1000.0
+var dash_speed: float = 4000.0
 # 朝向
 var facing = Vector2.RIGHT :
 	get: return facing

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://c07e3gn6qttvg"]
+[gd_scene load_steps=39 format=4 uid="uid://c07e3gn6qttvg"]
 
 [ext_resource type="Script" path="res://src/main/scene/level/island/island.gd" id="1_kgdlj"]
 [ext_resource type="Texture2D" uid="uid://dxqwv0r1ec0dx" path="res://src/main/assets/textures/tiny_world/terrain/water/water.png" id="2_xktbl"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="12_hv5gw"]
 [ext_resource type="Resource" uid="uid://euybd2w0bax" path="res://addons/phantom_camera/examples/resources/tween/PlayerPhantomCamera2DTween.tres" id="13_v0p15"]
 [ext_resource type="PackedScene" uid="uid://uhfxrobvkbqg" path="res://src/main/scene/ui/health_bar/health_bar.tscn" id="14_anr0t"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="15_cc5x4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_726xt"]
 texture = ExtResource("2_xktbl")
@@ -639,3 +640,10 @@ metadata/_edit_use_anchors_ = true
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
+
+[node name="StateChartDebugger" parent="." instance=ExtResource("15_cc5x4")]
+offset_left = 1296.0
+offset_top = 11.0
+offset_right = 1723.0
+offset_bottom = 509.0
+initial_node_to_watch = NodePath("../PlayerBase")

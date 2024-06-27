@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://ctoyq6dhqa3rq" path="res://src/main/assets/textures/player/Tiny Alchemist Sprite Sheet 48x32.png" id="2_hk0tc"]
 [ext_resource type="Texture2D" uid="uid://dnj73mg2hfe32" path="res://src/main/assets/textures/player/undead_shadow.png" id="3_k7cn1"]
 [ext_resource type="Texture2D" uid="uid://bwb8646gq5aho" path="res://src/main/assets/textures/effect/lights1.png" id="4_4dnik"]
-[ext_resource type="Script" path="res://src/main/scene/role/player/state/player_idle_state.gd" id="6_18xgn"]
 [ext_resource type="PackedScene" uid="uid://bfwmi3jc08w6q" path="res://src/main/common/component/hit_system/hit_system.tscn" id="6_ex5i0"]
 [ext_resource type="PackedScene" uid="uid://dovqdbr87wq8w" path="res://src/main/common/component/hurt_system/hurt_system.tscn" id="6_whwsm"]
-[ext_resource type="Script" path="res://src/main/scene/role/player/state/player_run_state.gd" id="7_rvkag"]
 [ext_resource type="PackedScene" uid="uid://ck2k0eckgylaa" path="res://src/main/common/component/health_system/health_system.tscn" id="7_s5e7k"]
-[ext_resource type="Script" path="res://src/main/common/component/fsm/fsm.gd" id="8_ifgbo"]
-[ext_resource type="Script" path="res://src/main/scene/role/player/state/player_dash_state.gd" id="8_s7xes"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="7_xocu1"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="8_j11ck"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="8_ooqr4"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="8_ycoy5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s3y4q"]
 atlas = ExtResource("2_hk0tc")
@@ -301,17 +301,57 @@ texture = ExtResource("4_4dnik")
 lifetime = 0.5
 explosiveness = 0.4
 
-[node name="Fsm" type="Node" parent="."]
-script = ExtResource("8_ifgbo")
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("8_j11ck")
 
-[node name="PlayerIdleState" type="Node" parent="Fsm"]
-script = ExtResource("6_18xgn")
+[node name="PlayerMoveState" type="Node" parent="StateChart"]
+script = ExtResource("7_xocu1")
+initial_state = NodePath("Idle")
 
-[node name="PlayerRunState" type="Node" parent="Fsm"]
-script = ExtResource("7_rvkag")
+[node name="Idle" type="Node" parent="StateChart/PlayerMoveState"]
+script = ExtResource("8_ycoy5")
 
-[node name="PlayerDashState" type="Node" parent="Fsm"]
-script = ExtResource("8_s7xes")
+[node name="ToRun" type="Node" parent="StateChart/PlayerMoveState/Idle"]
+script = ExtResource("8_ooqr4")
+to = NodePath("../../Run")
+event = &"PlayerMoveStateToRun"
+delay_in_seconds = "0.0"
+
+[node name="ToDash" type="Node" parent="StateChart/PlayerMoveState/Idle"]
+script = ExtResource("8_ooqr4")
+to = NodePath("../../Dash")
+event = &"PlayerMoveStateToDash"
+delay_in_seconds = "0.0"
+
+[node name="Run" type="Node" parent="StateChart/PlayerMoveState"]
+script = ExtResource("8_ycoy5")
+
+[node name="ToIdle" type="Node" parent="StateChart/PlayerMoveState/Run"]
+script = ExtResource("8_ooqr4")
+to = NodePath("../../Idle")
+event = &"PlayerMoveStateToIdle"
+delay_in_seconds = "0.0"
+
+[node name="ToDash" type="Node" parent="StateChart/PlayerMoveState/Run"]
+script = ExtResource("8_ooqr4")
+to = NodePath("../../Dash")
+event = &"PlayerMoveStateToDash"
+delay_in_seconds = "0.0"
+
+[node name="Dash" type="Node" parent="StateChart/PlayerMoveState"]
+script = ExtResource("8_ycoy5")
+
+[node name="ToIdle" type="Node" parent="StateChart/PlayerMoveState/Dash"]
+script = ExtResource("8_ooqr4")
+to = NodePath("../../Idle")
+event = &"PlayerMoveStateToIdle"
+delay_in_seconds = "0.0"
+
+[node name="ToRun" type="Node" parent="StateChart/PlayerMoveState/Dash"]
+script = ExtResource("8_ooqr4")
+to = NodePath("../../Run")
+event = &"PlayerMoveStateToRun"
+delay_in_seconds = "0.0"
 
 [node name="HealthSystem" parent="." instance=ExtResource("7_s5e7k")]
 
@@ -332,6 +372,13 @@ collision_mask = 4
 [node name="CollisionShape2D" parent="HurtSystem" index="0"]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_i18dv")
+
+[connection signal="state_entered" from="StateChart/PlayerMoveState/Idle" to="." method="_on_idle_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/PlayerMoveState/Idle" to="." method="_on_idle_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/PlayerMoveState/Run" to="." method="_on_run_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/PlayerMoveState/Run" to="." method="_on_run_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/PlayerMoveState/Dash" to="." method="_on_dash_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/PlayerMoveState/Dash" to="." method="_on_dash_state_physics_processing"]
 
 [editable path="HitSystem"]
 [editable path="HurtSystem"]

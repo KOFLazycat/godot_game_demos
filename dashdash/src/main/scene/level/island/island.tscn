@@ -638,8 +638,6 @@ inactive_update_mode = 0
 metadata/_edit_use_anchors_ = true
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
-wait_time = 0.1
-autostart = true
 
 [node name="StateChartDebugger" parent="." instance=ExtResource("15_cc5x4")]
 offset_left = 1296.0

@@ -10,6 +10,7 @@ class_name PlayerBase # Player基类
 @onready var hurt_system: HurtSystem = $HurtSystem
 @onready var input_manager: InputManager = InputManager.new()
 @onready var state_chart: StateChart = $StateChart
+@onready var hurt_collision_shape_2d: CollisionShape2D = $HurtSystem/CollisionShape2D
 
 # 加速度
 var accel: float = 2000.0
@@ -110,13 +111,11 @@ func _on_run_state_physics_processing(delta: float) -> void:
 
 
 func _on_dash_state_entered() -> void:
+	hurt_collision_shape_2d.call_deferred("set","disabled",true)
 	input_manager.is_dash = true
 	dash_gpu_particles_2d.emitting = true
 	animated_sprite_2d.play("dash")
 	AudioSystem.play_sfx(AudioSystem.SFX_INDEX.DASH)
-	await get_tree().create_timer(0.2, true, false, true).timeout
-	input_manager.is_dash = false
-	dash_gpu_particles_2d.emitting = false
 
 
 func _on_dash_state_physics_processing(delta: float) -> void:
@@ -131,3 +130,10 @@ func _on_dash_state_physics_processing(delta: float) -> void:
 			state_chart.send_event("PlayerMoveStateToIdle")
 		elif input_manager.normalized != Vector2.ZERO:
 			state_chart.send_event("PlayerMoveStateToRun")
+
+
+func _on_dash_state_exited() -> void:
+	await get_tree().create_timer(0.2, true, false, true).timeout
+	hurt_collision_shape_2d.call_deferred("set","disabled",false)
+	input_manager.is_dash = false
+	dash_gpu_particles_2d.emitting = false

@@ -23,5 +23,5 @@ func update(delta: float) -> void:
 	raw = Vector2(x, y)
 	normalized = raw.normalized()
 	
-	if Input.is_action_just_pressed("dash"):
+	if Input.is_action_just_pressed("dash") and normalized != Vector2.ZERO:
 		is_dash = true

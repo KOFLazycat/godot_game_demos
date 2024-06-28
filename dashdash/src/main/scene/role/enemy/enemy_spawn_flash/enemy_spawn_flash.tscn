@@ -42,6 +42,7 @@ _data = {
 }
 
 [node name="EnemySpawnFlash" type="Node2D"]
+scale = Vector2(3.5, 3.5)
 script = ExtResource("1_afgpf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxomjoieo6gvl"]
+
+[ext_resource type="Script" path="res://entities/enemy/dino_cactus/dino_cactus.gd" id="1_yj7sp"]
+[ext_resource type="Texture2D" uid="uid://b30krxj7npf4n" path="res://assets/textures/enemy/dino_cactus/cactus.png" id="2_kw56q"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kw56q"]
+height = 86.0
+
+[node name="DinoCactus" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_yj7sp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("2_kw56q")
+offset = Vector2(0, -24)
+hframes = 11
+region_rect = Rect2(8, 26, 15, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -43)
+shape = SubResource("CapsuleShape2D_kw56q")

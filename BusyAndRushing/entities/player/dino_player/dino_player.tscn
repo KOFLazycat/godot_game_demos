@@ -1,0 +1,100 @@
+[gd_scene load_steps=13 format=3 uid="uid://cugrvdodhxjak"]
+
+[ext_resource type="Script" path="res://entities/player/dino_player/dino_player.gd" id="1_28ph3"]
+[ext_resource type="Texture2D" uid="uid://bsfm7essq62ij" path="res://assets/textures/player/dino_player/Dinosaur-Sheet.png" id="1_k5rrp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7doq"]
+atlas = ExtResource("1_k5rrp")
+region = Rect2(0, 96, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7uai"]
+atlas = ExtResource("1_k5rrp")
+region = Rect2(64, 96, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28ph3"]
+atlas = ExtResource("1_k5rrp")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2p60"]
+atlas = ExtResource("1_k5rrp")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqy6h"]
+atlas = ExtResource("1_k5rrp")
+region = Rect2(0, 64, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evuce"]
+atlas = ExtResource("1_k5rrp")
+region = Rect2(64, 64, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k5rrp"]
+atlas = ExtResource("1_k5rrp")
+region = Rect2(0, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08qi0"]
+atlas = ExtResource("1_k5rrp")
+region = Rect2(64, 32, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_08qi0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7doq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u7uai")
+}],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_28ph3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2p60")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqy6h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evuce")
+}],
+"loop": true,
+"name": &"run_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k5rrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08qi0")
+}],
+"loop": true,
+"name": &"run_normal",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k5rrp"]
+radius = 29.0
+
+[node name="DinoPlayer" type="CharacterBody2D"]
+collision_mask = 6
+script = ExtResource("1_28ph3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_08qi0")
+animation = &"run_normal"
+offset = Vector2(0, -11)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -31)
+shape = SubResource("CircleShape2D_k5rrp")

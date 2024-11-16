@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://dch063htskbhx"]
+
+[ext_resource type="Script" path="res://ui/hud/juicy_bar/juicy_bar.gd" id="1_g1j0m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3u5i3"]
+bg_color = Color(0.835294, 0.835294, 0.835294, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2xcuk"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_443b2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c6xao"]
+bg_color = Color(0.815686, 0.0196078, 0.137255, 0.913725)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="JuicyBar" type="Control" node_paths=PackedStringArray("top_layer_bar", "bottom_layer_bar")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g1j0m")
+top_layer_bar = NodePath("TopLayerBar")
+bottom_layer_bar = NodePath("BottomLayerBar")
+max_value = 1.0
+bottom_layer_bar_time = 0.5
+bottom_layer_bar_delay = 0.2
+
+[node name="BottomLayerBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 40.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3u5i3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2xcuk")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="TopLayerBar" type="ProgressBar" parent="."]
+layout_mode = 1
+offset_right = 400.0
+offset_bottom = 40.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_443b2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_c6xao")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="SubButton" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 360.0
+offset_top = 100.0
+offset_right = 540.0
+offset_bottom = 160.0
+text = "SUB"
+
+[node name="AddButton" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 580.0
+offset_top = 100.0
+offset_right = 760.0
+offset_bottom = 160.0
+text = "ADD"

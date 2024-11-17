@@ -34,6 +34,8 @@ jump={
 2d_physics/layer_1="player"
 2d_physics/layer_2="enemy"
 2d_physics/layer_3="wall"
+2d_physics/layer_4="player_hurt_box"
+2d_physics/layer_5="enemy_hurt_box"
 
 [rendering]
 

@@ -77,7 +77,5 @@ position = Vector2(-28, 564)
 position = Vector2(300, 300)
 
 [node name="CactusSpawnTimer" type="Timer" parent="."]
-wait_time = 3.0
-autostart = true
 
 [node name="Cactus" type="Node" parent="." groups=["cactus"]]

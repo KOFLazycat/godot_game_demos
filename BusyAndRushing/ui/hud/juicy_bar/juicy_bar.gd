@@ -14,6 +14,8 @@ class_name JucyBar extends HudBase
 @onready var sub_button: Button = $SubButton
 @onready var add_button: Button = $AddButton
 
+signal empty
+
 
 func _ready() -> void:
 	current_value = max_value
@@ -34,6 +36,10 @@ func decrease_current_value(value: float) -> void:
 	current_value = clamp(current_value - value, min_value, max_value)
 	run_juicy_tween(top_layer_bar, current_value, top_layer_bar_time, top_layer_bar_delay)
 	run_juicy_tween(bottom_layer_bar, current_value, bottom_layer_bar_time, bottom_layer_bar_delay)
+	
+	# 如果值为零，则发出信号
+	if current_value <= 0:
+		empty.emit()
 
 
 ## 增加数值

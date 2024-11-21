@@ -1,0 +1,81 @@
+[gd_scene load_steps=4 format=3 uid="uid://depgxjtcpolee"]
+
+[ext_resource type="PackedScene" uid="uid://dch063htskbhx" path="res://ui/hud/juicy_bar/juicy_bar.tscn" id="1_hhydg"]
+[ext_resource type="Script" path="res://stages/quiz/quiz.gd" id="1_mipms"]
+[ext_resource type="FontFile" uid="uid://c6wydwtikx8v6" path="res://assets/fonts/Round9x13.ttf" id="2_mipms"]
+
+[node name="Quiz" type="Node2D"]
+script = ExtResource("1_mipms")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -300.0
+offset_right = 300.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 60
+
+[node name="JuicyBar" parent="CanvasLayer/PanelContainer/VBoxContainer" instance=ExtResource("1_hhydg")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+current_value = 1.0
+
+[node name="TopicLabel" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_mipms")
+theme_override_font_sizes/font_size = 60
+text = "23 + 66"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="SpaceLeft" type="Control" parent="CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OptionAButton" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_fonts/font = ExtResource("2_mipms")
+theme_override_font_sizes/font_size = 30
+text = "89"
+
+[node name="OptionBButton" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_fonts/font = ExtResource("2_mipms")
+theme_override_font_sizes/font_size = 30
+text = "89"
+
+[node name="OptionCButton" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_fonts/font = ExtResource("2_mipms")
+theme_override_font_sizes/font_size = 30
+text = "89"
+
+[node name="SpaceRight" type="Control" parent="CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DecreaseTimer" type="Timer" parent="."]
+autostart = true

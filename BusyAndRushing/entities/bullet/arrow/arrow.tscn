@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://glyu7f8bkdxk"]
+
+[ext_resource type="Texture2D" uid="uid://bjrelt7sij80y" path="res://assets/textures/Tiny Swords (Update 010)/Factions/Knights/Troops/Archer/Arrow/Arrow.png" id="1_enjlo"]
+[ext_resource type="Script" uid="uid://bpx35nybgchbd" path="res://entities/bullet/arrow/arrow.gd" id="1_p2jcm"]
+[ext_resource type="Script" uid="uid://c2x2jv4j5iw1w" path="res://utilities/box/hit_box.gd" id="3_ueaj7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_enjlo"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ueaj7"]
+radius = 9.0
+
+[node name="Arrow" type="CharacterBody2D"]
+collision_layer = 32
+collision_mask = 4
+script = ExtResource("1_p2jcm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_enjlo")
+region_enabled = true
+region_rect = Rect2(1, 28, 63, 14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(24, 0)
+shape = SubResource("CircleShape2D_enjlo")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("3_ueaj7")
+metadata/_custom_type_script = ExtResource("3_ueaj7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(24, 0)
+shape = SubResource("CircleShape2D_ueaj7")

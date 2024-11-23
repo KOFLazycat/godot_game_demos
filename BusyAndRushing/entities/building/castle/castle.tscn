@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cv072edt0526i"]
+
+[ext_resource type="Texture2D" uid="uid://baydoeio6qeo3" path="res://assets/textures/Tiny Swords (Update 010)/Factions/Knights/Buildings/Castle/Castle_Blue.png" id="1_7gbh8"]
+[ext_resource type="Script" uid="uid://d24jjphsc7d24" path="res://entities/building/castle/castle.gd" id="1_urf38"]
+[ext_resource type="PackedScene" uid="uid://dch063htskbhx" path="res://ui/hud/juicy_bar/juicy_bar.tscn" id="3_ug1wq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ug1wq"]
+size = Vector2(260, 110)
+
+[node name="Castle" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_urf38")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7gbh8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 55)
+shape = SubResource("RectangleShape2D_ug1wq")
+
+[node name="Marker2DLeft" type="Marker2D" parent="."]
+position = Vector2(-100, -60)
+
+[node name="Marker2DRight" type="Marker2D" parent="."]
+position = Vector2(100, -60)
+
+[node name="JuicyBar" parent="." instance=ExtResource("3_ug1wq")]
+offset_top = -152.0
+offset_bottom = -152.0
+scale = Vector2(0.6, 0.6)

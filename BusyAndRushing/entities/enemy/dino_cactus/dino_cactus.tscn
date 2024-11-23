@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bxomjoieo6gvl"]
 
-[ext_resource type="Script" path="res://entities/enemy/dino_cactus/dino_cactus.gd" id="1_yj7sp"]
+[ext_resource type="Script" uid="uid://ckbu1m3arftri" path="res://entities/enemy/dino_cactus/dino_cactus.gd" id="1_yj7sp"]
 [ext_resource type="Texture2D" uid="uid://b30krxj7npf4n" path="res://assets/textures/enemy/dino_cactus/cactus.png" id="2_kw56q"]
 [ext_resource type="PackedScene" uid="uid://dny8ra53vabyy" path="res://utilities/box/hit_box.tscn" id="3_s7u8q"]
 

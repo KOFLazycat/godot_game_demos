@@ -394,5 +394,5 @@ texture = ExtResource("32_scwki")
 position = Vector2(1060, 350)
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 5.0
 autostart = true

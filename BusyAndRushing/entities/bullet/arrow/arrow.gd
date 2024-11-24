@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var damage: float = 5.0
+@export var damage: float = 0.0
 @export var distance: float = 150.0
 @export var fly_time: float = 0.5
 @export var gravity: float = 1000

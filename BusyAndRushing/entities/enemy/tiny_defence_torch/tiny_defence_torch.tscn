@@ -270,14 +270,14 @@ height = 70.0
 
 [node name="TinyDefenceTorch" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 4
+collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_thsdw")
 metadata/_custom_type_script = ExtResource("1_eqjky")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_eqjky")
-animation = &"die"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -1,8 +1,11 @@
-[gd_scene load_steps=57 format=3 uid="uid://d1yi25j50n8mv"]
+[gd_scene load_steps=61 format=3 uid="uid://d1yi25j50n8mv"]
 
 [ext_resource type="Script" uid="uid://dlms5a6uy1g77" path="res://entities/player/tiny_defence_archer/tiny_defence_archer.gd" id="1_17c0v"]
 [ext_resource type="Script" uid="uid://d12u7cb1er0f" path="res://entities/player/player_base.gd" id="1_50yqe"]
 [ext_resource type="Texture2D" uid="uid://dbtn7i1ovkkun" path="res://assets/textures/Tiny Swords (Update 010)/Factions/Knights/Troops/Archer/Blue/Archer_Blue.png" id="2_vcd73"]
+[ext_resource type="Script" uid="uid://dh4exe7ejyfjl" path="res://addons/godot_state_charts/state_chart.gd" id="4_ixjev"]
+[ext_resource type="Script" uid="uid://bojdn74tmijw" path="res://addons/godot_state_charts/compound_state.gd" id="5_fhukm"]
+[ext_resource type="Script" uid="uid://ccqf4j0u1rpp4" path="res://addons/godot_state_charts/atomic_state.gd" id="6_6ip3s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_17c0v"]
 atlas = ExtResource("2_vcd73")
@@ -402,16 +405,17 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_vcd73"]
 radius = 15.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ip3s"]
+radius = 700.0
+
 [node name="TinyDefenceArcher" type="CharacterBody2D"]
+collision_mask = 0
 script = ExtResource("1_17c0v")
 metadata/_custom_type_script = ExtResource("1_50yqe")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0ahrl")
-animation = &"shot_tilt_up"
-autoplay = "idle"
-frame = 7
-frame_progress = 1.0
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 18)
@@ -419,3 +423,32 @@ shape = SubResource("CircleShape2D_vcd73")
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
+
+[node name="EnemyDetectArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectArea2D"]
+shape = SubResource("CircleShape2D_6ip3s")
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("4_ixjev")
+metadata/_custom_type_script = ExtResource("4_ixjev")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("5_fhukm")
+initial_state = NodePath("Idle")
+metadata/_custom_type_script = ExtResource("5_fhukm")
+
+[node name="Idle" type="Node" parent="StateChart/Root"]
+script = ExtResource("6_6ip3s")
+metadata/_custom_type_script = ExtResource("6_6ip3s")
+
+[node name="Attck" type="Node" parent="StateChart/Root"]
+script = ExtResource("6_6ip3s")
+metadata/_custom_type_script = ExtResource("6_6ip3s")
+
+[node name="Die" type="Node" parent="StateChart/Root"]
+script = ExtResource("6_6ip3s")
+metadata/_custom_type_script = ExtResource("6_6ip3s")
+
+[connection signal="state_entered" from="StateChart/Root/Idle" to="." method="_on_idle_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Attck" to="." method="_on_attck_state_entered"]

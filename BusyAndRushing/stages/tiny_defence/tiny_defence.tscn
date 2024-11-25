@@ -313,12 +313,9 @@ texture_region_size = Vector2i(192, 192)
 0:0/animation_frame_2/duration = 1.0
 0:0/animation_frame_3/duration = 1.0
 0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-13.7011, 55.6011, 19.1178, 57.5128, 19.4365, 76.3121, -14.0198, 75.0375)
 
 [sub_resource type="TileSet" id="TileSet_lcumt"]
 tile_size = Vector2i(64, 64)
-physics_layer_0/collision_layer = 4
-physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_t1y4r")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cafhf"]

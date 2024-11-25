@@ -32,4 +32,3 @@ func on_timer_timeout() -> void:
 	tiny_defence_tnt_right.global_position = marker_2d_right.global_position + Vector2(randf_range(-20, 20), randf_range(-15, 15))
 	tiny_defence_tnt_right.scale = Vector2(0.5, 0.5)
 	add_child(tiny_defence_tnt_right)
-	timer.stop()

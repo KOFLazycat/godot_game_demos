@@ -51,11 +51,8 @@ func fire() -> void:
 	await animated_sprite_2d.animation_finished
 
 
-func on_hurt_box_hurt(hit_box: HitBox, damage: float) -> void:
-	hp = clampf(hp - damage, 0.0, max_hp)
-	var decrease_percent: float = damage / max_hp
-	juicy_bar.decrease_current_value(decrease_percent)
-	if hp == 0.0:
+func check_die() -> void:
+	if hp <= 0:
 		dead = true
 		velocity = Vector2.ZERO
 		animated_sprite_2d.play("die")
@@ -63,13 +60,16 @@ func on_hurt_box_hurt(hit_box: HitBox, damage: float) -> void:
 		queue_free()
 
 
+func on_hurt_box_hurt(hit_box: HitBox, damage: float) -> void:
+	hp = clampf(hp - damage, 0.0, max_hp)
+	var decrease_percent: float = damage / max_hp
+	juicy_bar.decrease_current_value(decrease_percent)
+	check_die()
+
+
 # 进入idle状态
 func _on_idle_state_entered() -> void:
 	velocity = Vector2.ZERO
-	#if global_position.distance_to(castle.global_position) > STOP_DISTANCE:
-		#state_chart.send_event("idle_to_walk")
-	#else:
-		#state_chart.send_event("idle_to_attack")
 
 
 func _on_idle_state_physics_processing(delta: float) -> void:
@@ -78,11 +78,6 @@ func _on_idle_state_physics_processing(delta: float) -> void:
 		state_chart.send_event("idle_to_walk")
 	else:
 		state_chart.send_event("idle_to_attack")
-
-
-# 进入walk状态
-func _on_walk_state_entered() -> void:
-	pass
 
 
 # 在walk状态下处理逻辑

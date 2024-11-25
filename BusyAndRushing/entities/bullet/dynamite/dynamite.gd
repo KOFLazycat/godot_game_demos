@@ -1,31 +1,27 @@
 class_name Dynamite extends CharacterBody2D
 
-@export var damage: float = 0.0
-@export var distance: float = 185.0
+@export var damage: float = 1.0
+@export var distance: float = 180.0
 @export var fly_time: float = 1
-@export var gravity: float = 500
+@export var gravity: float = 400
 ## 箭矢偏移角度最小值
-@export var random_angle_min: float = -0.2
+@export var random_angle_min: float = -0.3
 ## 箭矢偏移角度最大值
-@export var random_angle_max: float = 0.2
+@export var random_angle_max: float = 0.3
 
 @onready var hit_box: HitBox = $HitBox
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 
-#var arrow_flip_h: bool = false
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hit_box.damage = damage
-	#if arrow_flip_h:
-		#distance = distance * (-1)
 	velocity = Vector2(distance / fly_time, -0.5 * gravity * fly_time).rotated(randf_range(random_angle_min, random_angle_max))
+	hit_box.hit.connect(on_hit_box_hit)
 
 
 func _physics_process(delta: float) -> void:
 	rotation += delta * 10
 	velocity.y += gravity * delta
-	#rotation = velocity.angle()
 	var collide:KinematicCollision2D = move_and_collide(velocity * delta)
 	if collide:
 		on_collision()
@@ -33,8 +29,12 @@ func _physics_process(delta: float) -> void:
 
 func on_collision() -> void:
 	set_physics_process(false)
-	var tween = create_tween()
-	tween.tween_interval(randf_range(0.3, 0.7))
-	tween.tween_property(self, "modulate:a", 0, 2.0)
-	await  tween.finished
+	animated_sprite_2d.play("explosion")
+	await animated_sprite_2d.animation_finished
+	queue_free()
+
+
+func on_hit_box_hit(hurt_box: HurtBox) -> void:
+	animated_sprite_2d.play("explosion")
+	await animated_sprite_2d.animation_finished
 	queue_free()

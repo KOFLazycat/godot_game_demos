@@ -17,12 +17,15 @@ class_name TinyDefenceTnt extends EnemyBase
 @onready var dynamite_tscn: PackedScene = preload("res://entities/bullet/dynamite/dynamite.tscn") as PackedScene
 @onready var marker_2d_right: Marker2D = $AnimatedSprite2D/Marker2DRight
 @onready var marker_2d_left: Marker2D = $AnimatedSprite2D/Marker2DLeft
+@onready var enemy_left: Node = get_tree().get_first_node_in_group("enemy_left")
+@onready var enemy_right: Node = get_tree().get_first_node_in_group("enemy_right")
 
 var knockback: Vector2 = Vector2.ZERO
 var dead: bool = false
 var hp: float = 0.0
 var animated_sprite_2d_flip_h: bool = false
 const STOP_DISTANCE: float = 300.0
+const ENEMY_DETECT_DISTANCE: float = 30.0
 
 
 func _ready() -> void:
@@ -34,6 +37,35 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	move_and_slide()
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.is_pressed():
+			var dis: float = get_global_mouse_position().distance_to(global_position)
+			if dis <= ENEMY_DETECT_DISTANCE:
+				add_to_target()
+
+
+func add_to_target() -> void:
+	#var material_out_line = ShaderMaterial.new()
+	#material_out_line.shader = load("res://assets/shaders/out_line.gdshader")
+	if !animated_sprite_2d_flip_h:
+		if GameData.enemy_target_left.find(self) < 0:
+			GameData.enemy_target_left.append(self)
+			animated_sprite_2d.material.set_shader_parameter("width", 2.0)
+		else:
+			# 再次点击取消选中
+			GameData.enemy_target_left.erase(self)
+			animated_sprite_2d.material.set_shader_parameter("width", 0.0)
+	else:
+		if GameData.enemy_target_right.find(self) < 0:
+			GameData.enemy_target_right.append(self)
+			animated_sprite_2d.material.set_shader_parameter("width", 2.0)
+		else:
+			# 再次点击取消选中
+			GameData.enemy_target_right.erase(self)
+			animated_sprite_2d.material.set_shader_parameter("width", 0.0)
 
 
 func fire() -> void:
@@ -55,8 +87,12 @@ func check_die() -> void:
 	if hp <= 0:
 		dead = true
 		velocity = Vector2.ZERO
+		animated_sprite_2d.material.set_shader_parameter("width", 0.0)
 		animated_sprite_2d.play("die")
 		await animated_sprite_2d.animation_finished
+		## 死亡角色移除目标数组
+		GameData.enemy_target_left.erase(self)
+		GameData.enemy_target_right.erase(self)
 		queue_free()
 
 

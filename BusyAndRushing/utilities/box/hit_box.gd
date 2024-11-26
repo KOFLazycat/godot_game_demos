@@ -10,6 +10,6 @@ func _ready() -> void:
 
 
 func on_area_entered(hurt_box: HurtBox) -> void:
-	print("[Hit] %s => %s", owner.name, hurt_box.owner.name)
+	#print("[Hit] %s => %s", owner.name, hurt_box.owner.name)
 	hit.emit(hurt_box)
 	hurt_box.hurt.emit(self, damage)

@@ -14,6 +14,10 @@ config/name="BusyAndRushing"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameData="*res://common/global/game_data/game_data.gd"
+
 [display]
 
 window/size/viewport_width=1280

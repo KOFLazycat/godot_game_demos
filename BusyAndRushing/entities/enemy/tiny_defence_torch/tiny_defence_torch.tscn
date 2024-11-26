@@ -1,6 +1,6 @@
 [gd_scene load_steps=43 format=3 uid="uid://cnlyiqadf51ki"]
 
-[ext_resource type="Script" path="res://entities/enemy/enemy_base.gd" id="1_eqjky"]
+[ext_resource type="Script" uid="uid://cwee4b16w23bo" path="res://entities/enemy/enemy_base.gd" id="1_eqjky"]
 [ext_resource type="Script" uid="uid://diipxjjc7c4rl" path="res://entities/enemy/tiny_defence_torch/tiny_defence_torch.gd" id="1_thsdw"]
 [ext_resource type="Texture2D" uid="uid://dgjokabw6jlvy" path="res://assets/textures/Tiny Swords (Update 010)/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="2_k7tgs"]
 [ext_resource type="Texture2D" uid="uid://c61ad0clhml5o" path="res://assets/textures/Tiny Swords (Update 010)/Factions/Knights/Troops/Dead/Dead.png" id="4_s7duu"]

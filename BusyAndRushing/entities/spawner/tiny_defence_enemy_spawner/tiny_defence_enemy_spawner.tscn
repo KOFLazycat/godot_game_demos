@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cowofwp4kvuas"]
+
+[ext_resource type="Script" uid="uid://dww2swdeoawee" path="res://entities/spawner/tiny_defence_enemy_spawner/tiny_defence_enemy_spawner.gd" id="1_rfa58"]
+
+[node name="TinyDefenceEnemySpawner" type="Node2D"]
+script = ExtResource("1_rfa58")
+spawn_left_position = Vector2(224, 350)
+spawn_right_position = Vector2(1060, 350)
+
+[node name="Timer" type="Timer" parent="."]

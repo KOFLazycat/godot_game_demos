@@ -1,27 +1,36 @@
-extends Node
+extends Control
 
 ## 数字向上跳动像素数
-var number_offset_y: int = 50
+@export var number_offset_y: int = 50
 ## 数字向上跳动持续时间
-var number_move_up_duration: float = 0.25
+@export var number_move_up_duration: float = 0.25
 ## 数字落回持续时间
-var number_move_down_duration: float = 0.5
+@export var number_move_down_duration: float = 0.5
 ## 数字缩小持续时间
-var number_shrink_duration: float = 0.25
+@export var number_shrink_duration: float = 0.25
+## 普通字体颜色
+@export var number_color_normal: Color = "#FFF"
+## 暴击字体颜色
+@export var number_color_critical: Color = "#B22"
+## 伤害为0（miss）时字体颜色
+@export var number_color_zero: Color = "#FFF8"
+
+@onready var round_font = preload("res://assets/fonts/Round9x13.ttf")
 
 ## 展示伤害数字
-func display_number(value: int, position: Vector2, is_critical: bool = false) -> void:
+func display_number(value: int, position: Vector2, is_critical: bool = false, prefix: String = "") -> void:
 	var number: Label = Label.new()
 	number.global_position = position
-	number.text = str(value)
+	number.text = prefix + str(value)
 	number.z_index = 5
 	number.label_settings = LabelSettings.new()
+	number.label_settings.font = round_font
 	
-	var color: Color = "#FFF"
+	var color: Color = number_color_normal
 	if is_critical:
-		color = "#B22"
+		color = number_color_critical
 	if value == 0:
-		color = "#FFF8"
+		color = number_color_zero
 	number.label_settings.font_color = color
 	number.label_settings.font_size = 24
 	number.label_settings.outline_color = "#000"

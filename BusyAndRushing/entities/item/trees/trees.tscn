@@ -1,0 +1,115 @@
+[gd_scene load_steps=16 format=3 uid="uid://ven3e0xpcvr"]
+
+[ext_resource type="Script" uid="uid://w1vhm80xbtda" path="res://entities/item/trees/trees.gd" id="1_r4tck"]
+[ext_resource type="Texture2D" uid="uid://dcjo08o4vqu2n" path="res://assets/textures/Tiny Swords (Update 010)/Resources/Trees/Tree.png" id="2_hun8n"]
+[ext_resource type="Script" uid="uid://dh4exe7ejyfjl" path="res://addons/godot_state_charts/state_chart.gd" id="3_hun8n"]
+[ext_resource type="Script" uid="uid://bojdn74tmijw" path="res://addons/godot_state_charts/compound_state.gd" id="4_2fdb4"]
+[ext_resource type="Script" uid="uid://ccqf4j0u1rpp4" path="res://addons/godot_state_charts/atomic_state.gd" id="5_hotj6"]
+[ext_resource type="Script" uid="uid://jp6o6jg6wmrg" path="res://utilities/box/hurt_box.gd" id="6_s1eo5"]
+[ext_resource type="Script" uid="uid://c5vw5h3jef1hf" path="res://addons/godot_state_charts/transition.gd" id="7_fbn2n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhjbu"]
+atlas = ExtResource("2_hun8n")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pr63h"]
+atlas = ExtResource("2_hun8n")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvc2g"]
+atlas = ExtResource("2_hun8n")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_selkf"]
+atlas = ExtResource("2_hun8n")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pkcyv"]
+atlas = ExtResource("2_hun8n")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjq17"]
+atlas = ExtResource("2_hun8n")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pr63h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhjbu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pr63h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvc2g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_selkf")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pkcyv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjq17")
+}],
+"loop": false,
+"name": &"swing",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s1eo5"]
+radius = 20.0
+
+[node name="Trees" type="Node2D"]
+script = ExtResource("1_r4tck")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pr63h")
+animation = &"idle"
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("6_s1eo5")
+metadata/_custom_type_script = ExtResource("6_s1eo5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 54)
+shape = SubResource("CircleShape2D_s1eo5")
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("3_hun8n")
+metadata/_custom_type_script = ExtResource("3_hun8n")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("4_2fdb4")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_hotj6")
+
+[node name="ToSwing" type="Node" parent="StateChart/Root/Idle"]
+script = ExtResource("7_fbn2n")
+to = NodePath("../../Swing")
+event = &"idle_to_swing"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = ExtResource("7_fbn2n")
+
+[node name="Swing" type="Node" parent="StateChart/Root"]
+script = ExtResource("5_hotj6")
+
+[node name="ToIdle" type="Node" parent="StateChart/Root/Swing"]
+script = ExtResource("7_fbn2n")
+to = NodePath("../../Idle")
+event = &"swing_to_idle"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = ExtResource("7_fbn2n")
+
+[connection signal="state_physics_processing" from="StateChart/Root/Idle" to="." method="_on_idle_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/Swing" to="." method="_on_swing_state_entered"]

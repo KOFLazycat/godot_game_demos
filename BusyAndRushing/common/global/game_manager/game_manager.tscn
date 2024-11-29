@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://q5a4k788xdr3"]
+
+[ext_resource type="Script" uid="uid://dopnsunu042y0" path="res://common/global/game_manager/game_manager.gd" id="1_g3w1e"]
+
+[node name="GameManager" type="Node2D"]
+script = ExtResource("1_g3w1e")
+
+[node name="GameOverTimer" type="Timer" parent="."]
+one_shot = true

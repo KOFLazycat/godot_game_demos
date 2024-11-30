@@ -17,3 +17,17 @@ func load_wood_num() -> int:
 		return game_resource.wood_num
 	else:
 		return 0
+
+
+func save_gold_num(gold_num: int) -> void:
+	var game_resource: GameResource = GameResource.new()
+	game_resource.gold_num = gold_num
+	ResourceSaver.save(game_resource, GAME_RESOURCE_PATH)
+
+
+func load_gold_num() -> int:
+	if ResourceLoader.exists(GAME_RESOURCE_PATH, "GameResource"):
+		var game_resource: GameResource = ResourceLoader.load(GAME_RESOURCE_PATH)
+		return game_resource.gold_num
+	else:
+		return 0

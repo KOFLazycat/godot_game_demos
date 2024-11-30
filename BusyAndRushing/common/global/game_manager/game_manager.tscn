@@ -6,4 +6,3 @@
 script = ExtResource("1_g3w1e")
 
 [node name="GameOverTimer" type="Timer" parent="."]
-one_shot = true

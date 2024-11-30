@@ -20,7 +20,8 @@ func is_game_over() -> bool:
 
 func set_game_over():
 	_is_game_over = true
-	game_over_timer.start()
+	get_tree().paused = true
+	#game_over_timer.start()
 
 
 func on_game_over_timer_timeout() -> void:

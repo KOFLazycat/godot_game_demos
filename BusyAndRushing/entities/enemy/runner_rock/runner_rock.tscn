@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://bc8h4g6x0rbiy"]
+
+[ext_resource type="Script" uid="uid://4nsycwyqy3kh" path="res://entities/enemy/runner_rock/runner_rock.gd" id="1_tpd6y"]
+[ext_resource type="PackedScene" uid="uid://dny8ra53vabyy" path="res://utilities/box/hit_box.tscn" id="3_pce76"]
+[ext_resource type="Texture2D" uid="uid://qgjglysjdjm0" path="res://assets/textures/Tiny Swords (Update 010)/Deco/06.png" id="3_vtuqj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vtuqj"]
+radius = 13.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bu80w"]
+radius = 17.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vtuqj"]
+size = Vector2(9, 205)
+
+[node name="RunnerRock" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_tpd6y")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_vtuqj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_vtuqj")
+
+[node name="HitBox" parent="." instance=ExtResource("3_pce76")]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_bu80w")
+
+[node name="ScoreHitBox" type="Area2D" parent="."]
+position = Vector2(31, -11)
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreHitBox"]
+position = Vector2(-5.5, -74.5)
+shape = SubResource("RectangleShape2D_vtuqj")

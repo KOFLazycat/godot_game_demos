@@ -1,0 +1,237 @@
+[gd_scene load_steps=26 format=4 uid="uid://bhni05dp5lq1p"]
+
+[ext_resource type="Texture2D" uid="uid://yjgxbsyhd0pa" path="res://assets/textures/Tiny Swords (Update 010)/Terrain/Ground/Tilemap_Flat.png" id="1_1usuw"]
+[ext_resource type="PackedScene" uid="uid://d0q4vk4tft80w" path="res://entities/player/runner_player/runner_player.tscn" id="1_g8mui"]
+[ext_resource type="Script" uid="uid://dkmlbwg8xhf27" path="res://stages/runner_world/runner_world.gd" id="1_hcme1"]
+[ext_resource type="Texture2D" uid="uid://f5vo2g8ahyrw" path="res://assets/textures/Tiny Swords (Update 010)/Terrain/Water/Water.png" id="2_wpqxr"]
+[ext_resource type="Texture2D" uid="uid://ovixfg7tl2x6" path="res://assets/textures/Tiny Swords (Update 010)/Terrain/Ground/Tilemap_Elevation.png" id="3_o5lbv"]
+[ext_resource type="Texture2D" uid="uid://cm2w24n1hndn5" path="res://assets/textures/Tiny Swords (Update 010)/Terrain/Water/Rocks/Rocks_01.png" id="4_uhjof"]
+[ext_resource type="Texture2D" uid="uid://kgxxnttul5p2" path="res://assets/textures/Tiny Swords (Update 010)/Terrain/Water/Foam/Foam.png" id="8_h8d60"]
+[ext_resource type="Texture2D" uid="uid://bdwrxumtuf1ht" path="res://assets/textures/dino_texture/cloud.png" id="11_sqx3f"]
+[ext_resource type="PackedScene" uid="uid://cm8l43emuusdn" path="res://utilities/box/hurt_box.tscn" id="12_sqx3f"]
+[ext_resource type="PackedScene" uid="uid://bc8h4g6x0rbiy" path="res://entities/enemy/runner_rock/runner_rock.tscn" id="13_85meu"]
+[ext_resource type="Texture2D" uid="uid://c0e7uuw8wp8sm" path="res://assets/textures/Tiny Swords (Update 010)/Resources/Resources/G_Idle_(NoShadow).png" id="13_sfh2f"]
+[ext_resource type="Theme" uid="uid://c3n53ayg8a6g" path="res://assets/themes/themes.tres" id="14_bfn6u"]
+[ext_resource type="FontFile" uid="uid://c6wydwtikx8v6" path="res://assets/fonts/Round9x13.ttf" id="15_ynb32"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oh0k4"]
+size = Vector2(916.25, 92)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uhjof"]
+texture = ExtResource("2_wpqxr")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_h8d60"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_uhjof")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wpqxr"]
+texture = ExtResource("8_h8d60")
+texture_region_size = Vector2i(192, 192)
+0:0/animation_speed = 10.0
+0:0/animation_mode = 1
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/animation_frame_4/duration = 1.0
+0:0/animation_frame_5/duration = 1.0
+0:0/animation_frame_6/duration = 1.0
+0:0/animation_frame_7/duration = 1.0
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ynb32"]
+texture = ExtResource("4_uhjof")
+texture_region_size = Vector2i(128, 128)
+0:0/animation_speed = 10.0
+0:0/animation_mode = 1
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/animation_frame_4/duration = 1.0
+0:0/animation_frame_5/duration = 1.0
+0:0/animation_frame_6/duration = 1.0
+0:0/animation_frame_7/duration = 1.0
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_frik5"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_wpqxr")
+sources/1 = SubResource("TileSetAtlasSource_ynb32")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hcme1"]
+texture = ExtResource("1_1usuw")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+3:1/0 = 0
+3:2/0 = 0
+3:3/0 = 0
+2:3/0 = 0
+1:3/0 = 0
+0:3/0 = 0
+0:2/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+2:2/0 = 0
+1:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_g8mui"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_hcme1")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_87ktk"]
+texture = ExtResource("3_o5lbv")
+texture_region_size = Vector2i(64, 64)
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_hcme1"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_87ktk")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_85meu"]
+radius = 27.0185
+
+[sub_resource type="LabelSettings" id="LabelSettings_bfn6u"]
+font = ExtResource("15_ynb32")
+font_size = 24
+
+[node name="RunnerWorld" type="Node2D"]
+script = ExtResource("1_hcme1")
+metadata/_edit_vertical_guides_ = [640.0]
+metadata/_edit_horizontal_guides_ = [360.0]
+
+[node name="Wall" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2(1095.88, 280)
+shape = SubResource("RectangleShape2D_oh0k4")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="GroundParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(640, 0)
+
+[node name="Map" type="Node2D" parent="ParallaxBackground/GroundParallaxLayer"]
+
+[node name="WaterTileMapLayer" type="TileMapLayer" parent="ParallaxBackground/GroundParallaxLayer/Map"]
+tile_map_data = PackedByteArray("AAAKAP//AAAAAAAAAAAKAAAAAAAAAAAAAAAKAAEAAAAAAAAAAAAKAAIAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAUAAAAAAAAAAAALAP//AAAAAAAAAAALAAAAAAAAAAAAAAALAAEAAAAAAAAAAAALAAIAAAAAAAAAAAALAAMAAAAAAAAAAAALAAQAAAAAAAAAAAALAAUAAAAAAAAAAAAMAP//AAAAAAAAAAAMAAAAAAAAAAAAAAAMAAEAAAAAAAAAAAAMAAIAAAAAAAAAAAAMAAMAAAAAAAAAAAAMAAQAAAAAAAAAAAAMAAUAAAAAAAAAAAANAP//AAAAAAAAAAANAAAAAAAAAAAAAAANAAEAAAAAAAAAAAANAAIAAAAAAAAAAAANAAMAAAAAAAAAAAANAAQAAAAAAAAAAAANAAUAAAAAAAAAAAAOAP//AAAAAAAAAAAOAAAAAAAAAAAAAAAOAAEAAAAAAAAAAAAOAAIAAAAAAAAAAAAOAAMAAAAAAAAAAAAOAAQAAAAAAAAAAAAOAAUAAAAAAAAAAAAPAP//AAAAAAAAAAAPAAAAAAAAAAAAAAAPAAEAAAAAAAAAAAAPAAIAAAAAAAAAAAAPAAMAAAAAAAAAAAAPAAQAAAAAAAAAAAAPAAUAAAAAAAAAAAAQAP//AAAAAAAAAAAQAAAAAAAAAAAAAAAQAAEAAAAAAAAAAAAQAAIAAAAAAAAAAAAQAAMAAAAAAAAAAAAQAAQAAAAAAAAAAAAQAAUAAAAAAAAAAAARAP//AAAAAAAAAAARAAAAAAAAAAAAAAARAAEAAAAAAAAAAAARAAIAAAAAAAAAAAARAAMAAAAAAAAAAAARAAQAAAAAAAAAAAARAAUAAAAAAAAAAAASAP//AAAAAAAAAAASAAAAAAAAAAAAAAASAAEAAAAAAAAAAAASAAIAAAAAAAAAAAASAAMAAAAAAAAAAAASAAQAAAAAAAAAAAASAAUAAAAAAAAAAAATAP//AAAAAAAAAAATAAAAAAAAAAAAAAATAAEAAAAAAAAAAAATAAIAAAAAAAAAAAATAAMAAAAAAAAAAAATAAQAAAAAAAAAAAATAAUAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_h8d60")
+
+[node name="FoamTileMapLayer" type="TileMapLayer" parent="ParallaxBackground/GroundParallaxLayer/Map"]
+tile_map_data = PackedByteArray("AAAKAAQAAAAAAAAAAAALAAQAAAAAAAAAAAAMAAQAAAAAAAAAAAANAAQAAAAAAAAAAAAOAAQAAAAAAAAAAAAPAAQAAAAAAAAAAAAQAAQAAAAAAAAAAAARAAQAAAAAAAAAAAASAAQAAAAAAAAAAAATAAQAAAAAAAAAAAAKAAUAAQAAAAAAAAA=")
+tile_set = SubResource("TileSet_frik5")
+
+[node name="FlatTileMapLayer" type="TileMapLayer" parent="ParallaxBackground/GroundParallaxLayer/Map"]
+tile_map_data = PackedByteArray("AAALAAMAAAABAAMAAAAKAAMAAAABAAMAAAAMAAMAAAABAAMAAAANAAMAAAABAAMAAAAOAAMAAAABAAMAAAAPAAMAAAABAAMAAAAQAAMAAAABAAMAAAARAAMAAAABAAMAAAATAAMAAAABAAMAAAASAAMAAAABAAMAAAA=")
+tile_set = SubResource("TileSet_g8mui")
+
+[node name="ElevationTileMapLayer" type="TileMapLayer" parent="ParallaxBackground/GroundParallaxLayer/Map"]
+tile_map_data = PackedByteArray("AAAKAAQAAAABAAUAAAALAAQAAAABAAUAAAAMAAQAAAABAAUAAAANAAQAAAABAAUAAAAOAAQAAAABAAUAAAAPAAQAAAABAAUAAAAQAAQAAAABAAUAAAARAAQAAAABAAUAAAASAAQAAAABAAUAAAATAAQAAAABAAUAAAA=")
+tile_set = SubResource("TileSet_hcme1")
+
+[node name="CloudParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(640, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/CloudParallaxLayer"]
+position = Vector2(783, 35)
+scale = Vector2(2, 2)
+texture = ExtResource("11_sqx3f")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/CloudParallaxLayer"]
+position = Vector2(885, 53)
+scale = Vector2(2, 2)
+texture = ExtResource("11_sqx3f")
+
+[node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/CloudParallaxLayer"]
+position = Vector2(1179, 12)
+scale = Vector2(2, 2)
+texture = ExtResource("11_sqx3f")
+
+[node name="RunnerPlayer" parent="." instance=ExtResource("1_g8mui")]
+position = Vector2(832, 199)
+
+[node name="RockGroup" type="Node2D" parent="." groups=["rock"]]
+
+[node name="RockSpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="JumpButton" type="Button" parent="."]
+offset_left = 905.0
+offset_top = 268.0
+offset_right = 1055.0
+offset_bottom = 328.0
+theme = ExtResource("14_bfn6u")
+theme_override_fonts/font = ExtResource("15_ynb32")
+text = "JUMP"
+
+[node name="RunnerRock" parent="." instance=ExtResource("13_85meu")]
+position = Vector2(1400, 215)
+
+[node name="HurtBox" parent="." instance=ExtResource("12_sqx3f")]
+position = Vector2(621, 205)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_85meu")
+
+[node name="Ui" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 114.0
+offset_top = -18.0
+offset_right = 154.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Ui"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 16.493
+anchor_top = 9.485
+anchor_right = 16.493
+anchor_bottom = 9.485
+offset_left = -130.72
+offset_top = -67.4
+offset_right = -2.71997
+offset_bottom = -2.40002
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Ui/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="Ui/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 64)
+layout_mode = 2
+size_flags_vertical = 8
+texture = ExtResource("13_sfh2f")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Ui/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(60, 45)
+layout_mode = 2
+size_flags_vertical = 8
+text = "000"
+label_settings = SubResource("LabelSettings_bfn6u")
+vertical_alignment = 1

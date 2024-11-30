@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bwqwwgpcio61s"]
 
-[ext_resource type="Script" path="res://stages/dino_run/dino_run.gd" id="1_7chjb"]
+[ext_resource type="Script" uid="uid://7tis0t5e2jn1" path="res://stages/dino_run/dino_run.gd" id="1_7chjb"]
 [ext_resource type="Texture2D" uid="uid://u3rmjuhti633" path="res://assets/textures/dino_texture/sky.png" id="2_nlqoj"]
 [ext_resource type="Texture2D" uid="uid://bdwrxumtuf1ht" path="res://assets/textures/dino_texture/cloud.png" id="3_qejmi"]
 [ext_resource type="PackedScene" uid="uid://cehri52robli2" path="res://stages/dino_run/dino_ground.tscn" id="4_20vic"]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8uwj5u441sq3"]
+
+[ext_resource type="Script" uid="uid://u1sw2vnryv0w" path="res://utilities/box/score_body_box.gd" id="1_hsn1l"]
+
+[node name="ScoreBodyBox" type="Area2D"]
+script = ExtResource("1_hsn1l")

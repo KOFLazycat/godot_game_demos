@@ -17,14 +17,14 @@ var runner_rock_tscn: PackedScene = preload("res://entities/enemy/runner_rock/ru
 var current_gold_num: int = 0
 
 func _ready() -> void:
-	LabelUtil.set_label(label)
 	current_gold_num = LoadSaveSystem.load_gold_num()
 	current_gold_num = clampi(current_gold_num, init_gold_num, current_gold_num)
-	LabelUtil.set_label_text(0, current_gold_num, 0.5)
+	set_label_text(0, current_gold_num, 0.5)
 	rock_spawn_timer.wait_time = randf_range(5.0, 10.0)
 	jump_button.pressed.connect(on_jump_button_pressed)
 	rock_spawn_timer.timeout.connect(on_rock_spawn_timer_timeout)
 	hurt_box.hurt.connect(on_hurt_box_hurt)
+	runner_player.obtain_gold.connect(on_runner_player_obtain_gold)
 
 
 func _physics_process(delta: float) -> void:
@@ -32,11 +32,17 @@ func _physics_process(delta: float) -> void:
 	ground_parallax_layer.motion_offset.x -= delta * ground_velocity_x
 
 
+func set_label_text(from: int, to: int, duration: float) -> void:
+	var tween: Tween = create_tween()
+	tween.tween_method(update_label, from, to, duration).set_trans(Tween.TRANS_LINEAR)
+
+
+func update_label(v: int) -> void:
+	label.text = str(v)
+
+
 func on_jump_button_pressed() -> void:
 	runner_player.jump()
-	current_gold_num += runner_player.obtain_gold_num
-	LabelUtil.set_label_text(current_gold_num - runner_player.obtain_gold_num, current_gold_num, 0.5)
-	LoadSaveSystem.save_gold_num(current_gold_num)
 
 
 func on_rock_spawn_timer_timeout() -> void:
@@ -50,3 +56,9 @@ func on_rock_spawn_timer_timeout() -> void:
 
 func on_hurt_box_hurt(hit_box: HitBox, damage: float) -> void:
 	hit_box.owner.queue_free()
+
+
+func on_runner_player_obtain_gold(gold: int) -> void:
+	current_gold_num += gold
+	set_label_text(current_gold_num - gold, current_gold_num, 0.5)
+	LoadSaveSystem.save_gold_num(current_gold_num)

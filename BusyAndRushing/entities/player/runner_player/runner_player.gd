@@ -1,19 +1,22 @@
 class_name RunnerPlayer extends PlayerBase
 
-@export var jump_velocity_y: float = 450.0
+@export var jump_velocity_y: float = 500.0
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var hurt_box: HurtBox = $HurtBox
 @onready var state_chart: StateChart = $StateChart
-@onready var score_hurt_box: Area2D = $ScoreHurtBox
+@onready var score_body_box: ScoreBodyBox = $ScoreBodyBox
+@onready var marker_2d: Marker2D = $Marker2D
 
 var default_gravity: float = ProjectSettings.get("physics/2d/default_gravity") as float
-var obtain_gold_num: int = 10
+var obtain_gold_num: int = 0
 var is_jumping: bool = false
+
+signal obtain_gold(gold_num: int)
 
 
 func _ready() -> void:
 	hurt_box.hurt.connect(on_hurt_box_hurt)
-	score_hurt_box.area_entered.connect(on_score_hurt_box_area_entered)
+	score_body_box.score.connect(on_score_body_box_score)
 
 
 func _physics_process(delta: float) -> void:
@@ -32,8 +35,10 @@ func on_hurt_box_hurt(hit_box: HitBox, damage: float) -> void:
 	GameManager.set_game_over()
 
 
-func on_score_hurt_box_area_entered(area: Area2D) -> void:
-	obtain_gold_num = 0
+func on_score_body_box_score(score_check_box: ScoreCheckBox, score: int) -> void:
+	var is_critical: bool = false
+	DamageNumber.display_number(score, marker_2d.global_position, is_critical, "+")
+	obtain_gold.emit(score)
 
 
 func _on_run_state_entered() -> void:

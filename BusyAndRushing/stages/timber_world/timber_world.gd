@@ -21,10 +21,9 @@ var current_wood_num: int = 0
 
 
 func _ready() -> void:
-	LabelUtil.set_label(label)
 	current_wood_num = LoadSaveSystem.load_wood_num()
 	current_wood_num = clampi(current_wood_num, init_wood_num, current_wood_num)
-	LabelUtil.set_label_text(0, current_wood_num, 0.5)
+	set_label_text(0, current_wood_num, 0.5)
 	decrease_timer.wait_time = decrease_timer_interval
 	chop_button.pressed.connect(on_chop_button_pressed)
 	decrease_timer.timeout.connect(on_decrease_timer_timeout)
@@ -38,14 +37,23 @@ func _physics_process(delta: float) -> void:
 		GameManager.set_game_over()
 
 
+func set_label_text(from: int, to: int, duration: float) -> void:
+	var tween: Tween = create_tween()
+	tween.tween_method(update_label, from, to, duration).set_trans(Tween.TRANS_LINEAR)
+
+
+func update_label(v: int) -> void:
+	label.text = str(v)
+
+
 func on_chop_button_pressed() -> void:
 	decrease_timer.stop()
 	juicy_bar.increase_current_value(increase_percent)
 	timber.choping()
-	# 等待一帧
-	#await get_tree().create_timer(0).timeout
+	# 等待
+	await get_tree().create_timer(0.5).timeout
 	current_wood_num += timber.obtain_wood_num
-	LabelUtil.set_label_text(current_wood_num - timber.obtain_wood_num, current_wood_num, 0.5)
+	set_label_text(current_wood_num - timber.obtain_wood_num, current_wood_num, 0.5)
 	decrease_timer.start()
 	LoadSaveSystem.save_wood_num(current_wood_num)
 

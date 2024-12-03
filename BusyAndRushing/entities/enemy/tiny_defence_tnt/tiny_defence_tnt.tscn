@@ -1,6 +1,6 @@
 [gd_scene load_steps=50 format=3 uid="uid://5baw378awbcj"]
 
-[ext_resource type="Script" uid="uid://cwee4b16w23bo" path="res://entities/enemy/enemy_base.gd" id="1_1s3r4"]
+[ext_resource type="Script" path="res://entities/enemy/enemy_base.gd" id="1_1s3r4"]
 [ext_resource type="Script" uid="uid://d4fhtxuab3j6s" path="res://entities/enemy/tiny_defence_tnt/tiny_defence_tnt.gd" id="1_vjo8q"]
 [ext_resource type="Texture2D" uid="uid://bobdjeb6mmcnt" path="res://assets/textures/Tiny Swords (Update 010)/Factions/Goblins/Troops/TNT/Red/TNT_Red.png" id="2_85jr6"]
 [ext_resource type="PackedScene" uid="uid://dch063htskbhx" path="res://ui/hud/juicy_bar/juicy_bar.tscn" id="2_p8o85"]

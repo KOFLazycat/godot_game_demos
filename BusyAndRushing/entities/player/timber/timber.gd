@@ -1,7 +1,7 @@
 class_name Timber extends PlayerBase
 
-## 每次砍伐能获取树木的数量
-@export var obtain_wood_num: int = 10
+## 每次砍伐能获取的分数
+@export var score_per_chop: int = 1
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -11,7 +11,7 @@ class_name Timber extends PlayerBase
 
 
 func _ready() -> void:
-	hit_box.damage = obtain_wood_num
+	hit_box.damage = score_per_chop
 
 # 砍树
 func choping() -> void:
@@ -26,5 +26,5 @@ func _on_chop_state_entered() -> void:
 	animation_player.play("chop")
 	await animation_player.animation_finished
 	var is_critical: bool = false
-	DamageNumber.display_number(obtain_wood_num, marker_2d.global_position, is_critical, "+")
+	DamageNumber.display_number(score_per_chop, marker_2d.global_position, is_critical, "+")
 	state_chart.send_event("chop_to_idle")

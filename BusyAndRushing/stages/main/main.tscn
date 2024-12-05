@@ -17,7 +17,6 @@ metadata/_edit_horizontal_guides_ = [360.0]
 visible = false
 
 [node name="RunnerWorld" parent="." instance=ExtResource("28_oh0k4")]
-visible = false
 
 [node name="QuizWorld" parent="." instance=ExtResource("29_iled3")]
 visible = false

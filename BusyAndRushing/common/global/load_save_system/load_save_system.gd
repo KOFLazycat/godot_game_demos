@@ -2,32 +2,18 @@ extends Node
 
 const GAME_RESOURCE_PATH: String = "user://game_resource.tres"
 
-var is_load: bool = false
 
+var score: int = 0
 
-func save_wood_num(wood_num: int) -> void:
+func save_score(score: int) -> void:
 	var game_resource: GameResource = GameResource.new()
-	game_resource.wood_num = wood_num
+	game_resource.score = score
 	ResourceSaver.save(game_resource, GAME_RESOURCE_PATH)
 
 
-func load_wood_num() -> int:
+func load_score() -> int:
 	if ResourceLoader.exists(GAME_RESOURCE_PATH, "GameResource"):
 		var game_resource: GameResource = ResourceLoader.load(GAME_RESOURCE_PATH)
-		return game_resource.wood_num
-	else:
-		return 0
-
-
-func save_gold_num(gold_num: int) -> void:
-	var game_resource: GameResource = GameResource.new()
-	game_resource.gold_num = gold_num
-	ResourceSaver.save(game_resource, GAME_RESOURCE_PATH)
-
-
-func load_gold_num() -> int:
-	if ResourceLoader.exists(GAME_RESOURCE_PATH, "GameResource"):
-		var game_resource: GameResource = ResourceLoader.load(GAME_RESOURCE_PATH)
-		return game_resource.gold_num
+		return game_resource.score
 	else:
 		return 0

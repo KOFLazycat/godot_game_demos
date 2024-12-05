@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cw4nr723icpq4"]
+[gd_scene load_steps=7 format=3 uid="uid://cw4nr723icpq4"]
 
 [ext_resource type="Script" uid="uid://bcbuqd47p15f3" path="res://stages/timber_world/timber_world.gd" id="1_7lee5"]
 [ext_resource type="PackedScene" uid="uid://dch063htskbhx" path="res://ui/hud/juicy_bar/juicy_bar.tscn" id="1_cchc7"]
@@ -6,11 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://mx3cvigesyka" path="res://entities/player/timber/timber.tscn" id="3_hh70d"]
 [ext_resource type="Theme" uid="uid://c3n53ayg8a6g" path="res://assets/themes/themes.tres" id="4_igvej"]
 [ext_resource type="FontFile" uid="uid://c6wydwtikx8v6" path="res://assets/fonts/Round9x13.ttf" id="5_7gtgp"]
-[ext_resource type="Texture2D" uid="uid://86edyq1hyo0u" path="res://assets/textures/Tiny Swords (Update 010)/Resources/Resources/W_Idle_(NoShadow).png" id="7_hh70d"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_7lee5"]
-font = ExtResource("5_7gtgp")
-font_size = 24
 
 [node name="TimberWorld" type="Node2D"]
 script = ExtResource("1_7lee5")
@@ -40,55 +35,8 @@ theme = ExtResource("4_igvej")
 theme_override_fonts/font = ExtResource("5_7gtgp")
 text = "choping"
 
+[node name="ButtonDisableTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [node name="DecreaseTimer" type="Timer" parent="."]
-
-[node name="SaveDataTimer" type="Timer" parent="."]
-wait_time = 10.0
-autostart = true
-
-[node name="Ui" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="Ui"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 16.493
-anchor_top = 9.485
-anchor_right = 16.493
-anchor_bottom = 9.485
-offset_left = -130.72
-offset_top = -67.4
-offset_right = -2.71997
-offset_bottom = -2.40002
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Ui/PanelContainer"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="Label" type="Label" parent="Ui/PanelContainer/HBoxContainer"]
-custom_minimum_size = Vector2(60, 45)
-layout_mode = 2
-size_flags_vertical = 8
-text = "000"
-label_settings = SubResource("LabelSettings_7lee5")
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="Ui/PanelContainer/HBoxContainer"]
-custom_minimum_size = Vector2(32, 64)
-layout_mode = 2
-size_flags_vertical = 8
-texture = ExtResource("7_hh70d")
-expand_mode = 3
-stretch_mode = 5

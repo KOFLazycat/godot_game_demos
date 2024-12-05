@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddm1bfln8gijx"]
-
-[ext_resource type="Script" uid="uid://l242dw3cyo7h" path="res://utilities/box/score_check_box.gd" id="1_bm1ec"]
-
-[node name="ScoreCheckBox" type="Area2D"]
-collision_layer = 0
-collision_mask = 128
-script = ExtResource("1_bm1ec")

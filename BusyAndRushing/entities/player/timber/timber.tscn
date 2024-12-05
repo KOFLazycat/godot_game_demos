@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://mx3cvigesyka"]
 
 [ext_resource type="Script" uid="uid://d2cf6m70a5trn" path="res://entities/player/timber/timber.gd" id="1_e3rsg"]
-[ext_resource type="Script" uid="uid://d12u7cb1er0f" path="res://entities/player/player_base.gd" id="1_silwv"]
+[ext_resource type="Script" path="res://entities/player/player_base.gd" id="1_silwv"]
 [ext_resource type="Texture2D" uid="uid://cjdqtaewjdt35" path="res://assets/textures/Tiny Swords (Update 010)/Factions/Knights/Troops/Pawn/Blue/Pawn_Blue.png" id="3_0t8qv"]
 [ext_resource type="Script" uid="uid://c2x2jv4j5iw1w" path="res://utilities/box/hit_box.gd" id="4_00036"]
 [ext_resource type="Script" uid="uid://dh4exe7ejyfjl" path="res://addons/godot_state_charts/state_chart.gd" id="5_w0ng3"]

@@ -1,9 +1,9 @@
 class_name Dynamite extends CharacterBody2D
 
 @export var damage: float = 1.0
-@export var distance: float = 180.0
+@export var distance: float = 280.0
 @export var fly_time: float = 1
-@export var gravity: float = 400
+@export var gravity: float = 500
 ## 箭矢偏移角度最小值
 @export var random_angle_min: float = -0.3
 ## 箭矢偏移角度最大值

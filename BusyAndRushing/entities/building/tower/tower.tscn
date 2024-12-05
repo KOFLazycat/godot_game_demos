@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://boqiovxxwfhxg"]
+
+[ext_resource type="Script" uid="uid://rthp1fhm8arc" path="res://entities/building/tower/tower.gd" id="1_2hmm0"]
+[ext_resource type="Texture2D" uid="uid://co8y2tgeadion" path="res://assets/textures/Tiny Swords (Update 010)/Factions/Knights/Buildings/Tower/Tower_Blue.png" id="1_7b7gr"]
+[ext_resource type="Script" uid="uid://jp6o6jg6wmrg" path="res://utilities/box/hurt_box.gd" id="2_2hmm0"]
+[ext_resource type="PackedScene" uid="uid://dch063htskbhx" path="res://ui/hud/juicy_bar/juicy_bar.tscn" id="3_fwmk4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gvgmq"]
+size = Vector2(68, 119)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gw17s"]
+size = Vector2(84, 169)
+
+[node name="Tower" type="StaticBody2D" groups=["tower"]]
+collision_layer = 0
+collision_mask = 64
+script = ExtResource("1_2hmm0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7b7gr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 27.5)
+shape = SubResource("RectangleShape2D_gvgmq")
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("2_2hmm0")
+metadata/_custom_type_script = ExtResource("2_2hmm0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 13.5)
+shape = SubResource("RectangleShape2D_gw17s")
+
+[node name="JuicyBar" parent="." instance=ExtResource("3_fwmk4")]
+offset_top = 120.0
+offset_bottom = 120.0
+scale = Vector2(0.3, 0.3)

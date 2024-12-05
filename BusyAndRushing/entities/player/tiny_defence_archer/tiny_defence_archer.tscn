@@ -1,7 +1,7 @@
 [gd_scene load_steps=61 format=3 uid="uid://d1yi25j50n8mv"]
 
 [ext_resource type="Script" uid="uid://dlms5a6uy1g77" path="res://entities/player/tiny_defence_archer/tiny_defence_archer.gd" id="1_17c0v"]
-[ext_resource type="Script" uid="uid://d12u7cb1er0f" path="res://entities/player/player_base.gd" id="1_50yqe"]
+[ext_resource type="Script" path="res://entities/player/player_base.gd" id="1_50yqe"]
 [ext_resource type="Texture2D" uid="uid://dbtn7i1ovkkun" path="res://assets/textures/Tiny Swords (Update 010)/Factions/Knights/Troops/Archer/Blue/Archer_Blue.png" id="2_vcd73"]
 [ext_resource type="Script" uid="uid://dh4exe7ejyfjl" path="res://addons/godot_state_charts/state_chart.gd" id="4_ixjev"]
 [ext_resource type="Script" uid="uid://bojdn74tmijw" path="res://addons/godot_state_charts/compound_state.gd" id="5_fhukm"]
@@ -414,12 +414,6 @@ metadata/_custom_type_script = ExtResource("1_50yqe")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0ahrl")
 animation = &"idle"
-
-[node name="Marker2DLeft" type="Marker2D" parent="AnimatedSprite2D"]
-position = Vector2(-40, -30)
-
-[node name="Marker2DRight" type="Marker2D" parent="AnimatedSprite2D"]
-position = Vector2(40, -30)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 18)

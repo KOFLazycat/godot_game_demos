@@ -357,7 +357,7 @@ radius = 16.0
 radius = 19.0
 height = 64.0
 
-[node name="TinyDefenceTnt" type="CharacterBody2D"]
+[node name="TinyDefenceTnt" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_vjo8q")
@@ -383,9 +383,9 @@ position = Vector2(0, 18)
 shape = SubResource("CircleShape2D_vjo8q")
 
 [node name="JuicyBar" parent="." instance=ExtResource("2_p8o85")]
-offset_top = -60.0
-offset_bottom = -60.0
-scale = Vector2(0.2, 0.3)
+offset_top = 50.0
+offset_bottom = 50.0
+scale = Vector2(0.2, 0.2)
 
 [node name="HurtBox" type="Area2D" parent="."]
 visible = false
@@ -423,6 +423,12 @@ event = &"idle_to_attack"
 delay_in_seconds = "1.0"
 metadata/_custom_type_script = ExtResource("10_l0ffc")
 
+[node name="ToDie" type="Node" parent="StateChart/Root/Idle"]
+script = ExtResource("10_l0ffc")
+to = NodePath("../../Die")
+event = &"to_die"
+delay_in_seconds = "0.0"
+
 [node name="Walk" type="Node" parent="StateChart/Root"]
 script = ExtResource("8_8n35l")
 
@@ -432,6 +438,12 @@ to = NodePath("../../Idle")
 event = &"walk_to_idle"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = ExtResource("10_l0ffc")
+
+[node name="ToDie" type="Node" parent="StateChart/Root/Walk"]
+script = ExtResource("10_l0ffc")
+to = NodePath("../../Die")
+event = &"to_die"
+delay_in_seconds = "0.0"
 
 [node name="Attack" type="Node" parent="StateChart/Root"]
 script = ExtResource("8_8n35l")
@@ -443,8 +455,18 @@ event = &"attack_to_idle"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = ExtResource("10_l0ffc")
 
+[node name="ToDie" type="Node" parent="StateChart/Root/Attack"]
+script = ExtResource("10_l0ffc")
+to = NodePath("../../Die")
+event = &"to_die"
+delay_in_seconds = "0.0"
+
+[node name="Die" type="Node" parent="StateChart/Root"]
+script = ExtResource("8_8n35l")
+
 [connection signal="state_entered" from="StateChart/Root/Idle" to="." method="_on_idle_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Idle" to="." method="_on_idle_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Walk" to="." method="_on_walk_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Walk" to="." method="_on_walk_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Attack" to="." method="_on_attack_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Die" to="." method="_on_die_state_entered"]

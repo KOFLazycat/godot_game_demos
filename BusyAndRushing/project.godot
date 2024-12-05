@@ -16,11 +16,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameData="*res://common/global/game_data/game_data.gd"
 DamageNumber="*res://common/global/damage_number/damage_number.tscn"
 LoadSaveSystem="*res://common/global/load_save_system/load_save_system.tscn"
 GameManager="*res://common/global/game_manager/game_manager.tscn"
-LabelUtil="*res://utilities/label_util/label_util.gd"
 RandUtil="*res://utilities/rand_util/rand_util.gd"
 
 [display]

@@ -1,9 +1,8 @@
-[gd_scene load_steps=70 format=3 uid="uid://d1yi25j50n8mv"]
+[gd_scene load_steps=69 format=3 uid="uid://d1yi25j50n8mv"]
 
 [ext_resource type="Script" uid="uid://dlms5a6uy1g77" path="res://entities/player/tiny_defence_archer/tiny_defence_archer.gd" id="1_17c0v"]
 [ext_resource type="Script" path="res://entities/player/player_base.gd" id="1_50yqe"]
 [ext_resource type="Texture2D" uid="uid://dbtn7i1ovkkun" path="res://assets/textures/Tiny Swords (Update 010)/Factions/Knights/Troops/Archer/Blue/Archer_Blue.png" id="2_vcd73"]
-[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="3_0ahrl"]
 [ext_resource type="Script" uid="uid://dh4exe7ejyfjl" path="res://addons/godot_state_charts/state_chart.gd" id="4_ixjev"]
 [ext_resource type="Script" uid="uid://bojdn74tmijw" path="res://addons/godot_state_charts/compound_state.gd" id="5_fhukm"]
 [ext_resource type="Script" uid="uid://ccqf4j0u1rpp4" path="res://addons/godot_state_charts/atomic_state.gd" id="6_6ip3s"]
@@ -496,12 +495,6 @@ radius = 15.0
 collision_mask = 0
 script = ExtResource("1_17c0v")
 metadata/_custom_type_script = ExtResource("1_50yqe")
-
-[node name="StateChartDebugger" parent="." instance=ExtResource("3_0ahrl")]
-offset_top = -450.0
-offset_right = 510.0
-offset_bottom = -90.0
-initial_node_to_watch = NodePath("../StateChart")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_ogxo6")

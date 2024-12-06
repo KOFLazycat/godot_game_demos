@@ -1,12 +1,12 @@
 class_name RunnerPlayer extends PlayerBase
 
-@export var jump_velocity_y: float = 500.0
+@export var jump_velocity_y: float = 450.0
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hurt_box: HurtBox = $HurtBox
 @onready var state_chart: StateChart = $StateChart
 
-var default_gravity: float = 800.0
+var default_gravity: float = 600.0
 var is_jumping: bool = false
 
 signal runner_player_die

@@ -6,12 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://cowofwp4kvuas" path="res://entities/spawner/tiny_defence_enemy_spawner/tiny_defence_enemy_spawner.tscn" id="5_bvqus"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_podi1"]
-size = Vector2(639, 36.25)
+size = Vector2(671.5, 36.25)
 
 [node name="TinyDefenceWorld" type="Node2D"]
 script = ExtResource("1_gv0ro")
-metadata/_edit_vertical_guides_ = [640.0, 1252.0]
-metadata/_edit_horizontal_guides_ = [360.0, 441.0]
 
 [node name="Tower" parent="." instance=ExtResource("1_7fdf2")]
 position = Vector2(750, 573)
@@ -29,5 +27,5 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
-position = Vector2(989, 689)
+position = Vector2(972.75, 689)
 shape = SubResource("RectangleShape2D_podi1")

@@ -1,12 +1,86 @@
-[gd_scene load_steps=61 format=3 uid="uid://d1yi25j50n8mv"]
+[gd_scene load_steps=70 format=3 uid="uid://d1yi25j50n8mv"]
 
 [ext_resource type="Script" uid="uid://dlms5a6uy1g77" path="res://entities/player/tiny_defence_archer/tiny_defence_archer.gd" id="1_17c0v"]
 [ext_resource type="Script" path="res://entities/player/player_base.gd" id="1_50yqe"]
 [ext_resource type="Texture2D" uid="uid://dbtn7i1ovkkun" path="res://assets/textures/Tiny Swords (Update 010)/Factions/Knights/Troops/Archer/Blue/Archer_Blue.png" id="2_vcd73"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="3_0ahrl"]
 [ext_resource type="Script" uid="uid://dh4exe7ejyfjl" path="res://addons/godot_state_charts/state_chart.gd" id="4_ixjev"]
 [ext_resource type="Script" uid="uid://bojdn74tmijw" path="res://addons/godot_state_charts/compound_state.gd" id="5_fhukm"]
 [ext_resource type="Script" uid="uid://ccqf4j0u1rpp4" path="res://addons/godot_state_charts/atomic_state.gd" id="6_6ip3s"]
 [ext_resource type="Script" uid="uid://c5vw5h3jef1hf" path="res://addons/godot_state_charts/transition.gd" id="7_0sihj"]
+
+[sub_resource type="Shader" id="Shader_0sihj"]
+code = "shader_type canvas_item;
+
+uniform vec4 color : source_color = vec4(1.0);
+uniform float width : hint_range(0, 10) = 1.0;
+uniform int pattern : hint_range(0, 2) = 0; // diamond, circle, square
+uniform bool inside = false;
+uniform bool add_margins = true; // only useful when inside is false
+
+void vertex() {
+	if (add_margins) {
+		VERTEX += (UV * 2.0 - 1.0) * width;
+	}
+}
+
+bool hasContraryNeighbour(vec2 uv, vec2 texture_pixel_size, sampler2D texture) {
+	for (float i = -ceil(width); i <= ceil(width); i++) {
+		float x = abs(i) > width ? width * sign(i) : i;
+		float offset;
+
+		if (pattern == 0) {
+			offset = width - abs(x);
+		} else if (pattern == 1) {
+			offset = floor(sqrt(pow(width + 0.5, 2) - x * x));
+		} else if (pattern == 2) {
+			offset = width;
+		}
+
+		for (float j = -ceil(offset); j <= ceil(offset); j++) {
+			float y = abs(j) > offset ? offset * sign(j) : j;
+			vec2 xy = uv + texture_pixel_size * vec2(x, y);
+
+			if ((xy != clamp(xy, vec2(0.0), vec2(1.0)) || texture(texture, xy).a == 0.0) == inside) {
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+void fragment() {
+	vec2 uv = UV;
+
+	if (add_margins) {
+		vec2 texture_pixel_size = vec2(1.0) / (vec2(1.0) / TEXTURE_PIXEL_SIZE + vec2(width * 2.0));
+
+		uv = (uv - texture_pixel_size * width) * TEXTURE_PIXEL_SIZE / texture_pixel_size;
+
+		if (uv != clamp(uv, vec2(0.0), vec2(1.0))) {
+			COLOR.a = 0.0;
+		} else {
+			COLOR = texture(TEXTURE, uv);
+		}
+	} else {
+		COLOR = texture(TEXTURE, uv);
+	}
+
+	if ((COLOR.a > 0.0) == inside && hasContraryNeighbour(uv, TEXTURE_PIXEL_SIZE, TEXTURE)) {
+		COLOR.rgb = inside ? mix(COLOR.rgb, color.rgb, color.a) : color.rgb;
+		COLOR.a += (1.0 - COLOR.a) * color.a;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ogxo6"]
+resource_local_to_scene = true
+shader = SubResource("Shader_0sihj")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 2.0
+shader_parameter/pattern = 2
+shader_parameter/inside = false
+shader_parameter/add_margins = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_17c0v"]
 atlas = ExtResource("2_vcd73")
@@ -406,18 +480,57 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_vcd73"]
 radius = 15.0
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0ahrl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ogxo6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yygf2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_haifh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pmx7x"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ucmv1"]
+
 [node name="TinyDefenceArcher" type="CharacterBody2D"]
 collision_mask = 0
 script = ExtResource("1_17c0v")
 metadata/_custom_type_script = ExtResource("1_50yqe")
 
+[node name="StateChartDebugger" parent="." instance=ExtResource("3_0ahrl")]
+offset_top = -450.0
+offset_right = 510.0
+offset_bottom = -90.0
+initial_node_to_watch = NodePath("../StateChart")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_ogxo6")
 sprite_frames = SubResource("SpriteFrames_0ahrl")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 18)
 shape = SubResource("CircleShape2D_vcd73")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(60, 60)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0ahrl")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ogxo6")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_yygf2")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_haifh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_pmx7x")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ucmv1")
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("4_ixjev")
@@ -439,6 +552,12 @@ event = &"idle_to_attack"
 delay_in_seconds = "1.0"
 metadata/_custom_type_script = ExtResource("7_0sihj")
 
+[node name="ToRage" type="Node" parent="StateChart/Root/Idle"]
+script = ExtResource("7_0sihj")
+to = NodePath("../../Rage")
+event = &"to_rage"
+delay_in_seconds = "0.0"
+
 [node name="Attck" type="Node" parent="StateChart/Root"]
 script = ExtResource("6_6ip3s")
 metadata/_custom_type_script = ExtResource("6_6ip3s")
@@ -446,10 +565,32 @@ metadata/_custom_type_script = ExtResource("6_6ip3s")
 [node name="ToIdle" type="Node" parent="StateChart/Root/Attck"]
 script = ExtResource("7_0sihj")
 to = NodePath("../../Idle")
-event = &"attack_to_idle"
+event = &"to_idle"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = ExtResource("7_0sihj")
+
+[node name="ToRage" type="Node" parent="StateChart/Root/Attck"]
+script = ExtResource("7_0sihj")
+to = NodePath("../../Rage")
+event = &"to_rage"
+delay_in_seconds = "0.0"
+
+[node name="Rage" type="Node" parent="StateChart/Root"]
+script = ExtResource("6_6ip3s")
+
+[node name="ToIdle" type="Node" parent="StateChart/Root/Rage"]
+script = ExtResource("7_0sihj")
+to = NodePath("../../Idle")
+event = &"to_idle"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = ExtResource("7_0sihj")
+
+[node name="PowerIntervalTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
 
 [connection signal="state_entered" from="StateChart/Root/Idle" to="." method="_on_idle_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Idle" to="." method="_on_idle_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Attck" to="." method="_on_attck_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Rage" to="." method="_on_rage_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/Rage" to="." method="_on_rage_state_exited"]

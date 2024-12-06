@@ -1,4 +1,4 @@
-extends Node2D
+class_name TimberWorld extends Node2D
 
 ## 每秒递减百分比
 @export var decrease_percent: float = 0.01
@@ -13,6 +13,8 @@ extends Node2D
 @onready var chop_button: Button = $ChopButton
 @onready var button_disable_timer: Timer = $ButtonDisableTimer
 @onready var decrease_timer: Timer = $DecreaseTimer
+
+signal timber_world_game_over
 
 
 func _ready() -> void:
@@ -40,7 +42,7 @@ func on_decrease_timer_timeout() -> void:
 
 
 func on_juicy_bar_empty() -> void:
-	GameManager.set_game_over()
+	timber_world_game_over.emit()
 
 
 func on_button_disable_timer_timeout() -> void:

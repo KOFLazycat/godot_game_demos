@@ -1,6 +1,6 @@
 class_name Dynamite extends CharacterBody2D
 
-@export var damage: float = 1.0
+@export var damage: float = 5.0
 @export var distance: float = 280.0
 @export var fly_time: float = 1
 @export var gravity: float = 500

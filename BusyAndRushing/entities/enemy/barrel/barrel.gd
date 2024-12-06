@@ -29,6 +29,7 @@ func _physics_process(delta: float) -> void:
 func get_score() -> void:
 	var is_critical: bool = false
 	DamageNumber.display_number(score_per_barrel, marker_2d.global_position, is_critical, "+")
+	GameManager.add_game_score(score_per_barrel)
 	juicy_bar.decrease_current_value(1.0)
 
 

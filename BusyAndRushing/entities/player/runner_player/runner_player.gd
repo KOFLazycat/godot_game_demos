@@ -9,7 +9,7 @@ class_name RunnerPlayer extends PlayerBase
 var default_gravity: float = 800.0
 var is_jumping: bool = false
 
-signal runner_game_over
+signal runner_player_die
 
 func _ready() -> void:
 	hurt_box.hurt.connect(on_hurt_box_hurt)
@@ -51,8 +51,8 @@ func _on_jump_state_physics_processing(delta: float) -> void:
 
 
 func _on_die_state_entered() -> void:
-	is_jumping = false
+	is_jumping = true
 	velocity = Vector2.ZERO
 	animated_sprite_2d.play("hurt")
 	await animated_sprite_2d.animation_finished
-	runner_game_over.emit()
+	runner_player_die.emit()

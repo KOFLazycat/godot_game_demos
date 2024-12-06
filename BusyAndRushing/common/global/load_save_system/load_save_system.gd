@@ -3,11 +3,9 @@ extends Node
 const GAME_RESOURCE_PATH: String = "user://game_resource.tres"
 
 
-var score: int = 0
-
-func save_score(score: int) -> void:
+func save_score(s: int) -> void:
 	var game_resource: GameResource = GameResource.new()
-	game_resource.score = score
+	game_resource.score = s
 	ResourceSaver.save(game_resource, GAME_RESOURCE_PATH)
 
 

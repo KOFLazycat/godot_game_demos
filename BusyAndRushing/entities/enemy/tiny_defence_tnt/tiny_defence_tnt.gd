@@ -7,6 +7,8 @@ class_name TinyDefenceTnt extends EnemyBase
 @export var knockback_recovery: float = 3.5
 ## 攻击间隔
 #@export var attack_interval: float = 2.0
+## 每个敌人死亡得分
+@export var score_per_tnt: int = 10
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var tower = get_tree().get_first_node_in_group("tower")
@@ -17,6 +19,8 @@ class_name TinyDefenceTnt extends EnemyBase
 @onready var dynamite_tscn: PackedScene = preload("res://entities/bullet/dynamite/dynamite.tscn") as PackedScene
 @onready var marker_2d_right: Marker2D = $AnimatedSprite2D/Marker2DRight
 @onready var marker_2d_left: Marker2D = $AnimatedSprite2D/Marker2DLeft
+@onready var marker_2d: Marker2D = $AnimatedSprite2D/Marker2D
+@onready var marker_2d_2: Marker2D = $AnimatedSprite2D/Marker2D2
 
 var knockback: Vector2 = Vector2.ZERO
 var current_hp: float = 0.0
@@ -56,6 +60,8 @@ func on_hurt_box_hurt(hit_box: HitBox, damage: float) -> void:
 	current_hp = clampf(current_hp - damage, 0.0, max_hp)
 	var decrease_percent: float = damage / max_hp
 	juicy_bar.decrease_current_value(decrease_percent)
+	var is_critical: bool = true
+	DamageNumber.display_number(damage, marker_2d_2.global_position, is_critical, "-")
 
 
 # 进入idle状态
@@ -92,5 +98,8 @@ func _on_die_state_entered() -> void:
 	velocity = Vector2.ZERO
 	animated_sprite_2d.material.set_shader_parameter("width", 0.0)
 	animated_sprite_2d.play("die")
+	var is_critical: bool = false
+	DamageNumber.display_number(score_per_tnt, marker_2d.global_position, is_critical, "+")
+	GameManager.add_game_score(score_per_tnt)
 	await animated_sprite_2d.animation_finished
 	queue_free()

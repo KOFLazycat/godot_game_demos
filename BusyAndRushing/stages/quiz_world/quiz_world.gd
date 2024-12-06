@@ -1,9 +1,11 @@
 extends Node2D
 
 ## 每秒递减百分比
-@export var decrease_percent: float = 0.1
+@export var decrease_percent: float = 0.05
 ## 刷新百分比
 @export var increase_percent: float = 1.0
+## 答对每道题得分
+@export var score_per_quiz: int = 3
 
 @onready var juicy_bar: JucyBar = $JuicyBar
 @onready var question_label: Label = $QuestionLabel
@@ -14,10 +16,11 @@ extends Node2D
 @onready var sheep_answer_tscn: PackedScene = preload("res://entities/item/sheep_answer/sheep_answer.tscn") as PackedScene
 @onready var sheep_group: Node2D = $SheepGroup
 
-
 var num_a: int = 0
 var num_b: int = 0
 var num_result: int = 0
+
+signal quiz_world_game_over
 
 
 func _ready() -> void:
@@ -43,6 +46,9 @@ func generate_question() -> void:
 	sheep_answer_left.global_position = marker_2d_left.global_position
 	sheep_answer_mid.global_position = marker_2d_mid.global_position
 	sheep_answer_right.global_position = marker_2d_right.global_position
+	sheep_answer_left.score_per_quiz = score_per_quiz
+	sheep_answer_mid.score_per_quiz = score_per_quiz
+	sheep_answer_right.score_per_quiz = score_per_quiz
 	sheep_answer_left.right_answer = str(num_result)
 	sheep_answer_mid.right_answer = str(num_result)
 	sheep_answer_right.right_answer = str(num_result)
@@ -79,7 +85,7 @@ func on_decrease_timer_timeout() -> void:
 
 
 func on_juicy_bar_empty() -> void:
-	GameManager.set_game_over()
+	quiz_world_game_over.emit()
 
 
 func on_sheep_answer_select_result(is_correct: bool) -> void:
@@ -87,8 +93,9 @@ func on_sheep_answer_select_result(is_correct: bool) -> void:
 		await get_tree().create_timer(0.8).timeout
 		decrease_timer.stop()
 		juicy_bar.increase_current_value(increase_percent)
+		GameManager.add_game_score(score_per_quiz)
 		decrease_timer.start()
 		clean_sheep()
 		generate_question()
 	else:
-		GameManager.set_game_over()
+		quiz_world_game_over.emit()

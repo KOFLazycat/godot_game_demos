@@ -27,4 +27,5 @@ func _on_chop_state_entered() -> void:
 	await animation_player.animation_finished
 	var is_critical: bool = false
 	DamageNumber.display_number(score_per_chop, marker_2d.global_position, is_critical, "+")
+	GameManager.add_game_score(score_per_chop)
 	state_chart.send_event("chop_to_idle")

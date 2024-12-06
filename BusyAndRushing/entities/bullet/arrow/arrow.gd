@@ -1,6 +1,6 @@
 class_name Arrow extends CharacterBody2D
 
-@export var damage: float = 5.0
+@export var damage: float = 2.0
 @export var distance: float = 350.0
 @export var fly_time: float = 0.8
 @export var gravity: float = 1000

@@ -377,6 +377,12 @@ position = Vector2(61, -33)
 [node name="Marker2DLeft" type="Marker2D" parent="AnimatedSprite2D"]
 position = Vector2(-61, -33)
 
+[node name="Marker2D" type="Marker2D" parent="AnimatedSprite2D"]
+position = Vector2(-13, 0)
+
+[node name="Marker2D2" type="Marker2D" parent="AnimatedSprite2D"]
+position = Vector2(-12, -43)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2(0, 18)

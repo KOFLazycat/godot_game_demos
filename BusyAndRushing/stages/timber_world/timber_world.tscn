@@ -35,8 +35,4 @@ theme = ExtResource("4_igvej")
 theme_override_fonts/font = ExtResource("5_7gtgp")
 text = "choping"
 
-[node name="ButtonDisableTimer" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
-
 [node name="DecreaseTimer" type="Timer" parent="."]

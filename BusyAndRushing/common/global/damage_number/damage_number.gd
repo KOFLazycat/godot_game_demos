@@ -18,9 +18,9 @@ extends Control
 @onready var round_font = preload("res://assets/fonts/Round9x13.ttf")
 
 ## 展示伤害数字
-func display_number(value: int, position: Vector2, is_critical: bool = false, prefix: String = "") -> void:
+func display_number(value: int, pos: Vector2, is_critical: bool = false, prefix: String = "") -> void:
 	var number: Label = Label.new()
-	number.global_position = position
+	number.global_position = pos
 	number.text = prefix + str(value)
 	number.z_index = 5
 	number.label_settings = LabelSettings.new()

@@ -11,7 +11,6 @@ class_name TimberWorld extends Node2D
 @onready var trees: Trees = $Trees
 @onready var timber: Timber = $Timber
 @onready var chop_button: Button = $ChopButton
-@onready var button_disable_timer: Timer = $ButtonDisableTimer
 @onready var decrease_timer: Timer = $DecreaseTimer
 
 signal timber_world_game_over
@@ -21,8 +20,14 @@ func _ready() -> void:
 	decrease_timer.wait_time = decrease_timer_interval
 	chop_button.pressed.connect(on_chop_button_pressed)
 	decrease_timer.timeout.connect(on_decrease_timer_timeout)
-	button_disable_timer.timeout.connect(on_button_disable_timer_timeout)
 	juicy_bar.empty.connect(on_juicy_bar_empty)
+	chop_button.set_deferred("disabled", true)
+	chop_button.set_deferred("visible", false)
+
+
+func game_world_start() -> void:
+	chop_button.set_deferred("disabled", false)
+	chop_button.set_deferred("visible", true)
 	decrease_timer.start()
 
 
@@ -34,7 +39,7 @@ func on_chop_button_pressed() -> void:
 	# 等待
 	await get_tree().create_timer(0.5).timeout
 	decrease_timer.start()
-	button_disable_timer.start()
+	chop_button.set_deferred("disabled", false)
 
 
 func on_decrease_timer_timeout() -> void:
@@ -43,7 +48,3 @@ func on_decrease_timer_timeout() -> void:
 
 func on_juicy_bar_empty() -> void:
 	timber_world_game_over.emit()
-
-
-func on_button_disable_timer_timeout() -> void:
-	chop_button.set_deferred("disabled", false)

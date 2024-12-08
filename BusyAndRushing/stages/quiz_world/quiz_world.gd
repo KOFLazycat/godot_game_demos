@@ -1,4 +1,4 @@
-extends Node2D
+class_name QuizWorld extends Node2D
 
 ## 每秒递减百分比
 @export var decrease_percent: float = 0.05
@@ -24,9 +24,13 @@ signal quiz_world_game_over
 
 
 func _ready() -> void:
-	generate_question()
 	decrease_timer.timeout.connect(on_decrease_timer_timeout)
 	juicy_bar.empty.connect(on_juicy_bar_empty)
+
+
+func game_world_start() -> void:
+	generate_question()
+	decrease_timer.start()
 
 
 # 产生题目

@@ -13,7 +13,7 @@ func _ready() -> void:
 
 func reset_game_state():
 	_is_game_over = false
-	_game_score = LoadSaveSystem.load_score()
+	#_game_score = LoadSaveSystem.load_score()
 
 
 func get_game_score() -> int:
@@ -22,7 +22,7 @@ func get_game_score() -> int:
 
 func add_game_score(s: int) -> void:
 	_game_score += s
-	LoadSaveSystem.save_score(_game_score)
+	#LoadSaveSystem.save_score(_game_score)
 
 
 func is_game_over() -> bool:

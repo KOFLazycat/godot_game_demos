@@ -6,6 +6,10 @@ class_name TinyDefenceArcher extends PlayerBase
 @export var power_interval: float = 10.0
 ## 大招可释放时，觉得外边框颜色
 @export var power_color: Color = Color.WHITE_SMOKE
+## 塔
+@export var tower: Tower
+## 每次点击塔恢复血量
+@export var hp_restore: float = 10.0
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var arrow_tscn: PackedScene = preload("res://entities/bullet/arrow/arrow.tscn") as PackedScene
 @onready var state_chart: StateChart = $StateChart
@@ -34,7 +38,7 @@ func fire() -> void:
 		var arrow: Arrow = arrow_tscn.instantiate()
 		# 狂怒状态下攻击速度和伤害都会增加
 		if current_arrow_num > 1:
-			arrow.damage = arrow.damage * 2
+			arrow.damage = arrow.damage * 5
 		add_child(arrow)
 	if is_rage:
 		state_chart.send_event("to_rage")
@@ -45,6 +49,7 @@ func fire() -> void:
 func on_button_pressed() -> void:
 	button.set_deferred("disabled", true)
 	is_rage = true
+	tower.restore_hp(hp_restore)
 
 
 func on_power_interval_timer_timeout() -> void:

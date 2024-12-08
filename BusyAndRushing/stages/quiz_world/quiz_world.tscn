@@ -37,4 +37,3 @@ position = Vector2(315, 652)
 [node name="SheepGroup" type="Node2D" parent="." groups=["sheep"]]
 
 [node name="DecreaseTimer" type="Timer" parent="."]
-autostart = true

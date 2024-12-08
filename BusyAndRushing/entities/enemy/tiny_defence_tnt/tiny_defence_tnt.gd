@@ -61,7 +61,7 @@ func on_hurt_box_hurt(hit_box: HitBox, damage: float) -> void:
 	var decrease_percent: float = damage / max_hp
 	juicy_bar.decrease_current_value(decrease_percent)
 	var is_critical: bool = true
-	DamageNumber.display_number(damage, marker_2d_2.global_position, is_critical, "-")
+	DamageNumber.display_number(int(damage), marker_2d_2.global_position, is_critical, "-")
 
 
 # 进入idle状态

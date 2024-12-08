@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dygtp8xrw6dkr"]
+[gd_scene load_steps=5 format=3 uid="uid://dygtp8xrw6dkr"]
 
 [ext_resource type="PackedScene" uid="uid://boqiovxxwfhxg" path="res://entities/building/tower/tower.tscn" id="1_7fdf2"]
 [ext_resource type="Script" uid="uid://csy42k2tukd5m" path="res://stages/tiny_defence_world/tiny_defence_world.gd" id="1_gv0ro"]
 [ext_resource type="PackedScene" uid="uid://d1yi25j50n8mv" path="res://entities/player/tiny_defence_archer/tiny_defence_archer.tscn" id="3_xbpwq"]
-[ext_resource type="PackedScene" uid="uid://cowofwp4kvuas" path="res://entities/spawner/tiny_defence_enemy_spawner/tiny_defence_enemy_spawner.tscn" id="5_bvqus"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_podi1"]
 size = Vector2(671.5, 36.25)
@@ -15,10 +14,9 @@ script = ExtResource("1_gv0ro")
 position = Vector2(750, 573)
 collision_layer = 4
 
-[node name="TinyDefenceArcher" parent="." instance=ExtResource("3_xbpwq")]
+[node name="TinyDefenceArcher" parent="." node_paths=PackedStringArray("tower") instance=ExtResource("3_xbpwq")]
 position = Vector2(749, 512)
-
-[node name="TinyDefenceEnemySpawner" parent="." instance=ExtResource("5_bvqus")]
+tower = NodePath("../Tower")
 
 [node name="EnemyGroup" type="Node2D" parent="." groups=["enemies"]]
 

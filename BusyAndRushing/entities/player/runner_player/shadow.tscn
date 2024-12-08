@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://mlu0hdrl6ov8"]
+
+[ext_resource type="Texture2D" uid="uid://mi6nate4dex" path="res://assets/textures/dino_texture/shadow_2.png" id="1_mk6w4"]
+
+[node name="Shadow" type="Sprite2D"]
+texture = ExtResource("1_mk6w4")

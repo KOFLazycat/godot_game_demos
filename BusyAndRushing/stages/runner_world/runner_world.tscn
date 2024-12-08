@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d0q4vk4tft80w" path="res://entities/player/runner_player/runner_player.tscn" id="1_g8mui"]
 [ext_resource type="Script" uid="uid://dkmlbwg8xhf27" path="res://stages/runner_world/runner_world.gd" id="1_hcme1"]
-[ext_resource type="PackedScene" uid="uid://b40723gk7tyw5" path="res://entities/spawner/barrel_spawner/barrel_spawner.tscn" id="6_yjwnw"]
+[ext_resource type="PackedScene" uid="uid://mlu0hdrl6ov8" path="res://entities/player/runner_player/shadow.tscn" id="7_dmhce"]
 [ext_resource type="PackedScene" uid="uid://cm8l43emuusdn" path="res://utilities/box/hurt_box.tscn" id="12_sqx3f"]
 [ext_resource type="Theme" uid="uid://c3n53ayg8a6g" path="res://assets/themes/themes.tres" id="14_bfn6u"]
 [ext_resource type="FontFile" uid="uid://c6wydwtikx8v6" path="res://assets/fonts/Round9x13.ttf" id="15_ynb32"]
@@ -29,7 +29,8 @@ shape = SubResource("RectangleShape2D_oh0k4")
 [node name="RunnerPlayer" parent="." instance=ExtResource("1_g8mui")]
 position = Vector2(801, 206)
 
-[node name="BarrelSpawner" parent="." instance=ExtResource("6_yjwnw")]
+[node name="Shadow" parent="." instance=ExtResource("7_dmhce")]
+position = Vector2(798, 233)
 
 [node name="BarrelGroup" type="Node2D" parent="." groups=["barrels"]]
 
@@ -46,7 +47,7 @@ text = "JUMP"
 one_shot = true
 
 [node name="HurtBox" parent="." instance=ExtResource("12_sqx3f")]
-position = Vector2(621, 205)
+position = Vector2(605, 205)
 collision_layer = 8
 collision_mask = 0
 

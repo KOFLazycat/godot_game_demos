@@ -1,8 +1,46 @@
-[gd_scene load_steps=2 format=3 uid="uid://q5a4k788xdr3"]
+[gd_scene load_steps=6 format=3 uid="uid://q5a4k788xdr3"]
 
 [ext_resource type="Script" uid="uid://dopnsunu042y0" path="res://common/global/game_manager/game_manager.gd" id="1_g3w1e"]
+[ext_resource type="Script" uid="uid://blufqr1j0hsw3" path="res://common/global/audio_master/AudioSFXFXRequest.gd" id="2_ql8eg"]
+
+[sub_resource type="Resource" id="Resource_3weml"]
+script = ExtResource("2_ql8eg")
+AudioPath = "res://assets/sounds/coin/Coin Pickup 001.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_ql8eg")
+
+[sub_resource type="Resource" id="Resource_im454"]
+script = ExtResource("2_ql8eg")
+AudioPath = "res://assets/sounds/coin/Coin Pickup 002.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_ql8eg")
+
+[sub_resource type="Resource" id="Resource_3a7o7"]
+script = ExtResource("2_ql8eg")
+AudioPath = "res://assets/sounds/coin/Coin Pickup 003.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_ql8eg")
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_g3w1e")
+coin_sfx = Array[ExtResource("2_ql8eg")]([SubResource("Resource_3weml"), SubResource("Resource_im454"), SubResource("Resource_3a7o7")])
 
 [node name="GameOverTimer" type="Timer" parent="."]

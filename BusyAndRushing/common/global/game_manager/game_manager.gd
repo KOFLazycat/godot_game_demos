@@ -1,5 +1,8 @@
 extends Node2D
 
+## 砍伐音效
+@export var coin_sfx: Array[AudioSFXFXRequest]
+
 @onready var game_over_timer: Timer = $GameOverTimer
 
 var _is_game_over: bool = false
@@ -21,6 +24,7 @@ func get_game_score() -> int:
 
 
 func add_game_score(s: int) -> void:
+	AudioMasterAutoload.PlayFX(coin_sfx.pick_random())
 	_game_score += s
 	#LoadSaveSystem.save_score(_game_score)
 

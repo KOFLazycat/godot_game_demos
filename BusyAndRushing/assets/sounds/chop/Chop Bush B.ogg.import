@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b6vy78n1pd2uk"
+path="res://.godot/imported/Chop Bush B.ogg-75cd8bd26a3d911096e7650ff135468f.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/chop/Chop Bush B.ogg"
+dest_files=["res://.godot/imported/Chop Bush B.ogg-75cd8bd26a3d911096e7650ff135468f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

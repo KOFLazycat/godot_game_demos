@@ -18,6 +18,7 @@ extends Node2D
 
 
 func _ready() -> void:
+	AudioMasterAutoload.PlayBGM("res://assets/sounds/bg/Rhythmic Vol2 Chankura Main.ogg")
 	# 遮罩
 	timber_world_fade_transition.cover()
 	runner_world_fade_transition.cover()

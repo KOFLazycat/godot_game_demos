@@ -1,13 +1,74 @@
-[gd_scene load_steps=15 format=3 uid="uid://mx3cvigesyka"]
+[gd_scene load_steps=21 format=3 uid="uid://mx3cvigesyka"]
 
 [ext_resource type="Script" uid="uid://d2cf6m70a5trn" path="res://entities/player/timber/timber.gd" id="1_e3rsg"]
 [ext_resource type="Script" path="res://entities/player/player_base.gd" id="1_silwv"]
+[ext_resource type="Script" uid="uid://blufqr1j0hsw3" path="res://common/global/audio_master/AudioSFXFXRequest.gd" id="2_r817w"]
 [ext_resource type="Texture2D" uid="uid://cjdqtaewjdt35" path="res://assets/textures/Tiny Swords (Update 010)/Factions/Knights/Troops/Pawn/Blue/Pawn_Blue.png" id="3_0t8qv"]
 [ext_resource type="Script" uid="uid://c2x2jv4j5iw1w" path="res://utilities/box/hit_box.gd" id="4_00036"]
 [ext_resource type="Script" uid="uid://dh4exe7ejyfjl" path="res://addons/godot_state_charts/state_chart.gd" id="5_w0ng3"]
 [ext_resource type="Script" uid="uid://bojdn74tmijw" path="res://addons/godot_state_charts/compound_state.gd" id="6_rodkg"]
 [ext_resource type="Script" uid="uid://ccqf4j0u1rpp4" path="res://addons/godot_state_charts/atomic_state.gd" id="7_r817w"]
 [ext_resource type="Script" uid="uid://c5vw5h3jef1hf" path="res://addons/godot_state_charts/transition.gd" id="8_rodkg"]
+
+[sub_resource type="Resource" id="Resource_8bhot"]
+script = ExtResource("2_r817w")
+AudioPath = "res://assets/sounds/chop/Chop Bush A.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_r817w")
+
+[sub_resource type="Resource" id="Resource_r817w"]
+script = ExtResource("2_r817w")
+AudioPath = "res://assets/sounds/chop/Chop Bush B.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_r817w")
+
+[sub_resource type="Resource" id="Resource_gyu3w"]
+script = ExtResource("2_r817w")
+AudioPath = "res://assets/sounds/chop/Chop Bush C.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_r817w")
+
+[sub_resource type="Resource" id="Resource_qjofy"]
+script = ExtResource("2_r817w")
+AudioPath = "res://assets/sounds/chop/Chop Bush D.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_r817w")
+
+[sub_resource type="Resource" id="Resource_rxv64"]
+script = ExtResource("2_r817w")
+AudioPath = "res://assets/sounds/chop/Chop Bush E.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_r817w")
 
 [sub_resource type="Animation" id="Animation_00036"]
 length = 0.001
@@ -242,6 +303,7 @@ radius = 12.1655
 
 [node name="Timber" type="CharacterBody2D"]
 script = ExtResource("1_e3rsg")
+chop_sfx = Array[ExtResource("2_r817w")]([SubResource("Resource_8bhot"), SubResource("Resource_r817w"), SubResource("Resource_gyu3w"), SubResource("Resource_qjofy"), SubResource("Resource_rxv64")])
 metadata/_custom_type_script = ExtResource("1_silwv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

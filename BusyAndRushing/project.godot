@@ -21,6 +21,7 @@ DamageNumber="*res://common/global/damage_number/damage_number.tscn"
 LoadSaveSystem="*res://common/global/load_save_system/load_save_system.tscn"
 GameManager="*res://common/global/game_manager/game_manager.tscn"
 RandUtil="*res://utilities/rand_util/rand_util.gd"
+AudioMasterAutoload="*res://common/global/audio_master/AudioMasterAutoload.gd"
 
 [debug]
 

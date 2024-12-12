@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cw4nr723icpq4"]
+[gd_scene load_steps=10 format=3 uid="uid://cw4nr723icpq4"]
 
 [ext_resource type="Script" uid="uid://bcbuqd47p15f3" path="res://stages/timber_world/timber_world.gd" id="1_7lee5"]
 [ext_resource type="PackedScene" uid="uid://dch063htskbhx" path="res://ui/hud/juicy_bar/juicy_bar.tscn" id="1_cchc7"]
@@ -6,12 +6,28 @@
 [ext_resource type="PackedScene" uid="uid://mx3cvigesyka" path="res://entities/player/timber/timber.tscn" id="3_hh70d"]
 [ext_resource type="Theme" uid="uid://c3n53ayg8a6g" path="res://assets/themes/themes.tres" id="4_igvej"]
 [ext_resource type="FontFile" uid="uid://c6wydwtikx8v6" path="res://assets/fonts/Round9x13.ttf" id="5_7gtgp"]
+[ext_resource type="Script" uid="uid://birt3427a4spw" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="7_igvej"]
+[ext_resource type="Script" uid="uid://bqc4obilsuf7h" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_7gtgp"]
+
+[sub_resource type="Resource" id="Resource_fk37y"]
+script = ExtResource("8_7gtgp")
+duration = 0.6
+transition = 8
+ease = 2
 
 [node name="TimberWorld" type="Node2D"]
 script = ExtResource("1_7lee5")
 decrease_percent = 0.05
 metadata/_edit_vertical_guides_ = [640.0]
 metadata/_edit_horizontal_guides_ = [360.0]
+
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+position = Vector2(320, 180)
+script = ExtResource("7_igvej")
+zoom = Vector2(2, 2)
+tween_resource = SubResource("Resource_fk37y")
+draw_limits = true
+metadata/_custom_type_script = ExtResource("7_igvej")
 
 [node name="JuicyBar" parent="." instance=ExtResource("1_cchc7")]
 offset_left = 329.0

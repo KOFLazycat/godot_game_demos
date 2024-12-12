@@ -15,9 +15,11 @@ extends Node2D
 @onready var runner_world_tscn: PackedScene = preload("res://stages/runner_world/runner_world.tscn") as PackedScene
 @onready var quiz_world_tscn: PackedScene = preload("res://stages/quiz_world/quiz_world.tscn") as PackedScene
 @onready var tiny_defence_world_tscn: PackedScene = preload("res://stages/tiny_defence_world/tiny_defence_world.tscn") as PackedScene
+@onready var pcam: PhantomCamera2D = $PhantomCamera2D
 
 
 func _ready() -> void:
+	pcam.set_priority(10)
 	AudioMasterAutoload.PlayBGM("res://assets/sounds/bg/Rhythmic Vol2 Chankura Main.ogg")
 	# 遮罩
 	timber_world_fade_transition.cover()
@@ -30,11 +32,7 @@ func _ready() -> void:
 	tiny_defence_world_timer.timeout.connect(on_tiny_defence_world_timer_timeout)
 	game_begin_button.pressed.connect(on_game_begin_button_pressed)
 	game_exit_button.pressed.connect(on_game_exit_button_pressed)
-	#runner_world.runner_world_game_over.connect(on_game_over)
-	#quiz_world.quiz_world_game_over.connect(on_game_over)
-	#tiny_defence_world.tiny_defence_world_game_over.connect(on_game_over)
-	#set_label_text(0, GameManager.get_game_score())
-	#set_process(true)
+	
 
 
 func _process(delta: float) -> void:
@@ -46,6 +44,7 @@ func init_timber_world() -> void:
 	add_child(timber_world)
 	timber_world.timber_world_game_over.connect(on_game_over)
 	timber_world.game_world_start()
+	timber_world.pcam.set_priority(20)
 	timber_world_fade_transition.uncover()
 
 
@@ -54,6 +53,7 @@ func init_runner_world() -> void:
 	add_child(runner_world)
 	runner_world.runner_world_game_over.connect(on_game_over)
 	runner_world.game_world_start()
+	runner_world.pcam.set_priority(20)
 	runner_world_fade_transition.uncover()
 
 
@@ -62,6 +62,7 @@ func init_quiz_world() -> void:
 	add_child(quiz_world)
 	quiz_world.quiz_world_game_over.connect(on_game_over)
 	quiz_world.game_world_start()
+	quiz_world.pcam.set_priority(20)
 	quiz_world_fade_transition.uncover()
 
 

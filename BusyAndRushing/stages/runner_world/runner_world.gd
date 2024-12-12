@@ -1,10 +1,14 @@
 class_name RunnerWorld extends Node2D
 
+## 跳跃音效
+@export var jump_sfx: Array[AudioSFXFXRequest]
+
 @onready var jump_button: Button = $JumpButton
 @onready var button_disable_timer: Timer = $ButtonDisableTimer
 @onready var runner_player: RunnerPlayer = $RunnerPlayer
 @onready var hurt_box: HurtBox = $HurtBox
 @onready var barrel_spawner_tscn: PackedScene = preload("res://entities/spawner/barrel_spawner/barrel_spawner.tscn") as PackedScene
+@onready var pcam: PhantomCamera2D = $PhantomCamera2D
 
 signal runner_world_game_over
 
@@ -22,6 +26,7 @@ func game_world_start() -> void:
 
 
 func on_jump_button_pressed() -> void:
+	AudioMasterAutoload.PlaySFX(jump_sfx.pick_random())
 	jump_button.set_deferred("disabled", true)
 	runner_player.jump()
 	button_disable_timer.start()

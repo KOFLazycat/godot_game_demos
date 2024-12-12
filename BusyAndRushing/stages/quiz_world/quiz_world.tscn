@@ -1,11 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4lg348ba2oki"]
+[gd_scene load_steps=7 format=3 uid="uid://b4lg348ba2oki"]
 
 [ext_resource type="FontFile" uid="uid://c6wydwtikx8v6" path="res://assets/fonts/Round9x13.ttf" id="1_3k1vl"]
 [ext_resource type="Script" uid="uid://3ysxqe5qes1m" path="res://stages/quiz_world/quiz_world.gd" id="1_3pl2b"]
 [ext_resource type="PackedScene" uid="uid://dch063htskbhx" path="res://ui/hud/juicy_bar/juicy_bar.tscn" id="2_3pl2b"]
+[ext_resource type="Script" uid="uid://birt3427a4spw" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="2_oddsk"]
+[ext_resource type="Script" uid="uid://bqc4obilsuf7h" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="3_ktt6c"]
+
+[sub_resource type="Resource" id="Resource_go4y8"]
+script = ExtResource("3_ktt6c")
+duration = 0.6
+transition = 8
+ease = 2
 
 [node name="QuizWorld" type="Node2D"]
 script = ExtResource("1_3pl2b")
+
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+position = Vector2(640, 360)
+script = ExtResource("2_oddsk")
+tween_resource = SubResource("Resource_go4y8")
+draw_limits = true
+metadata/_custom_type_script = ExtResource("2_oddsk")
 
 [node name="JuicyBar" parent="." instance=ExtResource("2_3pl2b")]
 offset_left = 332.0

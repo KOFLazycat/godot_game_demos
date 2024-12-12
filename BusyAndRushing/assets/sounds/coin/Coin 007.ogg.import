@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://m2j6fyu8811h"
+path="res://.godot/imported/Coin 007.ogg-c5426d348fbbf0bd679a36db045ae79c.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/coin/Coin 007.ogg"
+dest_files=["res://.godot/imported/Coin 007.ogg-c5426d348fbbf0bd679a36db045ae79c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

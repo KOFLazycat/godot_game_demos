@@ -8,6 +8,8 @@ class_name Barrel extends EnemyBase
 @export var animated_sprite_2d_flip_h: bool = false
 ## 每个炸药桶得分
 @export var score_per_barrel: int = 2
+## 爆炸音效
+@export var explosive_sfx: Array[AudioSFXFXRequest]
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var juicy_bar: JucyBar = $JuicyBar
@@ -65,6 +67,7 @@ func _on_explode_state_entered() -> void:
 
 
 func _on_die_state_entered() -> void:
+	AudioMasterAutoload.PlayFX(explosive_sfx.pick_random())
 	animated_sprite_2d.play("explosion")
 	await animated_sprite_2d.animation_finished
 	queue_free()

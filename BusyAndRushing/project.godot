@@ -22,6 +22,7 @@ LoadSaveSystem="*res://common/global/load_save_system/load_save_system.tscn"
 GameManager="*res://common/global/game_manager/game_manager.tscn"
 RandUtil="*res://utilities/rand_util/rand_util.gd"
 AudioMasterAutoload="*res://common/global/audio_master/AudioMasterAutoload.gd"
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
 [debug]
 
@@ -40,7 +41,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
 [input]
 

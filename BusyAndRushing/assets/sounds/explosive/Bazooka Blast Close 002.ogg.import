@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c1aykibov7rav"
+path="res://.godot/imported/Bazooka Blast Close 002.ogg-af4b39d08dba6f9fcea15177bdfdc697.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/explosive/Bazooka Blast Close 002.ogg"
+dest_files=["res://.godot/imported/Bazooka Blast Close 002.ogg-af4b39d08dba6f9fcea15177bdfdc697.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

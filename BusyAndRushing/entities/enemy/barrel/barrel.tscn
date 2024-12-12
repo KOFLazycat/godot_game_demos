@@ -1,7 +1,8 @@
-[gd_scene load_steps=43 format=3 uid="uid://b4l0h5jr08718"]
+[gd_scene load_steps=49 format=3 uid="uid://b4l0h5jr08718"]
 
 [ext_resource type="Script" path="res://entities/enemy/enemy_base.gd" id="1_3t3ka"]
 [ext_resource type="Script" uid="uid://b61acjctcxqo4" path="res://entities/enemy/barrel/barrel.gd" id="1_fogop"]
+[ext_resource type="Script" uid="uid://blufqr1j0hsw3" path="res://common/global/audio_master/AudioSFXFXRequest.gd" id="2_t57wm"]
 [ext_resource type="Texture2D" uid="uid://buytfkhy3fdlf" path="res://assets/textures/Tiny Swords (Update 010)/Factions/Goblins/Troops/Barrel/Red/Barrel_Red.png" id="3_rod7q"]
 [ext_resource type="Texture2D" uid="uid://cljcn5xfcm8xb" path="res://assets/textures/Tiny Swords (Update 010)/Effects/Explosion/Explosions.png" id="4_t57wm"]
 [ext_resource type="PackedScene" uid="uid://dch063htskbhx" path="res://ui/hud/juicy_bar/juicy_bar.tscn" id="5_2f22d"]
@@ -10,6 +11,66 @@
 [ext_resource type="Script" uid="uid://bojdn74tmijw" path="res://addons/godot_state_charts/compound_state.gd" id="8_2f22d"]
 [ext_resource type="Script" uid="uid://ccqf4j0u1rpp4" path="res://addons/godot_state_charts/atomic_state.gd" id="9_480xu"]
 [ext_resource type="Script" uid="uid://c5vw5h3jef1hf" path="res://addons/godot_state_charts/transition.gd" id="10_40v4l"]
+
+[sub_resource type="Resource" id="Resource_1woem"]
+script = ExtResource("2_t57wm")
+AudioPath = "res://assets/sounds/explosive/Bazooka Blast Close 001.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_t57wm")
+
+[sub_resource type="Resource" id="Resource_gg3bi"]
+script = ExtResource("2_t57wm")
+AudioPath = "res://assets/sounds/explosive/Bazooka Blast Close 002.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_t57wm")
+
+[sub_resource type="Resource" id="Resource_mc3j1"]
+script = ExtResource("2_t57wm")
+AudioPath = "res://assets/sounds/explosive/Bazooka Blast Close 003.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_t57wm")
+
+[sub_resource type="Resource" id="Resource_sud1h"]
+script = ExtResource("2_t57wm")
+AudioPath = "res://assets/sounds/explosive/Bazooka Blast Close 004.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_t57wm")
+
+[sub_resource type="Resource" id="Resource_kuw08"]
+script = ExtResource("2_t57wm")
+AudioPath = "res://assets/sounds/explosive/Bazooka Blast Close 005.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_t57wm")
 
 [sub_resource type="Shader" id="Shader_l0ffc"]
 code = "shader_type canvas_item;
@@ -306,6 +367,7 @@ radius = 15.0
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_fogop")
+explosive_sfx = Array[ExtResource("2_t57wm")]([SubResource("Resource_1woem"), SubResource("Resource_gg3bi"), SubResource("Resource_mc3j1"), SubResource("Resource_sud1h"), SubResource("Resource_kuw08")])
 metadata/_custom_type_script = ExtResource("1_3t3ka")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

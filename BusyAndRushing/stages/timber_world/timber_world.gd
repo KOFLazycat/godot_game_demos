@@ -12,6 +12,7 @@ class_name TimberWorld extends Node2D
 @onready var timber: Timber = $Timber
 @onready var chop_button: Button = $ChopButton
 @onready var decrease_timer: Timer = $DecreaseTimer
+@onready var pcam: PhantomCamera2D = $PhantomCamera2D
 
 signal timber_world_game_over
 

@@ -15,6 +15,7 @@ class_name QuizWorld extends Node2D
 @onready var marker_2d_mid: Marker2D = $Marker2DMid
 @onready var sheep_answer_tscn: PackedScene = preload("res://entities/item/sheep_answer/sheep_answer.tscn") as PackedScene
 @onready var sheep_group: Node2D = $SheepGroup
+@onready var pcam: PhantomCamera2D = $PhantomCamera2D
 
 var num_a: int = 0
 var num_b: int = 0

@@ -1,5 +1,8 @@
 extends Node2D
 
+## 游戏初始化音效
+@export var whoosh_sfx: Array[AudioSFXFXRequest]
+
 @onready var label: Label = $UI/PanelContainer/Label
 @onready var runner_world_timer: Timer = $RunnerWorldTimer
 @onready var quiz_world_timer: Timer = $QuizWorldTimer
@@ -40,6 +43,7 @@ func _process(delta: float) -> void:
 
 
 func init_timber_world() -> void:
+	AudioMasterAutoload.PlaySFX(whoosh_sfx.pick_random())
 	var timber_world: TimberWorld = timber_world_tscn.instantiate()
 	add_child(timber_world)
 	timber_world.timber_world_game_over.connect(on_game_over)
@@ -49,6 +53,7 @@ func init_timber_world() -> void:
 
 
 func init_runner_world() -> void:
+	AudioMasterAutoload.PlaySFX(whoosh_sfx.pick_random())
 	var runner_world: RunnerWorld = runner_world_tscn.instantiate()
 	add_child(runner_world)
 	runner_world.runner_world_game_over.connect(on_game_over)
@@ -58,6 +63,7 @@ func init_runner_world() -> void:
 
 
 func init_quiz_world() -> void:
+	AudioMasterAutoload.PlaySFX(whoosh_sfx.pick_random())
 	var quiz_world: QuizWorld = quiz_world_tscn.instantiate()
 	add_child(quiz_world)
 	quiz_world.quiz_world_game_over.connect(on_game_over)
@@ -67,6 +73,7 @@ func init_quiz_world() -> void:
 
 
 func init_tiny_defence_world() -> void:
+	AudioMasterAutoload.PlaySFX(whoosh_sfx.pick_random())
 	var tiny_defence_world: TinyDefenceWorld = tiny_defence_world_tscn.instantiate()
 	add_child(tiny_defence_world)
 	tiny_defence_world.tiny_defence_world_game_over.connect(on_game_over)

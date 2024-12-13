@@ -1,12 +1,73 @@
-[gd_scene load_steps=12 format=3 uid="uid://cej3jcgl77asb"]
+[gd_scene load_steps=18 format=3 uid="uid://cej3jcgl77asb"]
 
 [ext_resource type="Script" uid="uid://bl7704b7qyde7" path="res://stages/main/main.gd" id="1_woy08"]
 [ext_resource type="PackedScene" uid="uid://bjalvngcfecj0" path="res://stages/map/map.tscn" id="2_4vbm2"]
+[ext_resource type="Script" uid="uid://blufqr1j0hsw3" path="res://common/global/audio_master/AudioSFXFXRequest.gd" id="2_no1gd"]
 [ext_resource type="Script" uid="uid://c320mhh87m6sm" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_4vbm2"]
 [ext_resource type="FontFile" uid="uid://c6wydwtikx8v6" path="res://assets/fonts/Round9x13.ttf" id="5_usqqw"]
 [ext_resource type="PackedScene" uid="uid://pojmf4m23i0" path="res://addons/fade_transition/fade_transition.tscn" id="5_woy08"]
 [ext_resource type="Script" uid="uid://birt3427a4spw" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="6_4vbm2"]
 [ext_resource type="Script" uid="uid://bqc4obilsuf7h" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="7_no1gd"]
+
+[sub_resource type="Resource" id="Resource_no1gd"]
+script = ExtResource("2_no1gd")
+AudioPath = "res://assets/sounds/air_whoosh_medium/Air Whoosh Medium A.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_no1gd")
+
+[sub_resource type="Resource" id="Resource_3f6tk"]
+script = ExtResource("2_no1gd")
+AudioPath = "res://assets/sounds/air_whoosh_medium/Air Whoosh Medium B.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_no1gd")
+
+[sub_resource type="Resource" id="Resource_axbkc"]
+script = ExtResource("2_no1gd")
+AudioPath = "res://assets/sounds/air_whoosh_medium/Air Whoosh Medium C.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_no1gd")
+
+[sub_resource type="Resource" id="Resource_802tp"]
+script = ExtResource("2_no1gd")
+AudioPath = "res://assets/sounds/air_whoosh_medium/Air Whoosh Medium D.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_no1gd")
+
+[sub_resource type="Resource" id="Resource_l7y0w"]
+script = ExtResource("2_no1gd")
+AudioPath = "res://assets/sounds/air_whoosh_medium/Air Whoosh Medium E.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_no1gd")
 
 [sub_resource type="Resource" id="Resource_4vbm2"]
 script = ExtResource("7_no1gd")
@@ -25,6 +86,7 @@ bg_color = Color(0.74902, 0.729412, 0.356863, 0.584314)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_woy08")
+whoosh_sfx = Array[ExtResource("2_no1gd")]([SubResource("Resource_no1gd"), SubResource("Resource_3f6tk"), SubResource("Resource_axbkc"), SubResource("Resource_802tp"), SubResource("Resource_l7y0w")])
 metadata/_edit_vertical_guides_ = [640.0]
 metadata/_edit_horizontal_guides_ = [360.0]
 
@@ -49,15 +111,14 @@ metadata/_custom_type_script = ExtResource("6_4vbm2")
 [node name="Map" parent="." instance=ExtResource("2_4vbm2")]
 
 [node name="RunnerWorldTimer" type="Timer" parent="."]
-wait_time = 10.0
 one_shot = true
 
 [node name="QuizWorldTimer" type="Timer" parent="."]
-wait_time = 20.0
+wait_time = 2.0
 one_shot = true
 
 [node name="TinyDefenceWorldTimer" type="Timer" parent="."]
-wait_time = 30.0
+wait_time = 3.0
 one_shot = true
 
 [node name="UI" type="Control" parent="."]

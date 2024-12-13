@@ -8,6 +8,8 @@ class_name TinyDefenceArcher extends PlayerBase
 @export var power_color: Color = Color.WHITE_SMOKE
 ## 塔
 @export var tower: Tower
+## 放箭音效
+@export var arrow_release_sfx: Array[AudioSFXFXRequest]
 ## 每次点击塔恢复血量
 @export var hp_restore: float = 10.0
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
@@ -16,9 +18,17 @@ class_name TinyDefenceArcher extends PlayerBase
 @onready var button: Button = $Button
 @onready var power_interval_timer: Timer = $PowerIntervalTimer
 
+enum ArcherState {
+	Idle,
+	Attack,
+	Rage,
+	Dead
+}
+
 var animated_sprite_2d_flip_h: bool = false
 var is_rage: bool = false
 var current_arrow_num: int = 1
+var current_archer_state: ArcherState = ArcherState.Idle
 
 
 func _ready() -> void:
@@ -33,6 +43,7 @@ func _ready() -> void:
 
 func fire() -> void:
 	for i in range(current_arrow_num):
+		AudioMasterAutoload.PlaySFX(arrow_release_sfx.pick_random())
 		animated_sprite_2d.play("shot_tilt_up")
 		await animated_sprite_2d.animation_finished
 		var arrow: Arrow = arrow_tscn.instantiate()
@@ -59,6 +70,7 @@ func on_power_interval_timer_timeout() -> void:
 
 
 func _on_idle_state_entered() -> void:
+	current_archer_state = ArcherState.Idle
 	current_arrow_num = 1
 	state_chart.send_event("idle_to_attack")
 
@@ -68,10 +80,12 @@ func _on_idle_state_physics_processing(delta: float) -> void:
 
 
 func _on_attck_state_entered() -> void:
+	current_archer_state = ArcherState.Attack
 	fire()
 
 
 func _on_rage_state_entered() -> void:
+	current_archer_state = ArcherState.Rage
 	is_rage = false
 	animated_sprite_2d.material.set_shader_parameter("color", Color.CRIMSON)
 	current_arrow_num = power_arrow_num

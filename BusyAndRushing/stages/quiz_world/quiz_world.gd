@@ -6,6 +6,8 @@ class_name QuizWorld extends Node2D
 @export var increase_percent: float = 1.0
 ## 答对每道题得分
 @export var score_per_quiz: int = 3
+## 答对小羊音效
+@export var sheep_sfx: Array[AudioSFXFXRequest]
 
 @onready var juicy_bar: JucyBar = $JuicyBar
 @onready var question_label: Label = $QuestionLabel
@@ -95,6 +97,7 @@ func on_juicy_bar_empty() -> void:
 
 func on_sheep_answer_select_result(is_correct: bool) -> void:
 	if is_correct:
+		AudioMasterAutoload.PlaySFX(sheep_sfx.pick_random())
 		await get_tree().create_timer(0.8).timeout
 		decrease_timer.stop()
 		juicy_bar.increase_current_value(increase_percent)

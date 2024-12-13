@@ -8,15 +8,21 @@ class_name Arrow extends CharacterBody2D
 @export var random_angle_min: float = -0.2
 ## 箭矢偏移角度最大值
 @export var random_angle_max: float = 0.2
+## 中箭音效
+@export var arrow_hit_sfx: Array[AudioSFXFXRequest]
+## rage状态下中箭音效
+@export var arrow_rage_sfx: Array[AudioSFXFXRequest]
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var hit_box: HitBox = $HitBox
 @onready var collision_shape_2d: CollisionShape2D = $HitBox/CollisionShape2D
 @onready var timer: Timer = $Timer
+var archer: TinyDefenceArcher
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	archer = get_parent()
 	hit_box.damage = damage
 	velocity = Vector2(distance / fly_time, -0.5 * gravity * fly_time).rotated(randf_range(random_angle_min, random_angle_max))
 	rotation = velocity.angle()
@@ -45,6 +51,10 @@ func on_collision() -> void:
 
 
 func on_hit_box_hit(hurt_box: HurtBox) -> void:
+	if archer.current_archer_state == TinyDefenceArcher.ArcherState.Rage:
+		AudioMasterAutoload.PlaySFX(arrow_rage_sfx.pick_random())
+	else:
+		AudioMasterAutoload.PlaySFX(arrow_hit_sfx.pick_random())
 	collision_shape_2d.set_deferred("disabled", true)
 
 

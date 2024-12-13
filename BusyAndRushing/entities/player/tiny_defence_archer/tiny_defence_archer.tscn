@@ -1,12 +1,25 @@
-[gd_scene load_steps=69 format=3 uid="uid://d1yi25j50n8mv"]
+[gd_scene load_steps=71 format=3 uid="uid://d1yi25j50n8mv"]
 
 [ext_resource type="Script" uid="uid://dlms5a6uy1g77" path="res://entities/player/tiny_defence_archer/tiny_defence_archer.gd" id="1_17c0v"]
 [ext_resource type="Script" path="res://entities/player/player_base.gd" id="1_50yqe"]
+[ext_resource type="Script" uid="uid://blufqr1j0hsw3" path="res://common/global/audio_master/AudioSFXFXRequest.gd" id="2_0ahrl"]
 [ext_resource type="Texture2D" uid="uid://dbtn7i1ovkkun" path="res://assets/textures/Tiny Swords (Update 010)/Factions/Knights/Troops/Archer/Blue/Archer_Blue.png" id="2_vcd73"]
 [ext_resource type="Script" uid="uid://dh4exe7ejyfjl" path="res://addons/godot_state_charts/state_chart.gd" id="4_ixjev"]
 [ext_resource type="Script" uid="uid://bojdn74tmijw" path="res://addons/godot_state_charts/compound_state.gd" id="5_fhukm"]
 [ext_resource type="Script" uid="uid://ccqf4j0u1rpp4" path="res://addons/godot_state_charts/atomic_state.gd" id="6_6ip3s"]
 [ext_resource type="Script" uid="uid://c5vw5h3jef1hf" path="res://addons/godot_state_charts/transition.gd" id="7_0sihj"]
+
+[sub_resource type="Resource" id="Resource_ogxo6"]
+script = ExtResource("2_0ahrl")
+AudioPath = "res://assets/sounds/arrow/Windranger_projectile_launch.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_0ahrl")
 
 [sub_resource type="Shader" id="Shader_0sihj"]
 code = "shader_type canvas_item;
@@ -494,6 +507,7 @@ radius = 15.0
 [node name="TinyDefenceArcher" type="CharacterBody2D"]
 collision_mask = 0
 script = ExtResource("1_17c0v")
+arrow_release_sfx = Array[ExtResource("2_0ahrl")]([SubResource("Resource_ogxo6")])
 metadata/_custom_type_script = ExtResource("1_50yqe")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

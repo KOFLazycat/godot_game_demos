@@ -1,8 +1,105 @@
-[gd_scene load_steps=6 format=3 uid="uid://glyu7f8bkdxk"]
+[gd_scene load_steps=15 format=3 uid="uid://glyu7f8bkdxk"]
 
 [ext_resource type="Texture2D" uid="uid://bjrelt7sij80y" path="res://assets/textures/Tiny Swords (Update 010)/Factions/Knights/Troops/Archer/Arrow/Arrow.png" id="1_enjlo"]
 [ext_resource type="Script" uid="uid://bpx35nybgchbd" path="res://entities/bullet/arrow/arrow.gd" id="1_p2jcm"]
+[ext_resource type="Script" uid="uid://blufqr1j0hsw3" path="res://common/global/audio_master/AudioSFXFXRequest.gd" id="2_6dmio"]
 [ext_resource type="Script" uid="uid://c2x2jv4j5iw1w" path="res://utilities/box/hit_box.gd" id="3_ueaj7"]
+
+[sub_resource type="Resource" id="Resource_sy513"]
+script = ExtResource("2_6dmio")
+AudioPath = "res://assets/sounds/arrow/Drow_Ranger_projectile_impact1.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_6dmio")
+
+[sub_resource type="Resource" id="Resource_askok"]
+script = ExtResource("2_6dmio")
+AudioPath = "res://assets/sounds/arrow/Drow_Ranger_projectile_impact2.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_6dmio")
+
+[sub_resource type="Resource" id="Resource_qy6ys"]
+script = ExtResource("2_6dmio")
+AudioPath = "res://assets/sounds/arrow/Drow_Ranger_projectile_impact3.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_6dmio")
+
+[sub_resource type="Resource" id="Resource_6dmio"]
+script = ExtResource("2_6dmio")
+AudioPath = "res://assets/sounds/arrow/Powershot_target1.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_6dmio")
+
+[sub_resource type="Resource" id="Resource_twfgo"]
+script = ExtResource("2_6dmio")
+AudioPath = "res://assets/sounds/arrow/Powershot_target2.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_6dmio")
+
+[sub_resource type="Resource" id="Resource_y0ra3"]
+script = ExtResource("2_6dmio")
+AudioPath = "res://assets/sounds/arrow/Powershot_target3.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_6dmio")
+
+[sub_resource type="Resource" id="Resource_8biy5"]
+script = ExtResource("2_6dmio")
+AudioPath = "res://assets/sounds/arrow/Powershot_target4.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_6dmio")
+
+[sub_resource type="Resource" id="Resource_l4veb"]
+script = ExtResource("2_6dmio")
+AudioPath = "res://assets/sounds/arrow/Powershot_target5.ogg"
+RemoveAtEnd = true
+ModPitch = 1.0
+ModVolume = 0.0
+IsRand = true
+RandPitch = 0.2
+RandVolume = 0.0
+RemovePreviousAudio = Array[String]([])
+metadata/_custom_type_script = ExtResource("2_6dmio")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_enjlo"]
 radius = 6.0
@@ -14,6 +111,8 @@ radius = 9.0
 collision_layer = 32
 collision_mask = 6
 script = ExtResource("1_p2jcm")
+arrow_hit_sfx = Array[ExtResource("2_6dmio")]([SubResource("Resource_sy513"), SubResource("Resource_askok"), SubResource("Resource_qy6ys")])
+arrow_rage_sfx = Array[ExtResource("2_6dmio")]([SubResource("Resource_6dmio"), SubResource("Resource_twfgo"), SubResource("Resource_y0ra3"), SubResource("Resource_8biy5"), SubResource("Resource_l4veb")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_enjlo")

@@ -10,6 +10,7 @@ class_name TinyDefenceTnt extends EnemyBase
 ## 每个敌人死亡得分
 @export var score_per_tnt: int = 10
 
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var tower = get_tree().get_first_node_in_group("tower")
 @onready var hurt_box: HurtBox = $HurtBox

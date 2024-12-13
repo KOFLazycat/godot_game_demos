@@ -43,9 +43,9 @@ func _ready() -> void:
 
 func fire() -> void:
 	for i in range(current_arrow_num):
-		AudioMasterAutoload.PlaySFX(arrow_release_sfx.pick_random())
 		animated_sprite_2d.play("shot_tilt_up")
 		await animated_sprite_2d.animation_finished
+		AudioMasterAutoload.PlaySFX(arrow_release_sfx.pick_random())
 		var arrow: Arrow = arrow_tscn.instantiate()
 		# 狂怒状态下攻击速度和伤害都会增加
 		if current_arrow_num > 1:

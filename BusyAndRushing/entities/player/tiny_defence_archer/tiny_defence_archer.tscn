@@ -11,7 +11,7 @@
 
 [sub_resource type="Resource" id="Resource_ogxo6"]
 script = ExtResource("2_0ahrl")
-AudioPath = "res://assets/sounds/arrow/Windranger_projectile_launch.ogg"
+AudioPath = "res://assets/sounds/arrow/384917__ali_6868__bow-release-bow-and-arrow-4.ogg"
 RemoveAtEnd = true
 ModPitch = 1.0
 ModVolume = 0.0

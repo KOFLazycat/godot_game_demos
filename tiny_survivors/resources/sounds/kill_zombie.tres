@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="SoundResource" load_steps=3 format=3 uid="uid://mpqbmchs16c0"]
+[gd_resource type="Resource" script_class="SoundResource" load_steps=3 format=3 uid="uid://bmurrqosq7bec"]
 
-[ext_resource type="Script" uid="uid://bbp8xypt2x8d7" path="res://addons/great_games_library/resources/SoundResource/SoundResource.gd" id="1_q6l45"]
-[ext_resource type="AudioStream" uid="uid://dw3m26vjk5wsk" path="res://addons/top_down/assets/sounds/kill_1.wav" id="2_xu35m"]
+[ext_resource type="Script" path="res://addons/great_games_library/resources/SoundResource/SoundResource.gd" id="1_vlgc4"]
+[ext_resource type="AudioStream" uid="uid://b8ptbo6fdt1du" path="res://addons/top_down/assets/sounds/kill_1.wav" id="2_0c6eo"]
 
 [resource]
 resource_name = "Kill Zombie"
-script = ExtResource("1_q6l45")
+script = ExtResource("1_vlgc4")
 pitch_min = 0.98
 pitch_max = 1.2
 volume = -11.093
@@ -13,4 +13,4 @@ retrigger_time = 0.032
 pitch_add = 0.0
 pitch_cooldown = 0.0
 pitch_return = 0.0
-sound = ExtResource("2_xu35m")
+sound = ExtResource("2_0c6eo")

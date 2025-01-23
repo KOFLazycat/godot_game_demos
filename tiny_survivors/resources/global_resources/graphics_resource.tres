@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="GraphicsResource" load_steps=2 format=3 uid="uid://ci5ern408slh7"]
+[gd_resource type="Resource" script_class="GraphicsResource" load_steps=2 format=3 uid="uid://bx61rbuwillgh"]
 
-[ext_resource type="Script" uid="uid://ckd5beydoig87" path="res://addons/great_games_library/resources/GraphicsResource/GraphicsResource.gd" id="1_4qp3x"]
+[ext_resource type="Script" path="res://addons/great_games_library/resources/GraphicsResource/GraphicsResource.gd" id="1_ujpal"]
 
 [resource]
 resource_name = "Graphics Resource"
-script = ExtResource("1_4qp3x")
+script = ExtResource("1_ujpal")
 window_mode = 0
 window_flags = Array[bool]([false, true, false, false, false, false, false])
 borderless = false

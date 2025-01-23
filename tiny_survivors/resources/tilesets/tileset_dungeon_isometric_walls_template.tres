@@ -1,9 +1,9 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://c53tjgpj12g65"]
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://darvph80wx354"]
 
-[ext_resource type="Texture2D" uid="uid://cvver6cec2wjk" path="res://addons/top_down/assets/images/tilesets/tileset_dungeon_isometric_walls.png" id="1_eqiqn"]
+[ext_resource type="Texture2D" uid="uid://dfnnskg66dobn" path="res://addons/top_down/assets/images/tilesets/tileset_dungeon_isometric_walls.png" id="1_jlbr5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vf00h"]
-texture = ExtResource("1_eqiqn")
+texture = ExtResource("1_jlbr5")
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, 4)
 0:0/0/terrain_set = 0

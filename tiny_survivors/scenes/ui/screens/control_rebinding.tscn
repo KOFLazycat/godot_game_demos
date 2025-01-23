@@ -1,13 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://b3vg5e5js2bjx"]
+[gd_scene load_steps=12 format=3 uid="uid://cs0pkiltyswgv"]
 
-[ext_resource type="Theme" uid="uid://yctjuhnen1br" path="res://addons/top_down/resources/theme/game_gui_theme.theme" id="1_cmwt1"]
-[ext_resource type="Script" uid="uid://b0iiaixdow6qa" path="res://addons/top_down/scripts/input/control_reset_button.gd" id="2_l5u2x"]
-[ext_resource type="Resource" uid="uid://dsk5usbvnbqi3" path="res://addons/top_down/resources/global_resources/action_resource.tres" id="3_r4hig"]
-[ext_resource type="PackedScene" uid="uid://cvx2xmr86fa7b" path="res://addons/top_down/scenes/ui/binding_button.tscn" id="4_d18bx"]
-[ext_resource type="Texture2D" uid="uid://beqr25tfpvflw" path="res://addons/top_down/assets/images/kenney_input_prompt/Keyboard & Mouse/Double/mouse_move.png" id="5_s0xud"]
-[ext_resource type="Script" uid="uid://d4cb2urpu8kbq" path="res://addons/top_down/scripts/input/save_controls_event.gd" id="6_g8ltn"]
-[ext_resource type="PackedScene" uid="uid://b3ww0jqqy1eq7" path="res://addons/top_down/scenes/ui/menu_button.tscn" id="7_tjw5t"]
-[ext_resource type="Script" uid="uid://53np4vhxkg0r" path="res://addons/top_down/scripts/input/BindingMenu.gd" id="8_75r6f"]
+[ext_resource type="PackedScene" uid="uid://b3ww0jqqy1eq7" path="res://addons/top_down/scenes/ui/menu_button.tscn" id="1_71lak"]
+[ext_resource type="Theme" uid="uid://yctjuhnen1br" path="res://addons/top_down/resources/theme/game_gui_theme.theme" id="1_cqapm"]
+[ext_resource type="PackedScene" uid="uid://cvx2xmr86fa7b" path="res://addons/top_down/scenes/ui/binding_button.tscn" id="2_lok53"]
+[ext_resource type="Script" path="res://addons/top_down/scripts/input/control_reset_button.gd" id="2_u8xua"]
+[ext_resource type="Resource" uid="uid://dsk5usbvnbqi3" path="res://addons/top_down/resources/global_resources/action_resource.tres" id="3_km2jh"]
+[ext_resource type="Texture2D" uid="uid://dw8xitws1dy4n" path="res://addons/top_down/assets/images/kenney_input_prompt/Keyboard & Mouse/Double/mouse_move.png" id="3_mhje8"]
+[ext_resource type="Script" path="res://addons/top_down/scripts/input/BindingMenu.gd" id="5_87j6r"]
+[ext_resource type="Script" path="res://addons/top_down/scripts/input/save_controls_event.gd" id="6_sswam"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kd5i5"]
 bg_color = Color(0.154876, 0.154876, 0.154876, 1)
@@ -23,7 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_cmwt1")
+theme = ExtResource("1_cqapm")
 theme_override_styles/panel = SubResource("StyleBoxFlat_kd5i5")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -164,8 +164,8 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 8
 text = "Reset"
 flat = true
-script = ExtResource("2_l5u2x")
-action_resource = ExtResource("3_r4hig")
+script = ExtResource("2_u8xua")
+action_resource = ExtResource("3_km2jh")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1"]
 layout_mode = 2
@@ -176,95 +176,95 @@ theme_override_constants/separation = 0
 layout_mode = 2
 text = "Keyboard"
 
-[node name="ButtonRightKb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("4_d18bx")]
+[node name="ButtonRightKb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_right = NodePath("../../VBoxContainer3/ButtonRightGp")
 texture_normal = null
 action_name = &"right"
 event_variable = &"right_kb"
 
-[node name="ButtonLeftKb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("4_d18bx")]
+[node name="ButtonLeftKb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_right = NodePath("../../VBoxContainer3/ButtonLeftGp")
 texture_normal = null
 action_name = &"left"
 event_variable = &"left_kb"
 
-[node name="ButtonUpKb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("4_d18bx")]
+[node name="ButtonUpKb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_right = NodePath("../../VBoxContainer3/ButtonUpGp")
 texture_normal = null
 action_name = &"up"
 event_variable = &"up_kb"
 
-[node name="ButtonDownKb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("4_d18bx")]
+[node name="ButtonDownKb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_right = NodePath("../../VBoxContainer3/ButtonDownGp")
 texture_normal = null
 action_name = &"down"
 event_variable = &"down_kb"
 
-[node name="ButtonAimRightKb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("4_d18bx")]
+[node name="ButtonAimRightKb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_right = NodePath("../../VBoxContainer3/ButtonAimRightGp")
 texture_normal = null
 action_name = &"aim_right"
 event_variable = &"aim_right_kb"
-default_texture = ExtResource("5_s0xud")
+default_texture = ExtResource("3_mhje8")
 
-[node name="ButtonAimLeftKb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("4_d18bx")]
+[node name="ButtonAimLeftKb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_right = NodePath("../../VBoxContainer3/ButtonAimLeftGp")
 texture_normal = null
 action_name = &"aim_left"
 event_variable = &"aim_left_kb"
-default_texture = ExtResource("5_s0xud")
+default_texture = ExtResource("3_mhje8")
 
-[node name="ButtonAimUpKb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("4_d18bx")]
+[node name="ButtonAimUpKb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_right = NodePath("../../VBoxContainer3/ButtonAimUpGp")
 texture_normal = null
 action_name = &"aim_up"
 event_variable = &"aim_up_kb"
-default_texture = ExtResource("5_s0xud")
+default_texture = ExtResource("3_mhje8")
 
-[node name="ButtonAimDownKb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("4_d18bx")]
+[node name="ButtonAimDownKb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_right = NodePath("../../VBoxContainer3/ButtonAimDownGp")
 texture_normal = null
 action_name = &"aim_down"
 event_variable = &"aim_down_kb"
-default_texture = ExtResource("5_s0xud")
+default_texture = ExtResource("3_mhje8")
 
-[node name="ButtonAction1Kb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("4_d18bx")]
+[node name="ButtonAction1Kb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_right = NodePath("../../VBoxContainer3/ButtonAction1Gp")
 texture_normal = null
 action_name = &"action_1"
 event_variable = &"action_1_kb"
 
-[node name="ButtonAction2Kb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("4_d18bx")]
+[node name="ButtonAction2Kb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_right = NodePath("../../VBoxContainer3/ButtonAction2Gp")
 texture_normal = null
 action_name = &"action_2"
 event_variable = &"action_2_kb"
 
-[node name="ButtonNextKb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("4_d18bx")]
+[node name="ButtonNextKb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_right = NodePath("../../VBoxContainer3/ButtonAction2Gp")
 texture_normal = null
 action_name = &"next"
 event_variable = &"next_kb"
 
-[node name="ButtonPreviousKb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("4_d18bx")]
+[node name="ButtonPreviousKb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_right = NodePath("../../VBoxContainer3/ButtonAction2Gp")
 texture_normal = null
 action_name = &"previous"
 event_variable = &"previous_kb"
 
-[node name="ButtonPauseKb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("4_d18bx")]
+[node name="ButtonPauseKb" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_right = NodePath("../../VBoxContainer3/ButtonPauseGp")
 texture_normal = null
@@ -281,7 +281,7 @@ theme_override_constants/separation = 0
 layout_mode = 2
 text = "Gamepad"
 
-[node name="ButtonRightGp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("4_d18bx")]
+[node name="ButtonRightGp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../VBoxContainer2/ButtonRightKb")
 texture_normal = null
@@ -289,7 +289,7 @@ action_name = &"right"
 event_variable = &"right_gp"
 type = 1
 
-[node name="ButtonLeftGp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("4_d18bx")]
+[node name="ButtonLeftGp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../VBoxContainer2/ButtonLeftKb")
 texture_normal = null
@@ -297,7 +297,7 @@ action_name = &"left"
 event_variable = &"left_gp"
 type = 1
 
-[node name="ButtonUpGp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("4_d18bx")]
+[node name="ButtonUpGp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../VBoxContainer2/ButtonUpKb")
 texture_normal = null
@@ -305,7 +305,7 @@ action_name = &"up"
 event_variable = &"up_gp"
 type = 1
 
-[node name="ButtonDownGp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("4_d18bx")]
+[node name="ButtonDownGp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../VBoxContainer2/ButtonDownKb")
 texture_normal = null
@@ -313,7 +313,7 @@ action_name = &"down"
 event_variable = &"down_gp"
 type = 1
 
-[node name="ButtonAimRightGp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("4_d18bx")]
+[node name="ButtonAimRightGp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../VBoxContainer2/ButtonAimRightKb")
 texture_normal = null
@@ -321,7 +321,7 @@ action_name = &"aim_right"
 event_variable = &"aim_right_gp"
 type = 1
 
-[node name="ButtonAimLeftGp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("4_d18bx")]
+[node name="ButtonAimLeftGp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../VBoxContainer2/ButtonAimLeftKb")
 texture_normal = null
@@ -329,7 +329,7 @@ action_name = &"aim_left"
 event_variable = &"aim_left_gp"
 type = 1
 
-[node name="ButtonAimUpGp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("4_d18bx")]
+[node name="ButtonAimUpGp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../VBoxContainer2/ButtonAimUpKb")
 texture_normal = null
@@ -337,7 +337,7 @@ action_name = &"aim_up"
 event_variable = &"aim_up_gp"
 type = 1
 
-[node name="ButtonAimDownGp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("4_d18bx")]
+[node name="ButtonAimDownGp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../VBoxContainer2/ButtonAimDownKb")
 texture_normal = null
@@ -345,7 +345,7 @@ action_name = &"aim_down"
 event_variable = &"aim_down_gp"
 type = 1
 
-[node name="ButtonAction1Gp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("4_d18bx")]
+[node name="ButtonAction1Gp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../VBoxContainer2/ButtonAction1Kb")
 texture_normal = null
@@ -353,7 +353,7 @@ action_name = &"action_1"
 event_variable = &"action_1_gp"
 type = 1
 
-[node name="ButtonAction2Gp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("4_d18bx")]
+[node name="ButtonAction2Gp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../VBoxContainer2/ButtonAction2Kb")
 texture_normal = null
@@ -361,7 +361,7 @@ action_name = &"action_2"
 event_variable = &"action_2_gp"
 type = 1
 
-[node name="ButtonNextGp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("4_d18bx")]
+[node name="ButtonNextGp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../VBoxContainer2/ButtonAction2Kb")
 texture_normal = null
@@ -369,7 +369,7 @@ action_name = &"next"
 event_variable = &"next_gp"
 type = 1
 
-[node name="ButtonPreviousGp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("4_d18bx")]
+[node name="ButtonPreviousGp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../VBoxContainer2/ButtonAction2Kb")
 texture_normal = null
@@ -377,7 +377,7 @@ action_name = &"previous"
 event_variable = &"previous_gp"
 type = 1
 
-[node name="ButtonPauseGp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("4_d18bx")]
+[node name="ButtonPauseGp" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3" instance=ExtResource("2_lok53")]
 layout_mode = 2
 focus_neighbor_left = NodePath("../../VBoxContainer2/ButtonPauseKb")
 texture_normal = null
@@ -386,11 +386,11 @@ event_variable = &"pause_gp"
 type = 1
 
 [node name="SaveControlsEvent" type="Node" parent="MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1" node_paths=PackedStringArray("rebinding_panel")]
-script = ExtResource("6_g8ltn")
+script = ExtResource("6_sswam")
 rebinding_panel = NodePath("../../../../../..")
-action_resource = ExtResource("3_r4hig")
+action_resource = ExtResource("3_km2jh")
 
-[node name="MenuButton" parent="MarginContainer/VBoxContainer" instance=ExtResource("7_tjw5t")]
+[node name="MenuButton" parent="MarginContainer/VBoxContainer" instance=ExtResource("1_71lak")]
 layout_mode = 2
 size_flags_horizontal = 4
 
@@ -404,7 +404,7 @@ pressed_sound = null
 visible = false
 layout_mode = 2
 color = Color(0, 0, 0, 0.662745)
-script = ExtResource("8_75r6f")
+script = ExtResource("5_87j6r")
 button_list = [NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2/ButtonRightKb"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2/ButtonLeftKb"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2/ButtonUpKb"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2/ButtonDownKb"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2/ButtonAimRightKb"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2/ButtonAimLeftKb"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2/ButtonAimUpKb"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2/ButtonAimDownKb"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2/ButtonAction1Kb"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2/ButtonAction2Kb"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2/ButtonPauseKb"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3/ButtonRightGp"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3/ButtonLeftGp"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3/ButtonUpGp"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3/ButtonDownGp"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3/ButtonAimRightGp"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3/ButtonAimLeftGp"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3/ButtonAimUpGp"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3/ButtonAimDownGp"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3/ButtonAction1Gp"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3/ButtonAction2Gp"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3/ButtonPauseGp"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2/ButtonNextKb"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer2/ButtonPreviousKb"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3/ButtonNextGp"), NodePath("../MarginContainer/VBoxContainer/ScrollContainer/HBoxContainer/Player1/VBoxContainer3/ButtonPreviousGp")]
 choice_button_group = NodePath("CenterContainer/PanelContainer/MarginContainer/HBoxContainer")
 info_label = NodePath("CenterContainer/PanelContainer/MarginContainer/LabelInfo")

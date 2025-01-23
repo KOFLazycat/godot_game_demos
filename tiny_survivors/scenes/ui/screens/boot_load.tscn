@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://k13q2njpt5qb"]
+[gd_scene load_steps=9 format=3 uid="uid://wejbha6hbaog"]
 
-[ext_resource type="Theme" uid="uid://yctjuhnen1br" path="res://addons/top_down/resources/theme/game_gui_theme.theme" id="1_ptogj"]
-[ext_resource type="Script" uid="uid://4v7xd8mtvdku" path="res://addons/top_down/scripts/ui/boot_screen/boot_screen_manager.gd" id="2_gbueq"]
-[ext_resource type="Script" uid="uid://cgd8u674f6tta" path="res://addons/top_down/scripts/ui/boot_screen/BootPreloader.gd" id="3_c5s7v"]
-[ext_resource type="Resource" uid="uid://bk0svoela4oim" path="res://addons/top_down/resources/PreloadResource/boot_load_resource.tres" id="4_wlcb7"]
+[ext_resource type="Theme" uid="uid://yctjuhnen1br" path="res://addons/top_down/resources/theme/game_gui_theme.theme" id="1_oii66"]
+[ext_resource type="Script" path="res://addons/top_down/scripts/ui/boot_screen/boot_screen_manager.gd" id="2_fyly6"]
+[ext_resource type="Script" path="res://addons/top_down/scripts/ui/boot_screen/BootPreloader.gd" id="3_1bpyd"]
+[ext_resource type="Resource" uid="uid://bk0svoela4oim" path="res://addons/top_down/resources/PreloadResource/boot_load_resource.tres" id="4_hnv15"]
 
 [sub_resource type="Animation" id="Animation_o2n6v"]
 length = 0.001
@@ -102,9 +102,9 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cebse"]
 _data = {
-&"RESET": SubResource("Animation_o2n6v"),
-&"idle": SubResource("Animation_p3dpw"),
-&"transition_out": SubResource("Animation_6k5uc")
+"RESET": SubResource("Animation_o2n6v"),
+"idle": SubResource("Animation_p3dpw"),
+"transition_out": SubResource("Animation_6k5uc")
 }
 
 [node name="BootLoad" type="ColorRect"]
@@ -113,19 +113,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_ptogj")
+theme = ExtResource("1_oii66")
 color = Color(0.000325259, 0.000827362, 0.000775444, 1)
 
 [node name="BootScreenManager" type="Node" parent="." node_paths=PackedStringArray("animation_player", "boot_preloader")]
-script = ExtResource("2_gbueq")
+script = ExtResource("2_fyly6")
 next_screen = "res://addons/top_down/scenes/ui/screens/title.tscn"
 animation_player = NodePath("../AnimationPlayer")
 boot_preloader = NodePath("../BootPreloader")
 
 [node name="BootPreloader" type="Node2D" parent="." node_paths=PackedStringArray("material_holder_node")]
 position = Vector2(59, 43)
-script = ExtResource("3_c5s7v")
-preload_resource = ExtResource("4_wlcb7")
+script = ExtResource("3_1bpyd")
+preload_resource = ExtResource("4_hnv15")
 material_holder_node = NodePath(".")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -167,5 +167,5 @@ size_flags_stretch_ratio = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_cebse")
+"": SubResource("AnimationLibrary_cebse")
 }

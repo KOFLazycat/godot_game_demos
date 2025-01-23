@@ -1,9 +1,9 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cb6kgxajii4li"]
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dah24bbc4526"]
 
-[ext_resource type="Texture2D" uid="uid://cae7b5bgvyrg1" path="res://addons/top_down/assets/images/tilesets/tileset_isometric_walls.png" id="1_8iiiv"]
+[ext_resource type="Texture2D" uid="uid://bi4qyvinsod0o" path="res://addons/top_down/assets/images/tilesets/tileset_isometric_walls.png" id="1_jorl2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f5ja1"]
-texture = ExtResource("1_8iiiv")
+texture = ExtResource("1_jorl2")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, -8)

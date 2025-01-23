@@ -1,4 +1,4 @@
-class_name HealthResourceNew
+class_name HealthResource
 extends SaveableResource
 
 signal damaged

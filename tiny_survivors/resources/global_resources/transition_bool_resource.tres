@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="BoolResource" load_steps=2 format=3 uid="uid://brynai6vskxsb"]
+[gd_resource type="Resource" script_class="BoolResource" load_steps=2 format=3 uid="uid://df4nqpa0at8qn"]
 
-[ext_resource type="Script" uid="uid://c00kvayo84y3t" path="res://addons/great_games_library/resources/ValueResource/BoolResource.gd" id="1_7faxm"]
+[ext_resource type="Script" path="res://addons/great_games_library/resources/ValueResource/BoolResource.gd" id="1_yejyg"]
 
 [resource]
 resource_name = "Transition bool Resource"
-script = ExtResource("1_7faxm")
+script = ExtResource("1_yejyg")
 value = false
 default_value = false
 version = 0

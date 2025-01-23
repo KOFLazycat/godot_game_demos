@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="InstanceResource" load_steps=3 format=3 uid="uid://difur2op874oo"]
+[gd_resource type="Resource" script_class="InstanceResource" load_steps=3 format=3 uid="uid://h86cdxneli8u"]
 
-[ext_resource type="Resource" uid="uid://d1ck1axrd4kd4" path="res://addons/top_down/resources/RoomResources/ysort_reference.tres" id="1_eiu7f"]
-[ext_resource type="Script" uid="uid://b7no5afm72i2i" path="res://addons/great_games_library/resources/InstanceResource/InstanceResource.gd" id="2_hpt4o"]
+[ext_resource type="Resource" uid="uid://d1ck1axrd4kd4" path="res://addons/top_down/resources/RoomResources/ysort_reference.tres" id="1_lhpie"]
+[ext_resource type="Script" path="res://addons/great_games_library/resources/InstanceResource/InstanceResource.gd" id="2_mqml7"]
 
 [resource]
 resource_name = "zombie dead"
-script = ExtResource("2_hpt4o")
+script = ExtResource("2_mqml7")
 scene_path = "res://addons/top_down/scenes/vfx/dead/zombie_dead.tscn"
-parent_reference_resource = ExtResource("1_eiu7f")
+parent_reference_resource = ExtResource("1_lhpie")

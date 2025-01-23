@@ -27,7 +27,7 @@ void vertex(){
 	angle = (angle + radians(rotation));
 	from_center.x = cos(angle) * len;
 	from_center.y = sin(angle) * len;
-
+	
 	VERTEX = scale * from_center * stretch + half_size + offset;
 	MODULATE = COLOR; // store modulate value
 }

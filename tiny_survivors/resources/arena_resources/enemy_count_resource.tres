@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="IntResource" load_steps=2 format=3 uid="uid://dr6woprchbwrg"]
+[gd_resource type="Resource" script_class="IntResource" load_steps=2 format=3 uid="uid://cjmecrxyvujlx"]
 
-[ext_resource type="Script" uid="uid://d270acqosygct" path="res://addons/great_games_library/resources/ValueResource/IntResource.gd" id="1_8rj8n"]
+[ext_resource type="Script" path="res://addons/great_games_library/resources/ValueResource/IntResource.gd" id="1_b4yqr"]
 
 [resource]
 resource_name = "Enemy Count"
-script = ExtResource("1_8rj8n")
+script = ExtResource("1_b4yqr")
 value = 0
 default_value = 0
 version = 0

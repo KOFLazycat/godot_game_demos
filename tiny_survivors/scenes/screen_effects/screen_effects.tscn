@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bad1ybtcnlxdr"]
+[gd_scene load_steps=6 format=3 uid="uid://bqh7iwpl0s1ha"]
 
-[ext_resource type="Script" uid="uid://cuhbc330cnjt5" path="res://addons/great_games_library/resources/ReferenceNodeResource/ReferenceNodeSetter.gd" id="1_yf87t"]
-[ext_resource type="Resource" uid="uid://diqvd4u0lbw7h" path="res://addons/top_down/resources/CommandNodeResource/color_flash.tres" id="2_shxgg"]
+[ext_resource type="Script" path="res://addons/great_games_library/resources/ReferenceNodeResource/ReferenceNodeSetter.gd" id="1_qdpw6"]
+[ext_resource type="Resource" uid="uid://diqvd4u0lbw7h" path="res://addons/top_down/resources/CommandNodeResource/color_flash.tres" id="2_x72oy"]
 
 [sub_resource type="Animation" id="Animation_bpyts"]
 resource_name = "RESET"
@@ -36,8 +36,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_40epg"]
 _data = {
-&"RESET": SubResource("Animation_bpyts"),
-&"white_flash": SubResource("Animation_ch3u1")
+"RESET": SubResource("Animation_bpyts"),
+"white_flash": SubResource("Animation_ch3u1")
 }
 
 [node name="ScreenEffects" type="CanvasLayer"]
@@ -56,6 +56,6 @@ libraries = {
 }
 
 [node name="ReferenceNodeSetter" type="Node" parent="ColorFlash/AnimationPlayer" node_paths=PackedStringArray("reference_node")]
-script = ExtResource("1_yf87t")
+script = ExtResource("1_qdpw6")
 reference_node = NodePath("..")
-reference_resource = ExtResource("2_shxgg")
+reference_resource = ExtResource("2_x72oy")

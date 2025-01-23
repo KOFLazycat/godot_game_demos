@@ -1,9 +1,9 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b6ryesxymrrqj"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c1nx13s7kh0p"]
 
-[ext_resource type="Shader" uid="uid://ctj8vnsccf3u7" path="res://addons/top_down/scripts/shaders/control_shader.gdshader" id="1_r7ipq"]
+[ext_resource type="Shader" path="res://addons/top_down/scripts/shaders/control_shader.gdshader" id="1_hpxe4"]
 
 [resource]
-shader = ExtResource("1_r7ipq")
+shader = ExtResource("1_hpxe4")
 shader_parameter/size = Vector2(217, 55)
 shader_parameter/scale = 1.0
 shader_parameter/rotation = 0.0

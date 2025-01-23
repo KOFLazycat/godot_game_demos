@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="ActorStatsResource" load_steps=2 format=3 uid="uid://du6daaenerpih"]
+[gd_resource type="Resource" script_class="ActorStatsResource" load_steps=2 format=3 uid="uid://crpjcmktv22qx"]
 
-[ext_resource type="Script" uid="uid://cndmu7ul6lpmq" path="res://scripts/actor/ActorStatsResource.gd" id="1_y0352"]
+[ext_resource type="Script" path="res://addons/top_down/scripts/actor/ActorStatsResource.gd" id="1_7iir7"]
 
 [resource]
 resource_name = "Player Stats"
-script = ExtResource("1_y0352")
+script = ExtResource("1_7iir7")
 acceleration = 200.0
 max_speed = 60.0
 version = 0

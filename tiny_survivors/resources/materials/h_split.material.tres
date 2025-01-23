@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://d8cqgr252wgm"]
+
+[ext_resource type="Shader" uid="uid://d3yco5bgp70r2" path="res://addons/top_down/scripts/shaders/h_separator_line.gdshader" id="1_gi2yy"]
+
+[resource]
+shader = ExtResource("1_gi2yy")
+shader_parameter/tint = Color(1, 1, 1, 0.105882)

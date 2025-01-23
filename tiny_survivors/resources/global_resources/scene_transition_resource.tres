@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SceneTransitionResource" load_steps=2 format=3 uid="uid://xtfya1anwt4f"]
+
+[ext_resource type="Script" uid="uid://bcryng337nljo" path="res://scripts/game/SceneTransitionResource.gd" id="1_3cg6s"]
+
+[resource]
+resource_name = "Scene transition"
+script = ExtResource("1_3cg6s")
+next_scene_path = ""
+entry_tag = ""
+version = 0
+not_saved = false

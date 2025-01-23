@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HealthResource" load_steps=2 format=3 uid="uid://dv3gdkf2ws2w8"]
+
+[ext_resource type="Script" uid="uid://bcp4otss35fbx" path="res://scripts/damage/HealthResource.gd" id="1_bvwdw"]
+
+[resource]
+resource_name = "Player Health"
+script = ExtResource("1_bvwdw")
+hp = 5.0
+max_hp = 5.0
+reset_hp = 5.0
+reset_max_hp = 5.0
+is_dead = false
+version = 0
+not_saved = false

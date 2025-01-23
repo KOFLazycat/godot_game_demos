@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="PreloadResource" load_steps=35 format=3 uid="uid://b1x8cm56o8y13"]
+
+[ext_resource type="Material" uid="uid://dh55irc80dvm7" path="res://addons/top_down/resources/materials/dust_particle_material.tres" id="1_ne1og"]
+[ext_resource type="Script" uid="uid://b7no5afm72i2i" path="res://addons/great_games_library/resources/InstanceResource/InstanceResource.gd" id="2_yeky0"]
+[ext_resource type="Resource" uid="uid://ceuk0khv7rbvr" path="res://addons/top_down/resources/InstanceResources/actors/player_instance_resource.tres" id="3_3v42m"]
+[ext_resource type="Resource" uid="uid://dyfuc7bon78d" path="res://addons/top_down/resources/InstanceResources/vfx/dead/player_dead_instance_resource.tres" id="4_1wfwq"]
+[ext_resource type="Resource" uid="uid://c05ys7ybsfv4u" path="res://addons/top_down/resources/InstanceResources/actors/zomby_instance_resource.tres" id="5_emwhi"]
+[ext_resource type="Resource" uid="uid://h86cdxneli8u" path="res://addons/top_down/resources/InstanceResources/vfx/dead/zomby_dead_instance_resource.tres" id="6_o3f8e"]
+[ext_resource type="Resource" uid="uid://ddp7qf0qghy82" path="res://addons/top_down/resources/InstanceResources/actors/zomby_crawler_instance_resource.tres" id="7_08pac"]
+[ext_resource type="Resource" uid="uid://bx3gvcma6vvg" path="res://addons/top_down/resources/InstanceResources/vfx/dead/zomby_crawler_dead_instance_resource.tres" id="8_4qrf0"]
+[ext_resource type="Resource" uid="uid://cwxx7lc1yjet4" path="res://addons/top_down/resources/InstanceResources/actors/slime_instance_resource.tres" id="9_35uds"]
+[ext_resource type="Resource" uid="uid://lm63dcddpjhf" path="res://addons/top_down/resources/InstanceResources/vfx/dead/slime_dead_instance_resource.tres" id="10_m5oam"]
+[ext_resource type="Resource" uid="uid://bwaqqrp3vlmbc" path="res://addons/top_down/resources/InstanceResources/actors/slime_small_instance_resource.tres" id="11_pb31m"]
+[ext_resource type="Resource" uid="uid://weoefubhnbf" path="res://addons/top_down/resources/InstanceResources/vfx/dead/slime_small_dead_instance_resource.tres" id="12_3ti1d"]
+[ext_resource type="Resource" uid="uid://d1ui7w7atv8wt" path="res://addons/top_down/resources/InstanceResources/projectiles/gun_bullet_instance_resource.tres" id="13_jc1rq"]
+[ext_resource type="Resource" uid="uid://f7qtvi0nk5sx" path="res://addons/top_down/resources/InstanceResources/projectiles/shotgun_bullet_instance_resource.tres" id="14_3oik7"]
+[ext_resource type="Resource" uid="uid://cw030o04i08yd" path="res://addons/top_down/resources/InstanceResources/projectiles/assault_bullet_instance_resource.tres" id="15_174aa"]
+[ext_resource type="Resource" uid="uid://o8teeob07t1x" path="res://addons/top_down/resources/InstanceResources/projectiles/sword_projectile_instance_resource.tres" id="16_rs1v1"]
+[ext_resource type="Resource" uid="uid://djdgiocrbvmt8" path="res://addons/top_down/resources/InstanceResources/projectiles/sword_slash_instance_resource.tres" id="17_o2hra"]
+[ext_resource type="Resource" uid="uid://d1e4s216ukuhw" path="res://addons/top_down/resources/InstanceResources/projectiles/zombie_slash_instance_resource.tres" id="18_sl5mc"]
+[ext_resource type="Resource" uid="uid://xbek2osd7l4w" path="res://addons/top_down/resources/InstanceResources/vfx/damage_points_instance_resource.tres" id="19_6gkq7"]
+[ext_resource type="Resource" uid="uid://s3oxaww7qjgi" path="res://addons/top_down/resources/InstanceResources/vfx/impact_instance_resource.tres" id="20_m5k0y"]
+[ext_resource type="Resource" uid="uid://bc5djwa8gc2df" path="res://addons/top_down/resources/InstanceResources/pickups/health_pickup_instance_resource.tres" id="21_fw553"]
+[ext_resource type="Resource" uid="uid://cd4jt13gwv8bs" path="res://addons/top_down/resources/InstanceResources/vfx/enemy_spawn_mark.tres" id="22_0pepn"]
+[ext_resource type="Resource" uid="uid://way0xfgx53ix" path="res://addons/top_down/resources/InstanceResources/vfx/spawn_dust_instance.tres" id="23_vmiar"]
+[ext_resource type="Resource" uid="uid://bvrv6nddhxgp0" path="res://addons/top_down/resources/InstanceResources/vfx/crawler_blood_instance.tres" id="24_8niek"]
+[ext_resource type="Material" uid="uid://by1613lxovtnf" path="res://addons/top_down/resources/ParticleProcessMaterial/bullet_process_material.tres" id="25_1x6bx"]
+[ext_resource type="Material" uid="uid://corlu7mpg0puk" path="res://addons/top_down/resources/ParticleProcessMaterial/dust_process_material.tres" id="26_4rdtg"]
+[ext_resource type="Script" uid="uid://bp8kfprey616w" path="res://addons/top_down/scripts/game/PreloadResource.gd" id="27_7e42k"]
+[ext_resource type="Shader" uid="uid://cnlk17sdrgil3" path="res://addons/top_down/scripts/shaders/color_flash.gdshader" id="28_14f7n"]
+[ext_resource type="Shader" uid="uid://ctj8vnsccf3u7" path="res://addons/top_down/scripts/shaders/control_shader.gdshader" id="29_phqls"]
+[ext_resource type="Shader" uid="uid://d1e2qd0iwitj8" path="res://addons/top_down/scripts/shaders/dust_partickle.gdshader" id="30_lmhs2"]
+[ext_resource type="Shader" uid="uid://d3yco5bgp70r2" path="res://addons/top_down/scripts/shaders/h_separator_line.gdshader" id="31_4jx8i"]
+[ext_resource type="Shader" uid="uid://c3ux56ctmmsjo" path="res://addons/top_down/scripts/shaders/progress_fill.gdshader" id="32_i0sdh"]
+[ext_resource type="Shader" uid="uid://vthffmx6ssm1" path="res://addons/top_down/scripts/shaders/spawn_ring.gdshader" id="33_8vs7m"]
+[ext_resource type="Shader" uid="uid://cbnqbe2rosise" path="res://addons/top_down/scripts/shaders/transition.gdshader" id="34_t7qa1"]
+
+[resource]
+script = ExtResource("27_7e42k")
+instance_resource_list = Array[ExtResource("2_yeky0")]([ExtResource("3_3v42m"), ExtResource("4_1wfwq"), ExtResource("5_emwhi"), ExtResource("6_o3f8e"), ExtResource("7_08pac"), ExtResource("8_4qrf0"), ExtResource("9_35uds"), ExtResource("10_m5oam"), ExtResource("11_pb31m"), ExtResource("12_3ti1d"), ExtResource("13_jc1rq"), ExtResource("14_3oik7"), ExtResource("15_174aa"), ExtResource("16_rs1v1"), ExtResource("17_o2hra"), ExtResource("18_sl5mc"), ExtResource("19_6gkq7"), ExtResource("20_m5k0y"), ExtResource("21_fw553"), ExtResource("22_0pepn"), ExtResource("23_vmiar"), ExtResource("24_8niek")])
+particle_process_material_list = Array[Material]([ExtResource("25_1x6bx"), ExtResource("26_4rdtg")])
+shader2d_list = Array[Shader]([ExtResource("28_14f7n"), ExtResource("29_phqls"), ExtResource("30_lmhs2"), ExtResource("31_4jx8i"), ExtResource("32_i0sdh"), ExtResource("33_8vs7m"), ExtResource("34_t7qa1")])
+canvas_material_list = Array[Material]([ExtResource("1_ne1og")])
+packed_scenes_list = Array[String](["res://addons/top_down/scenes/levels/room_start.tscn", "res://addons/top_down/scenes/levels/room_0.tscn"])

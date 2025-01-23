@@ -7,6 +7,7 @@ extends Node2D
 
 var _is_game_over: bool = false
 var _game_score: int = 0
+var _history_max: int = 0
 
 
 func _ready() -> void:
@@ -16,16 +17,22 @@ func _ready() -> void:
 
 func reset_game_state():
 	_is_game_over = false
-	#_game_score = LoadSaveSystem.load_score()
+	_history_max = LoadSaveSystem.load_history_max()
 
 
 func get_game_score() -> int:
 	return _game_score
 
 
+func get_history_max() -> int:
+	return _history_max
+
+
 func add_game_score(s: int) -> void:
 	AudioMasterAutoload.PlayFX(coin_sfx.pick_random())
 	_game_score += s
+	if _game_score > _history_max:
+		_history_max = _game_score
 	#LoadSaveSystem.save_score(_game_score)
 
 
@@ -35,6 +42,7 @@ func is_game_over() -> bool:
 
 func set_game_over():
 	_is_game_over = true
+	LoadSaveSystem.save_history_max(_history_max)
 	get_tree().paused = true
 
 

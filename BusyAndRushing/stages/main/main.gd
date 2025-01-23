@@ -19,6 +19,11 @@ extends Node2D
 @onready var quiz_world_tscn: PackedScene = preload("res://stages/quiz_world/quiz_world.tscn") as PackedScene
 @onready var tiny_defence_world_tscn: PackedScene = preload("res://stages/tiny_defence_world/tiny_defence_world.tscn") as PackedScene
 @onready var pcam: PhantomCamera2D = $PhantomCamera2D
+@onready var panel_container_3: PanelContainer = $UI/PanelContainer3
+@onready var history_max_label: Label = $UI/PanelContainer3/VBoxContainer/HBoxContainer/HistoryMaxLabel
+@onready var current_label: Label = $UI/PanelContainer3/VBoxContainer/HBoxContainer2/CurrentLabel
+@onready var game_restart_button: Button = $UI/PanelContainer3/VBoxContainer/GameRestartButton
+@onready var game_exit_button_2: Button = $UI/PanelContainer3/VBoxContainer/GameExitButton
 
 
 func _ready() -> void:
@@ -35,6 +40,8 @@ func _ready() -> void:
 	tiny_defence_world_timer.timeout.connect(on_tiny_defence_world_timer_timeout)
 	game_begin_button.pressed.connect(on_game_begin_button_pressed)
 	game_exit_button.pressed.connect(on_game_exit_button_pressed)
+	game_restart_button.pressed.connect(on_game_begin_button_pressed)
+	game_exit_button_2.pressed.connect(on_game_exit_button_pressed)
 	
 
 
@@ -82,16 +89,15 @@ func init_tiny_defence_world() -> void:
 
 
 func on_game_over() -> void:
+	panel_container_3.set_deferred("visible", true)
+	history_max_label.text = str(GameManager.get_history_max())
+	current_label.text = str(GameManager.get_game_score())
+	# 遮罩
+	timber_world_fade_transition.cover()
+	runner_world_fade_transition.cover()
+	quiz_world_fade_transition.cover()
+	tiny_defence_world_fade_transition.cover()
 	GameManager.set_game_over()
-
-
-func set_label_text(from: int, to: int, duration: float = 1.0) -> void:
-	var tween: Tween = create_tween()
-	tween.tween_method(update_label, from, to, duration).set_trans(Tween.TRANS_LINEAR)
-
-
-func update_label(v: int) -> void:
-	label.text = str(v)
 
 
 func on_runner_world_timer_timeout() -> void:

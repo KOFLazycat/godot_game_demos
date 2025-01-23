@@ -1,0 +1,57 @@
+[gd_scene load_steps=12 format=3 uid="uid://dv7a7p4g7vs54"]
+
+[ext_resource type="PackedScene" uid="uid://obtkbxd6aj4s" path="res://scenes/tile_layers/floor_layer.tscn" id="1_f8pn5"]
+[ext_resource type="TileSet" uid="uid://72s160v20a12" path="res://resources/tilesets/tileset_template.tres" id="2_i712p"]
+[ext_resource type="Script" uid="uid://dmcmkjflmeruv" path="res://addons/great_games_library/nodes/Navigation/TileCollisionGenerator.gd" id="3_i712p"]
+[ext_resource type="PackedScene" uid="uid://5wpp1s221j3p" path="res://scenes/tile_layers/obstacle_layer.tscn" id="3_p74vp"]
+[ext_resource type="Script" uid="uid://cuhbc330cnjt5" path="res://addons/great_games_library/resources/ReferenceNodeResource/ReferenceNodeSetter.gd" id="4_gs2v7"]
+[ext_resource type="Resource" uid="uid://ef5aj1j2ol1c" path="res://resources/RoomResources/obstacle_reference.tres" id="6_p74vp"]
+[ext_resource type="Resource" uid="uid://ctvcf1iedvbo2" path="res://resources/RoomResources/behind_reference.tres" id="7_su25n"]
+[ext_resource type="Resource" uid="uid://d285b2ajvgj30" path="res://resources/RoomResources/front_reference.tres" id="8_773qv"]
+[ext_resource type="PackedScene" uid="uid://cy2ahrqe6xy0y" path="res://scenes/main_camera.tscn" id="9_pb107"]
+[ext_resource type="PackedScene" uid="uid://bad1ybtcnlxdr" path="res://scenes/screen_effects/screen_effects.tscn" id="10_apjvd"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_pkurn"]
+points = PackedVector2Array(-16, 0, 0, 8, 16, 0, 0, -8)
+
+[node name="Room" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="FloorLayer" parent="Background" instance=ExtResource("1_f8pn5")]
+tile_set = ExtResource("2_i712p")
+
+[node name="ObstacleLayer" parent="Background" instance=ExtResource("3_p74vp")]
+tile_set = ExtResource("2_i712p")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Background/ObstacleLayer" node_paths=PackedStringArray("tilemap_layer", "static_body")]
+z_index = 2
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("3_i712p")
+tilemap_layer = NodePath("..")
+static_body = NodePath(".")
+tile_shape = SubResource("ConvexPolygonShape2D_pkurn")
+
+[node name="ReferenceObstacle" type="Node" parent="Background/ObstacleLayer" node_paths=PackedStringArray("reference_node")]
+script = ExtResource("4_gs2v7")
+reference_node = NodePath("..")
+reference_resource = ExtResource("6_p74vp")
+
+[node name="Behind" type="Node2D" parent="."]
+
+[node name="ReferenceBehind" type="Node" parent="Behind" node_paths=PackedStringArray("reference_node")]
+script = ExtResource("4_gs2v7")
+reference_node = NodePath("..")
+reference_resource = ExtResource("7_su25n")
+
+[node name="Front" type="Node2D" parent="."]
+
+[node name="ReferenceFront" type="Node" parent="Front" node_paths=PackedStringArray("reference_node")]
+script = ExtResource("4_gs2v7")
+reference_node = NodePath("..")
+reference_resource = ExtResource("8_773qv")
+
+[node name="MainCamera" parent="." instance=ExtResource("9_pb107")]
+
+[node name="ScreenEffects" parent="." instance=ExtResource("10_apjvd")]

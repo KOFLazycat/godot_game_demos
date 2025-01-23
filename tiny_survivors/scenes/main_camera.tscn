@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://cy2ahrqe6xy0y"]
+
+[ext_resource type="Script" uid="uid://c8kdi8lcs34ep" path="res://addons/top_down/scripts/game/CameraFollow2D.gd" id="1_hoovk"]
+[ext_resource type="Resource" uid="uid://b1yn036rka2tk" path="res://addons/top_down/resources/CameraResources/camera_position_resource.tres" id="2_c4rpq"]
+[ext_resource type="Script" uid="uid://cuhbc330cnjt5" path="res://addons/great_games_library/resources/ReferenceNodeResource/ReferenceNodeSetter.gd" id="3_7fu1u"]
+[ext_resource type="Resource" uid="uid://c5igju2sl4cdg" path="res://addons/top_down/resources/CameraResources/camera_reference.tres" id="4_4hnl1"]
+
+[node name="MainCamera" type="Camera2D"]
+position = Vector2(252, 140)
+script = ExtResource("1_hoovk")
+target_position = ExtResource("2_c4rpq")
+
+[node name="ReferenceNodeSetter" type="Node" parent="." node_paths=PackedStringArray("reference_node")]
+script = ExtResource("3_7fu1u")
+reference_node = NodePath("..")
+reference_resource = ExtResource("4_4hnl1")

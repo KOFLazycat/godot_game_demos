@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cej3jcgl77asb"]
+[gd_scene load_steps=19 format=3 uid="uid://cej3jcgl77asb"]
 
 [ext_resource type="Script" uid="uid://bl7704b7qyde7" path="res://stages/main/main.gd" id="1_woy08"]
 [ext_resource type="PackedScene" uid="uid://bjalvngcfecj0" path="res://stages/map/map.tscn" id="2_4vbm2"]
@@ -83,6 +83,10 @@ bg_color = Color(0.74902, 0.729412, 0.356863, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_usqqw"]
 bg_color = Color(0.74902, 0.729412, 0.356863, 0.584314)
+
+[sub_resource type="LabelSettings" id="LabelSettings_no1gd"]
+font = ExtResource("5_usqqw")
+font_size = 24
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_woy08")
@@ -240,6 +244,80 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_woy08")
 text = "开始游戏"
 
 [node name="GameExitButton" type="Button" parent="UI/PanelContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_usqqw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_woy08")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_usqqw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_woy08")
+text = "退出游戏"
+
+[node name="PanelContainer3" type="PanelContainer" parent="UI"]
+visible = false
+layout_mode = 0
+offset_left = 333.0
+offset_top = 187.0
+offset_right = 950.0
+offset_bottom = 536.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PanelContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/PanelContainer3/VBoxContainer"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/PanelContainer3/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "历史最高分"
+label_settings = SubResource("LabelSettings_no1gd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HistoryMaxLabel" type="Label" parent="UI/PanelContainer3/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "000"
+label_settings = SubResource("LabelSettings_no1gd")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/PanelContainer3/VBoxContainer"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/PanelContainer3/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "本次得分"
+label_settings = SubResource("LabelSettings_no1gd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentLabel" type="Label" parent="UI/PanelContainer3/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "000"
+label_settings = SubResource("LabelSettings_no1gd")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="GameRestartButton" type="Button" parent="UI/PanelContainer3/VBoxContainer"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_usqqw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_woy08")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_usqqw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_woy08")
+text = "重新开始"
+
+[node name="GameExitButton" type="Button" parent="UI/PanelContainer3/VBoxContainer"]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32

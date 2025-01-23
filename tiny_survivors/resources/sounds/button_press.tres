@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SoundResource" load_steps=3 format=3 uid="uid://doyomwj6mnos0"]
+
+[ext_resource type="Script" uid="uid://bbp8xypt2x8d7" path="res://addons/great_games_library/resources/SoundResource/SoundResource.gd" id="1_yqvl7"]
+[ext_resource type="AudioStream" uid="uid://dgmt4s54jv0so" path="res://addons/top_down/assets/sounds/button_pressed.wav" id="2_qaqqq"]
+
+[resource]
+script = ExtResource("1_yqvl7")
+pitch_min = 0.98
+pitch_max = 1.2
+volume = -5.0
+retrigger_time = 0.032
+pitch_add = 0.0
+pitch_cooldown = 0.0
+pitch_return = 0.0
+sound = ExtResource("2_qaqqq")

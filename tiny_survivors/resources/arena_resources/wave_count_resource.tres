@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="IntResource" load_steps=2 format=3 uid="uid://c73cfieyjoxw4"]
+
+[ext_resource type="Script" uid="uid://d270acqosygct" path="res://addons/great_games_library/resources/ValueResource/IntResource.gd" id="1_dc1s6"]
+
+[resource]
+resource_name = "Wave Count"
+script = ExtResource("1_dc1s6")
+value = 0
+default_value = 0
+version = 0
+not_saved = false

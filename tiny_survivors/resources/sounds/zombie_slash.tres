@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SoundResource" load_steps=3 format=3 uid="uid://ck65225dgd88d"]
+
+[ext_resource type="Script" uid="uid://bbp8xypt2x8d7" path="res://addons/great_games_library/resources/SoundResource/SoundResource.gd" id="1_qp2sd"]
+[ext_resource type="AudioStream" uid="uid://c1jsgktd37a8w" path="res://addons/top_down/assets/sounds/shoot_4.wav" id="2_uchrx"]
+
+[resource]
+resource_name = "Zombie Slash"
+script = ExtResource("1_qp2sd")
+pitch_min = 0.98
+pitch_max = 1.2
+volume = -10.144
+retrigger_time = 0.032
+pitch_add = 0.0
+pitch_cooldown = 0.0
+pitch_return = 0.0
+sound = ExtResource("2_uchrx")
